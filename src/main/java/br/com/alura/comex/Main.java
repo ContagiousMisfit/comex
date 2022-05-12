@@ -4,49 +4,21 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.file.Path;
 import java.text.NumberFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Locale;
+
+import br.com.alura.comex.utils.ProcessadorDeCSV;
 
 public class Main {
 
     public static void main(String[] args) throws IOException, URISyntaxException {
+        
         ArrayList<Pedido> pedidos = new ArrayList<>();
-
-        try {
-            URL recursoCSV = ClassLoader.getSystemResource("pedidos.csv");
-            Path caminhoDoArquivo = caminhoDoArquivo = Path.of(recursoCSV.toURI());
-
-            Scanner leitorDeLinhas = new Scanner(caminhoDoArquivo);
-
-            leitorDeLinhas.nextLine();
-
-            int quantidadeDeRegistros = 0;
-            while (leitorDeLinhas.hasNextLine()) {
-                String linha = leitorDeLinhas.nextLine();
-                String[] registro = linha.split(",");
-
-                String categoria = registro[0];
-                String produto = registro[1];
-                BigDecimal preco = new BigDecimal(registro[2]);
-                int quantidade = Integer.parseInt(registro[3]);
-                LocalDate data = LocalDate.parse(registro[4], DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-                String cliente = registro[5];
-
-                Pedido pedido = new Pedido(categoria, produto, cliente, preco, quantidade, data);
-                pedidos.add(pedido);
-
-                quantidadeDeRegistros++;
-            }
-        } catch (URISyntaxException e) {
-            throw new RuntimeException("Arquivo pedido.csv não localizado!");
-        } catch (IOException e) {
-            throw new RuntimeException("Erro ao abrir Scanner para processar arquivo!");
-        }
-
+    	String arquivoCSV = "pedidos.csv";
+    	
+    	ProcessadorDeCSV processadorDeCSV = new ProcessadorDeCSV();
+    	pedidos = processadorDeCSV.listarPedidos(arquivoCSV);
 
         int totalDeProdutosVendidos = 0;
         int totalDePedidosRealizados = 0;
