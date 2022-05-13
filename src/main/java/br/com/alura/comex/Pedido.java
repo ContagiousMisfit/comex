@@ -57,22 +57,22 @@ public class Pedido {
 				+ '\'' + ", preco=" + preco + ", quantidade=" + quantidade + ", data=" + data + '}';
 	}
 
-	public BigDecimal getValorTotal(ArrayList<Pedido> pedidos) {
-		return null;
+	public BigDecimal getValorTotal() {
+		return this.getPreco().multiply(new BigDecimal(this.getQuantidade()));
 
 	}
 
 	public static Optional<Pedido> getPedidoMaisBarato(ArrayList<Pedido> pedidos) {
 
 		return Optional.of(
-				pedidos.stream().min(Comparator.comparing(Pedido::getPreco)).orElseThrow(NoSuchElementException::new));
+				pedidos.stream().min(Comparator.comparing(Pedido::getValorTotal)).orElseThrow(NoSuchElementException::new));
 
 	}
 
 	public static Optional<Pedido> getPedidoMaisCaro(ArrayList<Pedido> pedidos) {
 
 		return Optional.of(
-				pedidos.stream().max(Comparator.comparing(Pedido::getPreco)).orElseThrow(NoSuchElementException::new));
+				pedidos.stream().max(Comparator.comparing(Pedido::getValorTotal)).orElseThrow(NoSuchElementException::new));
 
 	}
 
