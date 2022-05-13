@@ -23,22 +23,14 @@ public class RelatorioSintetico {
 
 	public RelatorioSintetico(ArrayList<Pedido> pedidos) {
 		super();
+		this.totalDePedidosRealizados = pedidos.size();
 		//Mapa de big decimals
 		Function<Pedido, BigDecimal> mapaPedidos = pedido -> pedido.getValorTotal();
-		Function<Pedido, String> mapaCategorias = pedido -> pedido.getCategoria();
-
-
 		this.totalDeProdutosVendidos = pedidos
 				.stream()
 				.mapToInt(pedido -> pedido.getQuantidade())
 				.sum();
-		this.totalDePedidosRealizados = pedidos.size();
-		//this.categoriasProcessadas = 
-
-//		if (!categoriasProcessadas.contains(pedidoAtual.getCategoria())) {
-//			totalDeCategorias++;
-//			categoriasProcessadas.add(pedidoAtual.getCategoria());
-//		}
+		pedidos.forEach(pedido -> categoriasProcessadas.add(pedido.getCategoria()));
 		this.totalDeCategorias = categoriasProcessadas.size();
 		this.montanteDeVendas = pedidos
 				.stream()
