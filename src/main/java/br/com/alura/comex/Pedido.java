@@ -18,6 +18,7 @@ public class Pedido {
 	private int quantidade;
 
 	private LocalDate data;
+	
 
 	public Pedido(String categoria, String produto, String cliente, BigDecimal preco, int quantidade, LocalDate data) {
 		this.categoria = categoria;
