@@ -49,8 +49,7 @@ public class Main {
         System.out.printf("- TOTAL DE PRODUTOS VENDIDOS: %s\n", totalDeProdutosVendidos);
         System.out.printf("- TOTAL DE CATEGORIAS: %s\n", totalDeCategorias);
         System.out.printf("- MONTANTE DE VENDAS: %s\n", NumberFormat.getCurrencyInstance(new Locale("pt", "BR")).format(montanteDeVendas.setScale(2, RoundingMode.HALF_DOWN)));
-        System.out.printf("- PEDIDO MAIS BARATO: %s (%s)\n", NumberFormat.getCurrencyInstance(new Locale("pt", "BR")).format(Pedido.getPedidoMaisBarato(pedidos).get().getPreco().multiply(new BigDecimal(Pedido.getPedidoMaisBarato(pedidos).get().getQuantidade())).setScale(2, RoundingMode.HALF_DOWN)), Pedido.getPedidoMaisBarato(pedidos).get().getProduto());
-
-        System.out.printf("- PEDIDO MAIS CARO: %s (%s)\n", NumberFormat.getCurrencyInstance(new Locale("pt", "BR")).format(Pedido.getPedidoMaisCaro(pedidos).get().getPreco().multiply(new BigDecimal(Pedido.getPedidoMaisCaro(pedidos).get().getQuantidade())).setScale(2, RoundingMode.HALF_DOWN)), Pedido.getPedidoMaisCaro(pedidos).get().getProduto());
+        System.out.printf("- PEDIDO MAIS BARATO: %s (%s)\n", NumberFormat.getCurrencyInstance(new Locale("pt", "BR")).format(Pedido.getPedidoMaisBarato(pedidos).get().getPreco()), Pedido.getPedidoMaisBarato(pedidos).get().getProduto());
+        System.out.printf("- PEDIDO MAIS CARO: %s (%s)\n", NumberFormat.getCurrencyInstance(new Locale("pt", "BR")).format(Pedido.getPedidoMaisCaro(pedidos).get().getValorTotal()), Pedido.getPedidoMaisCaro(pedidos).get().getProduto());
     }
 }
