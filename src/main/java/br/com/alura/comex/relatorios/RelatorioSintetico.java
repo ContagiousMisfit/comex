@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import br.com.alura.comex.CategoriasProcessadas;
 import br.com.alura.comex.Pedido;
@@ -20,20 +21,25 @@ public class RelatorioSintetico {
 	Optional<Pedido> pedidoMaisBarato = null;
 	Optional<Pedido> pedidoMaisCaro = null;
 
-	public RelatorioSintetico(ArrayList<Pedido> pedidos, int totalDeProdutosVendidos, int totalDePedidosRealizados, int totalDeCategorias,
-			CategoriasProcessadas categoriasProcessadas, BigDecimal montanteDeVendas, Pedido pedidoMaisBarato,
-			Pedido pedidoMaisCaro) {
+	public RelatorioSintetico(ArrayList<Pedido> pedidos) {
 		super();
 		//Mapa de big decimals
 		Function<Pedido, BigDecimal> mapaPedidos = pedido -> pedido.getValorTotal();
+		Function<Pedido, String> mapaCategorias = pedido -> pedido.getCategoria();
+
 
 		this.totalDeProdutosVendidos = pedidos
 				.stream()
 				.mapToInt(pedido -> pedido.getQuantidade())
 				.sum();
 		this.totalDePedidosRealizados = pedidos.size();
-		this.totalDeCategorias = totalDeCategorias;
-		this.categoriasProcessadas = categoriasProcessadas;
+		//this.categoriasProcessadas = 
+
+//		if (!categoriasProcessadas.contains(pedidoAtual.getCategoria())) {
+//			totalDeCategorias++;
+//			categoriasProcessadas.add(pedidoAtual.getCategoria());
+//		}
+		this.totalDeCategorias = categoriasProcessadas.size();
 		this.montanteDeVendas = pedidos
 				.stream()
 				.map(mapaPedidos)
@@ -41,6 +47,26 @@ public class RelatorioSintetico {
 		this.pedidoMaisBarato = Pedido.getPedidoMaisBarato(pedidos);
 		this.pedidoMaisCaro = Pedido.getPedidoMaisCaro(pedidos);
 	}
+
+	public Optional<Pedido> getPedidoMaisBarato() {
+		return pedidoMaisBarato;
+	}
+
+
+	public void setPedidoMaisBarato(Optional<Pedido> pedidoMaisBarato) {
+		this.pedidoMaisBarato = pedidoMaisBarato;
+	}
+
+
+	public Optional<Pedido> getPedidoMaisCaro() {
+		return pedidoMaisCaro;
+	}
+
+
+	public void setPedidoMaisCaro(Optional<Pedido> pedidoMaisCaro) {
+		this.pedidoMaisCaro = pedidoMaisCaro;
+	}
+
 
 	public int getTotalDeProdutosVendidos() {
 		return totalDeProdutosVendidos;
