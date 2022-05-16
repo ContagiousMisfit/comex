@@ -56,7 +56,7 @@ public class Pedido {
 		return "Pedido{" + "categoria='" + categoria + '\'' + ", produto='" + produto + '\'' + ", cliente='" + cliente
 				+ '\'' + ", preco=" + preco + ", quantidade=" + quantidade + ", data=" + data + '}';
 	}
-
+	
 	public BigDecimal getValorTotal() {
 		return getPreco().multiply(new BigDecimal(getQuantidade()));
 	}
