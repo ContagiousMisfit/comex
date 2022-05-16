@@ -1,11 +1,9 @@
 package br.com.alura.comex;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.NoSuchElementException;
+import java.util.List;
 import java.util.Optional;
 
 public class Pedido {
@@ -61,21 +59,6 @@ public class Pedido {
 
 	public BigDecimal getValorTotal() {
 		return getPreco().multiply(new BigDecimal(getQuantidade()));
-
-	}
-
-	public static Optional<Pedido> getPedidoMaisBarato(ArrayList<Pedido> pedidos) {
-
-		return Optional.of(pedidos.stream().min(Comparator.comparing(Pedido::getValorTotal))
-				.orElseThrow(NoSuchElementException::new));
-
-	}
-
-	public static Optional<Pedido> getPedidoMaisCaro(ArrayList<Pedido> pedidos) {
-
-		return Optional.of(pedidos.stream().max(Comparator.comparing(Pedido::getValorTotal))
-				.orElseThrow(NoSuchElementException::new));
-
 	}
 
 }

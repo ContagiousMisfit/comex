@@ -8,13 +8,14 @@ import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import br.com.alura.comex.Pedido;
 
 public class ProcessadorDeCSV {
 	
-	public ArrayList<Pedido> listarPedidos(String nomeDoArquivo) {
+	public List<Pedido> listarPedidos(String nomeDoArquivo) {
 	    
 		ArrayList<Pedido> pedidos = new ArrayList<>();
         

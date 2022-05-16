@@ -1,103 +1,75 @@
 package br.com.alura.comex.relatorios;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Optional;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.List;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 
-import br.com.alura.comex.CategoriasProcessadas;
 import br.com.alura.comex.Pedido;
 
 public class RelatorioSintetico {
 
+	List<Pedido> listaDePedidos;
 	int totalDeProdutosVendidos = 0;
 	int totalDePedidosRealizados = 0;
 	int totalDeCategorias = 0;
 
-	CategoriasProcessadas categoriasProcessadas = new CategoriasProcessadas();
+	HashSet<String> categoriasProcessadas = new HashSet<String>();
 
 	BigDecimal montanteDeVendas = BigDecimal.ZERO;
-	Optional<Pedido> pedidoMaisBarato = null;
-	Optional<Pedido> pedidoMaisCaro = null;
+	Pedido pedidoMaisBarato;
+	Pedido pedidoMaisCaro;
 
-	public RelatorioSintetico(ArrayList<Pedido> pedidos) {
+	public RelatorioSintetico(List<Pedido> listaDePedidos) {
 		super();
-		this.totalDePedidosRealizados = pedidos.size();
-		//Mapa de big decimals
-		Function<Pedido, BigDecimal> mapaPedidos = pedido -> pedido.getValorTotal();
-		this.totalDeProdutosVendidos = pedidos
+		//verificação - programação defensiva
+		if (listaDePedidos == null || listaDePedidos.isEmpty()) throw new IllegalArgumentException("A lista de pedidos não pode ser nula nem vazia!");
+		
+		this.totalDePedidosRealizados = getTotalDePedidosRealizados(listaDePedidos);
+		this.totalDeProdutosVendidos = getTotalDeProdutosVendidos(listaDePedidos);
+		this.totalDeCategorias = getTotalDeCategorias(listaDePedidos);
+		this.montanteDeVendas = getMontanteDeVendas(listaDePedidos);
+		this.pedidoMaisBarato = getPedidoMaisBarato(listaDePedidos);
+		this.pedidoMaisCaro = getPedidoMaisCaro(listaDePedidos);
+	}
+
+	public int getTotalDeProdutosVendidos(List<Pedido> listaDePedidos) { 
+		return this.totalDeProdutosVendidos = listaDePedidos
 				.stream()
 				.mapToInt(pedido -> pedido.getQuantidade())
 				.sum();
-		pedidos.forEach(pedido -> categoriasProcessadas.add(pedido.getCategoria()));
-		this.totalDeCategorias = categoriasProcessadas.size();
-		this.montanteDeVendas = pedidos
-				.stream()
-				.map(mapaPedidos)
-				.reduce(BigDecimal.ZERO, BigDecimal::add);
-		this.pedidoMaisBarato = Pedido.getPedidoMaisBarato(pedidos);
-		this.pedidoMaisCaro = Pedido.getPedidoMaisCaro(pedidos);
 	}
 
-	public Optional<Pedido> getPedidoMaisBarato() {
-		return pedidoMaisBarato;
+	public int getTotalDePedidosRealizados(List<Pedido> listaDePedidos) {
+		return listaDePedidos.size();
 	}
 
-
-	public void setPedidoMaisBarato(Optional<Pedido> pedidoMaisBarato) {
-		this.pedidoMaisBarato = pedidoMaisBarato;
+	public int getTotalDeCategorias(List<Pedido> listaDePedidos) {
+		listaDePedidos.forEach(pedido -> categoriasProcessadas.add(pedido.getCategoria()));
+		return categoriasProcessadas.size();
 	}
 
-
-	public Optional<Pedido> getPedidoMaisCaro() {
-		return pedidoMaisCaro;
-	}
-
-
-	public void setPedidoMaisCaro(Optional<Pedido> pedidoMaisCaro) {
-		this.pedidoMaisCaro = pedidoMaisCaro;
-	}
-
-
-	public int getTotalDeProdutosVendidos() {
-		return totalDeProdutosVendidos;
-	}
-
-	public void setTotalDeProdutosVendidos(int totalDeProdutosVendidos) {
-		this.totalDeProdutosVendidos = totalDeProdutosVendidos;
-	}
-
-	public int getTotalDePedidosRealizados() {
-		return totalDePedidosRealizados;
-	}
-
-	public void setTotalDePedidosRealizados(int totalDePedidosRealizados) {
-		this.totalDePedidosRealizados = totalDePedidosRealizados;
-	}
-
-	public int getTotalDeCategorias() {
-		return totalDeCategorias;
-	}
-
-	public void setTotalDeCategorias(int totalDeCategorias) {
-		this.totalDeCategorias = totalDeCategorias;
-	}
-
-	public CategoriasProcessadas getCategoriasProcessadas() {
+	public HashSet<String> getCategoriasProcessadas() {
 		return categoriasProcessadas;
 	}
 
-	public void setCategoriasProcessadas(CategoriasProcessadas categoriasProcessadas) {
-		this.categoriasProcessadas = categoriasProcessadas;
+	public BigDecimal getMontanteDeVendas(List<Pedido> listaDePedidos) {
+		Function<Pedido, BigDecimal> mapaPedidos = pedido -> pedido.getValorTotal();
+		return montanteDeVendas = listaDePedidos
+				.stream()
+				.map(mapaPedidos)
+				.reduce(BigDecimal.ZERO, BigDecimal::add);
 	}
 
-	public BigDecimal getMontanteDeVendas() {
-		return montanteDeVendas;
+	public Pedido getPedidoMaisBarato(List<Pedido> listaDePedidos) {
+		return listaDePedidos.stream().min(Comparator.comparing(Pedido::getValorTotal)).orElseThrow(() -> new IllegalStateException("A lista de pedidos não deveria estar vazia."));
 	}
 
-	public void setMontanteDeVendas(BigDecimal montanteDeVendas) {
-		this.montanteDeVendas = montanteDeVendas;
+	public Pedido getPedidoMaisCaro(List<Pedido> listaDePedidos) {
+		return listaDePedidos.stream().max(Comparator.comparing(Pedido::getValorTotal)).orElseThrow(() -> new IllegalStateException("A lista de pedidos não deveria estar vazia."));
 	}
+
+	
 
 }
