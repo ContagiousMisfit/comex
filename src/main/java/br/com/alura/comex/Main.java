@@ -8,7 +8,9 @@ import java.util.List;
 import java.util.Locale;
 
 import br.com.alura.comex.relatorios.RelatorioFidelidade;
+import br.com.alura.comex.relatorios.RelatorioProdutosMaisVendidos;
 import br.com.alura.comex.relatorios.RelatorioSintetico;
+import br.com.alura.comex.relatorios.RelatorioVendasPorCategoria;
 import br.com.alura.comex.utils.ProcessadorDeCSV;
 
 public class Main {
@@ -30,5 +32,7 @@ public class Main {
         System.out.printf("- PEDIDO MAIS CARO: %s (%s)\n", NumberFormat.getCurrencyInstance(new Locale("pt", "BR")).format(relatorio.getPedidoMaisCaro(listaDePedidos).getValorTotal()), relatorio.getPedidoMaisCaro(listaDePedidos).getProduto());
     
         RelatorioFidelidade relatorioFidelidade = new RelatorioFidelidade(listaDePedidos);
+        RelatorioVendasPorCategoria relatorioVendasPorCategoria = new RelatorioVendasPorCategoria(listaDePedidos);
+        //RelatorioProdutosMaisVendidos relatorioProdutosMaisVendidos = new RelatorioProdutosMaisVendidos(listaDePedidos);
     }
 }
