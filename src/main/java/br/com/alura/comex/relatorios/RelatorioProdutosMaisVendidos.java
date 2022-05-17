@@ -14,7 +14,7 @@ public class RelatorioProdutosMaisVendidos {
 		Map<Integer, List<Pedido>> produtosVendidos = listaDePedidos.stream()
 				.collect(Collectors.groupingBy(Pedido::getQuantidade));
 
-		System.out.println("\n#### TOP 3 PRODUTOS MAIS VENDIDOS \n");
+		System.out.println("\n#### TOP 3 PRODUTOS MAIS VENDIDOS");
 
 		produtosVendidos
 			.entrySet()

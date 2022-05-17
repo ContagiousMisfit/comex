@@ -7,6 +7,8 @@ import java.text.NumberFormat;
 import java.util.List;
 import java.util.Locale;
 
+import br.com.alura.comex.relatorios.Relatorio;
+import br.com.alura.comex.relatorios.RelatorioClientesMaisLucrativos;
 import br.com.alura.comex.relatorios.RelatorioFidelidade;
 import br.com.alura.comex.relatorios.RelatorioProdutosMaisCaros;
 import br.com.alura.comex.relatorios.RelatorioProdutosMaisVendidos;
@@ -35,6 +37,7 @@ public class Main {
         RelatorioFidelidade relatorioFidelidade = new RelatorioFidelidade(listaDePedidos);
         RelatorioVendasPorCategoria relatorioVendasPorCategoria = new RelatorioVendasPorCategoria(listaDePedidos);
         RelatorioProdutosMaisVendidos relatorioProdutosMaisVendidos = new RelatorioProdutosMaisVendidos(listaDePedidos);
-        //RelatorioProdutosMaisCaros relatorioProdutosMaisCaros = new RelatorioProdutosMaisCaros(listaDePedidos);
+        RelatorioProdutosMaisCaros relatorioProdutosMaisCaros = new RelatorioProdutosMaisCaros(listaDePedidos);
+        Relatorio relatorioClientesMaisLucrativos = new RelatorioClientesMaisLucrativos(listaDePedidos);
     }
 }
