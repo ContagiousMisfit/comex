@@ -1,11 +1,16 @@
 package br.com.alura.comex.relatorios;
 
-import java.util.Map;
+import java.util.List;
 
-public abstract class Relatorio {
+import br.com.alura.comex.Pedido;
+
+public interface Relatorio {
 	
-	public abstract <T> Map<T, T> filtrarRelatorio();
+	public static final List<Pedido> listaDePedidos = null; 
+
+	public abstract void filtrarRelatorio(List<Pedido> listaDePedidos);
 	
 	public abstract void imprimirRelatorio();
+
 
 }

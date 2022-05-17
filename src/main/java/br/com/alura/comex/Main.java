@@ -24,20 +24,26 @@ public class Main {
     	ProcessadorDeCSV processadorDeCSV = new ProcessadorDeCSV();
     	List<Pedido> listaDePedidos = processadorDeCSV.listarPedidos(arquivoCSV);
 
-    	RelatorioSintetico relatorio = new RelatorioSintetico(listaDePedidos);
+    	RelatorioSintetico relatorioSintetico = new RelatorioSintetico(listaDePedidos);
         
         System.out.println("#### RELATÓRIO DE VALORES TOTAIS");
-        System.out.printf("- TOTAL DE PEDIDOS REALIZADOS: %s\n", relatorio.getTotalDePedidosRealizados(listaDePedidos));
-        System.out.printf("- TOTAL DE PRODUTOS VENDIDOS: %s\n", relatorio.getTotalDeProdutosVendidos(listaDePedidos));
-        System.out.printf("- TOTAL DE CATEGORIAS: %s\n", relatorio.getTotalDeCategorias(listaDePedidos));
-        System.out.printf("- MONTANTE DE VENDAS: %s\n", NumberFormat.getCurrencyInstance(new Locale("pt", "BR")).format(relatorio.getMontanteDeVendas(listaDePedidos).setScale(2, RoundingMode.HALF_DOWN)));
-        System.out.printf("- PEDIDO MAIS BARATO: %s (%s)\n", NumberFormat.getCurrencyInstance(new Locale("pt", "BR")).format(relatorio.getPedidoMaisBarato(listaDePedidos).getValorTotal()), relatorio.getPedidoMaisBarato(listaDePedidos).getProduto());
-        System.out.printf("- PEDIDO MAIS CARO: %s (%s)\n", NumberFormat.getCurrencyInstance(new Locale("pt", "BR")).format(relatorio.getPedidoMaisCaro(listaDePedidos).getValorTotal()), relatorio.getPedidoMaisCaro(listaDePedidos).getProduto());
+        System.out.printf("- TOTAL DE PEDIDOS REALIZADOS: %s\n", relatorioSintetico.getTotalDePedidosRealizados(listaDePedidos));
+        System.out.printf("- TOTAL DE PRODUTOS VENDIDOS: %s\n", relatorioSintetico.getTotalDeProdutosVendidos(listaDePedidos));
+        System.out.printf("- TOTAL DE CATEGORIAS: %s\n", relatorioSintetico.getTotalDeCategorias(listaDePedidos));
+        System.out.printf("- MONTANTE DE VENDAS: %s\n", NumberFormat.getCurrencyInstance(new Locale("pt", "BR")).format(relatorioSintetico.getMontanteDeVendas(listaDePedidos).setScale(2, RoundingMode.HALF_DOWN)));
+        System.out.printf("- PEDIDO MAIS BARATO: %s (%s)\n", NumberFormat.getCurrencyInstance(new Locale("pt", "BR")).format(relatorioSintetico.getPedidoMaisBarato(listaDePedidos).getValorTotal()), relatorioSintetico.getPedidoMaisBarato(listaDePedidos).getProduto());
+        System.out.printf("- PEDIDO MAIS CARO: %s (%s)\n", NumberFormat.getCurrencyInstance(new Locale("pt", "BR")).format(relatorioSintetico.getPedidoMaisCaro(listaDePedidos).getValorTotal()), relatorioSintetico.getPedidoMaisCaro(listaDePedidos).getProduto());
     
-        RelatorioFidelidade relatorioFidelidade = new RelatorioFidelidade(listaDePedidos);
-        RelatorioVendasPorCategoria relatorioVendasPorCategoria = new RelatorioVendasPorCategoria(listaDePedidos);
+        Relatorio relatorioFidelidade = new RelatorioFidelidade();
+        relatorioFidelidade.filtrarRelatorio(listaDePedidos);
+        relatorioFidelidade.imprimirRelatorio();
+        
+        Relatorio relatorioVendasPorCategoria = new RelatorioVendasPorCategoria();
+        relatorioVendasPorCategoria.filtrarRelatorio(listaDePedidos);
+        relatorioVendasPorCategoria.imprimirRelatorio();
+        
         RelatorioProdutosMaisVendidos relatorioProdutosMaisVendidos = new RelatorioProdutosMaisVendidos(listaDePedidos);
         RelatorioProdutosMaisCaros relatorioProdutosMaisCaros = new RelatorioProdutosMaisCaros(listaDePedidos);
-        Relatorio relatorioClientesMaisLucrativos = new RelatorioClientesMaisLucrativos(listaDePedidos);
+        RelatorioClientesMaisLucrativos relatorioClientesMaisLucrativos = new RelatorioClientesMaisLucrativos(listaDePedidos);
     }
 }
