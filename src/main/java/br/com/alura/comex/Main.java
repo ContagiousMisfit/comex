@@ -42,8 +42,17 @@ public class Main {
         relatorioVendasPorCategoria.filtrarRelatorio(listaDePedidos);
         relatorioVendasPorCategoria.imprimirRelatorio();
         
-        RelatorioProdutosMaisVendidos relatorioProdutosMaisVendidos = new RelatorioProdutosMaisVendidos(listaDePedidos);
-        RelatorioProdutosMaisCaros relatorioProdutosMaisCaros = new RelatorioProdutosMaisCaros(listaDePedidos);
-        RelatorioClientesMaisLucrativos relatorioClientesMaisLucrativos = new RelatorioClientesMaisLucrativos(listaDePedidos);
+        Relatorio relatorioProdutosMaisVendidos = new RelatorioProdutosMaisVendidos();
+        relatorioProdutosMaisVendidos.filtrarRelatorio(listaDePedidos);
+        relatorioProdutosMaisVendidos.imprimirRelatorio();
+        
+        Relatorio relatorioProdutosMaisCaros = new RelatorioProdutosMaisCaros();
+        relatorioProdutosMaisCaros.filtrarRelatorio(listaDePedidos);
+        relatorioProdutosMaisCaros.imprimirRelatorio();
+        
+        Relatorio relatorioClientesMaisLucrativos = new RelatorioClientesMaisLucrativos();
+        relatorioClientesMaisLucrativos.filtrarRelatorio(listaDePedidos);
+        relatorioClientesMaisLucrativos.imprimirRelatorio();
+        
     }
 }

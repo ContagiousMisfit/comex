@@ -8,9 +8,9 @@ public interface Relatorio {
 	
 	public static final List<Pedido> listaDePedidos = null; 
 
-	public abstract void filtrarRelatorio(List<Pedido> listaDePedidos);
+	public void filtrarRelatorio(List<Pedido> listaDePedidos);
 	
-	public abstract void imprimirRelatorio();
+	public void imprimirRelatorio();
 
 
 }

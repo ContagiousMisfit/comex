@@ -7,13 +7,18 @@ import java.util.stream.Collectors;
 
 import br.com.alura.comex.Pedido;
 
-public class RelatorioProdutosMaisVendidos {
+public class RelatorioProdutosMaisVendidos implements Relatorio {
 
-	public RelatorioProdutosMaisVendidos(List<Pedido> listaDePedidos) {
+	Map<Integer, List<Pedido>> produtosVendidos;
 
-		Map<Integer, List<Pedido>> produtosVendidos = listaDePedidos.stream()
+	@Override
+	public void filtrarRelatorio(List<Pedido> listaDePedidos) {
+		produtosVendidos = listaDePedidos.stream()
 				.collect(Collectors.groupingBy(Pedido::getQuantidade));
-
+	}
+	
+	@Override
+	public void imprimirRelatorio() {
 		System.out.println("\n#### TOP 3 PRODUTOS MAIS VENDIDOS");
 
 		produtosVendidos
@@ -26,8 +31,7 @@ public class RelatorioProdutosMaisVendidos {
 					"PRODUTO: " + entry.getValue().get(0).getProduto() 
 					+ "\nQUANTIDADE VENDIDA: " + entry.getKey()
 					+ "\n");
-		});
-
+		});		
 	}
 
 }

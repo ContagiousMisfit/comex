@@ -11,24 +11,25 @@ import java.util.stream.Collectors;
 
 import br.com.alura.comex.Pedido;
 
-public class RelatorioProdutosMaisCaros {
+public class RelatorioProdutosMaisCaros implements Relatorio {
 
-	public RelatorioProdutosMaisCaros(List<Pedido> listaDePedidos) {
+	Map<String, Pedido> produtosMaisCaros;
 
-		System.out.println("\n#### PRODUTO MAIS CARO EM CADA CATEGORIA");
-
-		Map<String, Pedido> produtosMaisCaros = listaDePedidos
-				.stream()
-				.collect(Collectors.toMap(Pedido::getCategoria,
-				Function.identity(), BinaryOperator.maxBy(Comparator.comparing(Pedido::getPreco))));
-		
-		produtosMaisCaros
-			.entrySet()
-			.stream()
-			.sorted(Map.Entry.<String, Pedido>comparingByKey())
-			.forEach(entry -> System.out.println("CATEGORIA: " + entry.getKey() + "\nPRODUTO: "
-				+ entry.getValue().getProduto() + "\nPREÇO:" + NumberFormat.getCurrencyInstance(new Locale("pt", "BR")).format(entry.getValue().getPreco()) + "\n"));
+	@Override
+	public void filtrarRelatorio(List<Pedido> listaDePedidos) {
+		produtosMaisCaros = listaDePedidos.stream().collect(Collectors.toMap(Pedido::getCategoria, Function.identity(),
+				BinaryOperator.maxBy(Comparator.comparing(Pedido::getPreco))));
 
 	}
 
+	@Override
+	public void imprimirRelatorio() {
+		System.out.println("\n#### PRODUTO MAIS CARO EM CADA CATEGORIA");
+		produtosMaisCaros.entrySet().stream().sorted(Map.Entry.<String, Pedido>comparingByKey())
+				.forEach(
+						entry -> System.out.println("CATEGORIA: " + entry.getKey() + "\nPRODUTO: "
+								+ entry.getValue().getProduto() + "\nPREÇO: " + NumberFormat
+										.getCurrencyInstance(new Locale("pt", "BR")).format(entry.getValue().getPreco())
+								+ "\n"));
+	}
 }

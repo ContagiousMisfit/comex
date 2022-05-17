@@ -11,8 +11,6 @@ import br.com.alura.comex.Pedido;
 
 public class RelatorioVendasPorCategoria implements Relatorio {
 
-	BigDecimal montanteDeVendas = BigDecimal.ZERO;
-
 	Map<String, List<Pedido>> vendasPorCategoria;
 
 	@Override
@@ -34,5 +32,6 @@ public class RelatorioVendasPorCategoria implements Relatorio {
 							+ "\n");
 				});
 	}
+	
 
 }
