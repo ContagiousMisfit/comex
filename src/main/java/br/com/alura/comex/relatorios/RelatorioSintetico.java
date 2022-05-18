@@ -1,14 +1,18 @@
 package br.com.alura.comex.relatorios;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.NumberFormat;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import br.com.alura.comex.Pedido;
 
-public class RelatorioSintetico {
+public class RelatorioSintetico implements Relatorio {
 
 	List<Pedido> listaDePedidos;
 	int totalDeProdutosVendidos = 0;
@@ -21,18 +25,18 @@ public class RelatorioSintetico {
 	Pedido pedidoMaisBarato;
 	Pedido pedidoMaisCaro;
 
-	public RelatorioSintetico(List<Pedido> listaDePedidos) {
-		super();
-		//verificação - programação defensiva
-		if (listaDePedidos == null || listaDePedidos.isEmpty()) throw new IllegalArgumentException("A lista de pedidos não pode ser nula nem vazia!");
-		
-		this.totalDePedidosRealizados = getTotalDePedidosRealizados(listaDePedidos);
-		this.totalDeProdutosVendidos = getTotalDeProdutosVendidos(listaDePedidos);
-		this.totalDeCategorias = getTotalDeCategorias(listaDePedidos);
-		this.montanteDeVendas = getMontanteDeVendas(listaDePedidos);
-		this.pedidoMaisBarato = getPedidoMaisBarato(listaDePedidos);
-		this.pedidoMaisCaro = getPedidoMaisCaro(listaDePedidos);
-	}
+//	public RelatorioSintetico(List<Pedido> listaDePedidos) {
+//		super();
+//		//verificação - programação defensiva
+//		if (listaDePedidos == null || listaDePedidos.isEmpty()) throw new IllegalArgumentException("A lista de pedidos não pode ser nula nem vazia!");
+//		
+//		this.totalDePedidosRealizados = getTotalDePedidosRealizados(listaDePedidos);
+//		this.totalDeProdutosVendidos = getTotalDeProdutosVendidos(listaDePedidos);
+//		this.totalDeCategorias = getTotalDeCategorias(listaDePedidos);
+//		this.montanteDeVendas = getMontanteDeVendas(listaDePedidos);
+//		this.pedidoMaisBarato = getPedidoMaisBarato(listaDePedidos);
+//		this.pedidoMaisCaro = getPedidoMaisCaro(listaDePedidos);
+//	}
 
 	public int getTotalDeProdutosVendidos(List<Pedido> listaDePedidos) { 
 		return this.totalDeProdutosVendidos = listaDePedidos
@@ -68,6 +72,25 @@ public class RelatorioSintetico {
 
 	public Pedido getPedidoMaisCaro(List<Pedido> listaDePedidos) {
 		return listaDePedidos.stream().max(Comparator.comparing(Pedido::getValorTotal)).orElseThrow(() -> new IllegalStateException("A lista de pedidos não deveria estar vazia."));
+	}
+
+	@Override
+	public void filtrarRelatorio(List<Pedido> listaAtual) {
+		listaDePedidos = listaAtual.stream()
+				.collect(Collectors.toList());				
+	}
+
+	@Override
+	public void imprimirRelatorio() {
+		
+		  System.out.println("#### RELATÓRIO DE VALORES TOTAIS");
+	        System.out.printf("- TOTAL DE PEDIDOS REALIZADOS: %s\n", getTotalDePedidosRealizados(listaDePedidos));
+	        System.out.printf("- TOTAL DE PRODUTOS VENDIDOS: %s\n", getTotalDeProdutosVendidos(listaDePedidos));
+	        System.out.printf("- TOTAL DE CATEGORIAS: %s\n", getTotalDeCategorias(listaDePedidos));
+	        System.out.printf("- MONTANTE DE VENDAS: %s\n", NumberFormat.getCurrencyInstance(new Locale("pt", "BR")).format(getMontanteDeVendas(listaDePedidos).setScale(2, RoundingMode.HALF_DOWN)));
+	        System.out.printf("- PEDIDO MAIS BARATO: %s (%s)\n", NumberFormat.getCurrencyInstance(new Locale("pt", "BR")).format(getPedidoMaisBarato(listaDePedidos).getValorTotal()), getPedidoMaisBarato(listaDePedidos).getProduto());
+	        System.out.printf("- PEDIDO MAIS CARO: %s (%s)\n", NumberFormat.getCurrencyInstance(new Locale("pt", "BR")).format(getPedidoMaisCaro(listaDePedidos).getValorTotal()), getPedidoMaisCaro(listaDePedidos).getProduto());
+	    			
 	}
 
 	

@@ -1,11 +1,8 @@
 package br.com.alura.comex;
 
 import java.io.IOException;
-import java.math.RoundingMode;
 import java.net.URISyntaxException;
-import java.text.NumberFormat;
 import java.util.List;
-import java.util.Locale;
 
 import br.com.alura.comex.relatorios.Relatorio;
 import br.com.alura.comex.relatorios.RelatorioClientesMaisLucrativos;
@@ -24,16 +21,10 @@ public class Main {
     	ProcessadorDeCSV processadorDeCSV = new ProcessadorDeCSV();
     	List<Pedido> listaDePedidos = processadorDeCSV.lerRegistros();
 
-    	RelatorioSintetico relatorioSintetico = new RelatorioSintetico(listaDePedidos);
-        
-        System.out.println("#### RELATÓRIO DE VALORES TOTAIS");
-        System.out.printf("- TOTAL DE PEDIDOS REALIZADOS: %s\n", relatorioSintetico.getTotalDePedidosRealizados(listaDePedidos));
-        System.out.printf("- TOTAL DE PRODUTOS VENDIDOS: %s\n", relatorioSintetico.getTotalDeProdutosVendidos(listaDePedidos));
-        System.out.printf("- TOTAL DE CATEGORIAS: %s\n", relatorioSintetico.getTotalDeCategorias(listaDePedidos));
-        System.out.printf("- MONTANTE DE VENDAS: %s\n", NumberFormat.getCurrencyInstance(new Locale("pt", "BR")).format(relatorioSintetico.getMontanteDeVendas(listaDePedidos).setScale(2, RoundingMode.HALF_DOWN)));
-        System.out.printf("- PEDIDO MAIS BARATO: %s (%s)\n", NumberFormat.getCurrencyInstance(new Locale("pt", "BR")).format(relatorioSintetico.getPedidoMaisBarato(listaDePedidos).getValorTotal()), relatorioSintetico.getPedidoMaisBarato(listaDePedidos).getProduto());
-        System.out.printf("- PEDIDO MAIS CARO: %s (%s)\n", NumberFormat.getCurrencyInstance(new Locale("pt", "BR")).format(relatorioSintetico.getPedidoMaisCaro(listaDePedidos).getValorTotal()), relatorioSintetico.getPedidoMaisCaro(listaDePedidos).getProduto());
-    
+    	Relatorio relatorioSintetico = new RelatorioSintetico();
+    	relatorioSintetico.filtrarRelatorio(listaDePedidos);
+    	relatorioSintetico.imprimirRelatorio();
+
         Relatorio relatorioFidelidade = new RelatorioFidelidade();
         relatorioFidelidade.filtrarRelatorio(listaDePedidos);
         relatorioFidelidade.imprimirRelatorio();
