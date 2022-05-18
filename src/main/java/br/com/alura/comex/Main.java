@@ -18,11 +18,11 @@ import br.com.alura.comex.utils.ProcessadorDeCSV;
 
 public class Main {
 
+
     public static void main(String[] args) throws IOException, URISyntaxException {
         
-    	String arquivoCSV = "pedidos.csv";
     	ProcessadorDeCSV processadorDeCSV = new ProcessadorDeCSV();
-    	List<Pedido> listaDePedidos = processadorDeCSV.listarPedidos(arquivoCSV);
+    	List<Pedido> listaDePedidos = processadorDeCSV.lerRegistros();
 
     	RelatorioSintetico relatorioSintetico = new RelatorioSintetico(listaDePedidos);
         
