@@ -21,7 +21,7 @@ public class RelatorioClientesMaisLucrativos implements Relatorio {
 	@Override
 	public void imprimirRelatorio() {
 		System.out.println("\n#### CLIENTES MAIS LUCRATIVOS");
-		clientesMaisLucrativos.entrySet().stream().sorted(Map.Entry.<String, List<Pedido>>comparingByKey())
+		clientesMaisLucrativos.entrySet().stream().sorted(Map.Entry.<String, List<Pedido>>comparingByKey()).filter(cliente -> cliente.getValue().stream().map(pedido -> pedido.getQuantidade()).count() > 3)
 				.forEach(cliente -> {
 					System.out.println("NOME: " + cliente.getKey() + "\nNº DE PEDIDOS: "
 							+ cliente.getValue().stream().map(pedido -> pedido.getQuantidade()).count()
