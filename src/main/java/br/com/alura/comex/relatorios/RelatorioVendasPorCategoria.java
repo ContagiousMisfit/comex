@@ -24,11 +24,10 @@ public class RelatorioVendasPorCategoria implements Relatorio {
 		System.out.println("\n#### RELATÓRIO DE VENDAS POR CATEGORIA");
 		vendasPorCategoria.entrySet().stream().sorted(Map.Entry.<String, List<Pedido>>comparingByKey())
 				.forEach(entry -> {
-					System.out.println("CATEGORIA: " + entry.getKey() + "\nQUANTIDADE VENDIDA: "
-							+ entry.getValue().stream().mapToInt(pedido -> pedido.getQuantidade()).sum()
-							+ "\nMONTANTE: "
-							+ NumberFormat.getCurrencyInstance(new Locale("pt", "BR")).format(entry.getValue().stream()
-									.map(pedido -> pedido.getValorTotal()).reduce(BigDecimal.ZERO, BigDecimal::add))
+					System.out.println("CATEGORIA: " + entry.getKey() 
+							+ "\nQUANTIDADE VENDIDA: "+ entry.getValue().stream().mapToInt(pedido -> pedido.getQuantidade()).sum()
+							+ "\nMONTANTE: " + NumberFormat.getCurrencyInstance(new Locale("pt", "BR")).format(entry.getValue().stream()
+												.map(pedido -> pedido.getValorTotal()).reduce(BigDecimal.ZERO, BigDecimal::add))
 							+ "\n");
 				});
 	}

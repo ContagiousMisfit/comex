@@ -27,9 +27,9 @@ public class RelatorioProdutosMaisCaros implements Relatorio {
 		System.out.println("\n#### PRODUTO MAIS CARO EM CADA CATEGORIA");
 		produtosMaisCaros.entrySet().stream().sorted(Map.Entry.<String, Pedido>comparingByKey())
 				.forEach(
-						entry -> System.out.println("CATEGORIA: " + entry.getKey() + "\nPRODUTO: "
-								+ entry.getValue().getProduto() + "\nPREÇO: " + NumberFormat
-										.getCurrencyInstance(new Locale("pt", "BR")).format(entry.getValue().getPreco())
-								+ "\n"));
+						entry -> System.out.println("CATEGORIA: " + entry.getKey() 
+						+ "\nPRODUTO: " + entry.getValue().getProduto() 
+						+ "\nPREÇO: " + NumberFormat.getCurrencyInstance(new Locale("pt", "BR")).format(entry.getValue().getPreco())
+						+ "\n"));
 	}
 }

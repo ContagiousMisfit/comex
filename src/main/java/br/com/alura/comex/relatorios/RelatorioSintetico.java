@@ -25,19 +25,6 @@ public class RelatorioSintetico implements Relatorio {
 	Pedido pedidoMaisBarato;
 	Pedido pedidoMaisCaro;
 
-//	public RelatorioSintetico(List<Pedido> listaDePedidos) {
-//		super();
-//		//verificação - programação defensiva
-//		if (listaDePedidos == null || listaDePedidos.isEmpty()) throw new IllegalArgumentException("A lista de pedidos não pode ser nula nem vazia!");
-//		
-//		this.totalDePedidosRealizados = getTotalDePedidosRealizados(listaDePedidos);
-//		this.totalDeProdutosVendidos = getTotalDeProdutosVendidos(listaDePedidos);
-//		this.totalDeCategorias = getTotalDeCategorias(listaDePedidos);
-//		this.montanteDeVendas = getMontanteDeVendas(listaDePedidos);
-//		this.pedidoMaisBarato = getPedidoMaisBarato(listaDePedidos);
-//		this.pedidoMaisCaro = getPedidoMaisCaro(listaDePedidos);
-//	}
-
 	public int getTotalDeProdutosVendidos(List<Pedido> listaDePedidos) { 
 		return this.totalDeProdutosVendidos = listaDePedidos
 				.stream()
