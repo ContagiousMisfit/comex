@@ -15,12 +15,12 @@ import br.com.alura.comex.Pedido;
 
 public class ProcessadorDeJSON implements Processador {
 
-	static final String ARQUIVO_CSV = "pedidos.json";
+	static final String ARQUIVO_JSON = "pedidos.json";
 	
 	@Override
 	public List<Pedido> lerRegistros() throws URISyntaxException, StreamReadException, DatabindException, IOException {
-		URL recursoCSV = ClassLoader.getSystemResource(ARQUIVO_CSV);
-		FileReader reader = new FileReader(recursoCSV.toURI().getPath());
+		URL recursoJSON= ClassLoader.getSystemResource(ARQUIVO_JSON);
+		FileReader reader = new FileReader(recursoJSON.toURI().getPath());
 		ObjectMapper objectMapper = new ObjectMapper();
 		return objectMapper.readValue(reader, new TypeReference<List<Pedido>>() {});
 	}

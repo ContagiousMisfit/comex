@@ -14,6 +14,7 @@ import br.com.alura.comex.relatorios.RelatorioVendasPorCategoria;
 import br.com.alura.comex.utils.Processador;
 import br.com.alura.comex.utils.ProcessadorDeCSV;
 import br.com.alura.comex.utils.ProcessadorDeJSON;
+import br.com.alura.comex.utils.ProcessadorDeXML;
 
 public class Main {
 
@@ -26,28 +27,31 @@ public class Main {
     	Processador processadorDeJSON = new ProcessadorDeJSON();
     	List<Pedido> listaDePedidosJSON = processadorDeJSON.lerRegistros();
 
+    	Processador processadorDeXML = new ProcessadorDeXML();
+    	List<Pedido> listaDePedidosXML = processadorDeXML.lerRegistros();
+    	
     	Relatorio relatorioSintetico = new RelatorioSintetico();
-    	relatorioSintetico.filtrarRelatorio(listaDePedidosJSON);
+    	relatorioSintetico.filtrarRelatorio(listaDePedidosXML);
     	relatorioSintetico.imprimirRelatorio();
 
         Relatorio relatorioFidelidade = new RelatorioFidelidade();
-        relatorioFidelidade.filtrarRelatorio(listaDePedidosJSON);
+        relatorioFidelidade.filtrarRelatorio(listaDePedidosXML);
         relatorioFidelidade.imprimirRelatorio();
         
         Relatorio relatorioVendasPorCategoria = new RelatorioVendasPorCategoria();
-        relatorioVendasPorCategoria.filtrarRelatorio(listaDePedidosJSON);
+        relatorioVendasPorCategoria.filtrarRelatorio(listaDePedidosXML);
         relatorioVendasPorCategoria.imprimirRelatorio();
         
         Relatorio relatorioProdutosMaisVendidos = new RelatorioProdutosMaisVendidos();
-        relatorioProdutosMaisVendidos.filtrarRelatorio(listaDePedidosJSON);
+        relatorioProdutosMaisVendidos.filtrarRelatorio(listaDePedidosXML);
         relatorioProdutosMaisVendidos.imprimirRelatorio();
         
         Relatorio relatorioProdutosMaisCaros = new RelatorioProdutosMaisCaros();
-        relatorioProdutosMaisCaros.filtrarRelatorio(listaDePedidosJSON);
+        relatorioProdutosMaisCaros.filtrarRelatorio(listaDePedidosXML);
         relatorioProdutosMaisCaros.imprimirRelatorio();
         
         Relatorio relatorioClientesMaisLucrativos = new RelatorioClientesMaisLucrativos();
-        relatorioClientesMaisLucrativos.filtrarRelatorio(listaDePedidosJSON);
+        relatorioClientesMaisLucrativos.filtrarRelatorio(listaDePedidosXML);
         relatorioClientesMaisLucrativos.imprimirRelatorio();
         
     }
