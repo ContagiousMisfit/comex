@@ -11,7 +11,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import br.com.alura.comex.Pedido;
+import br.com.alura.comex.model.Pedido;
 
 public class ProcessadorDeJSON implements Processador {
 

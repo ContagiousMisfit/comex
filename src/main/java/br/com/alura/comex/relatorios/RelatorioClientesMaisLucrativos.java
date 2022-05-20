@@ -7,14 +7,19 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import br.com.alura.comex.Pedido;
+import br.com.alura.comex.model.Pedido;
 
-public class RelatorioClientesMaisLucrativos implements Relatorio {
+public class RelatorioClientesMaisLucrativos extends Relatorio {
+
+	public RelatorioClientesMaisLucrativos(List<Pedido> listaDePedidos) {
+		super(listaDePedidos);
+		// TODO Auto-generated constructor stub
+	}
 
 	Map<String, List<Pedido>> clientesMaisLucrativos;
 
 	@Override
-	public void filtrarRelatorio(List<Pedido> listaDePedidos) {
+	public void filtrarRelatorio() {
 		clientesMaisLucrativos = listaDePedidos.stream().collect(Collectors.groupingBy(Pedido::getCliente));
 	}
 

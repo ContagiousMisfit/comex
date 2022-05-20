@@ -5,14 +5,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import br.com.alura.comex.Pedido;
+import br.com.alura.comex.model.Pedido;
 
-public class RelatorioProdutosMaisVendidos implements Relatorio {
+public class RelatorioProdutosMaisVendidos extends Relatorio {
+
+	public RelatorioProdutosMaisVendidos(List<Pedido> listaDePedidos) {
+		super(listaDePedidos);
+	}
 
 	Map<Integer, List<Pedido>> produtosVendidos;
 
 	@Override
-	public void filtrarRelatorio(List<Pedido> listaDePedidos) {
+	public void filtrarRelatorio() {
 		produtosVendidos = listaDePedidos.stream()
 				.collect(Collectors.groupingBy(Pedido::getQuantidade));
 	}

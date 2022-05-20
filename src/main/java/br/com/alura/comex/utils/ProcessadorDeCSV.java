@@ -9,7 +9,7 @@ import java.util.List;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 
-import br.com.alura.comex.Pedido;
+import br.com.alura.comex.model.Pedido;
 
 public class ProcessadorDeCSV implements Processador {
 

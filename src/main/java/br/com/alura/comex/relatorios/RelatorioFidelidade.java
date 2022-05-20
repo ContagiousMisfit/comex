@@ -4,14 +4,18 @@ import java.util.List;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
-import br.com.alura.comex.Pedido;
+import br.com.alura.comex.model.Pedido;
 
-public class RelatorioFidelidade implements Relatorio{
+public class RelatorioFidelidade extends Relatorio{
+
+	public RelatorioFidelidade(List<Pedido> listaDePedidos) {
+		super(listaDePedidos);
+	}
 
 	private TreeMap<String, Long> clientesFieis;
 	
 	@Override
-	public void filtrarRelatorio(List<Pedido> listaDePedidos) {
+	public void filtrarRelatorio() {
 		clientesFieis = listaDePedidos.stream()
 				.collect(Collectors.groupingBy(Pedido::getCliente, TreeMap::new, Collectors.counting()));		
 	}
