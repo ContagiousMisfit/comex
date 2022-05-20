@@ -14,16 +14,12 @@ import br.com.alura.comex.Pedido;
 
 public class RelatorioSintetico implements Relatorio {
 
-	List<Pedido> listaDePedidos;
-	int totalDeProdutosVendidos = 0;
-	int totalDePedidosRealizados = 0;
-	int totalDeCategorias = 0;
+	private List<Pedido> listaDePedidos;
+	private int totalDeProdutosVendidos = 0;
 
-	HashSet<String> categoriasProcessadas = new HashSet<String>();
-
-	BigDecimal montanteDeVendas = BigDecimal.ZERO;
-	Pedido pedidoMaisBarato;
-	Pedido pedidoMaisCaro;
+	private BigDecimal montanteDeVendas = BigDecimal.ZERO;
+	private Pedido pedidoMaisBarato;
+	private Pedido pedidoMaisCaro;
 
 	public int getTotalDeProdutosVendidos(List<Pedido> listaDePedidos) { 
 		return this.totalDeProdutosVendidos = listaDePedidos
@@ -36,13 +32,8 @@ public class RelatorioSintetico implements Relatorio {
 		return listaDePedidos.size();
 	}
 
-	public int getTotalDeCategorias(List<Pedido> listaDePedidos) {
-		listaDePedidos.forEach(pedido -> categoriasProcessadas.add(pedido.getCategoria()));
-		return categoriasProcessadas.size();
-	}
-
-	public HashSet<String> getCategoriasProcessadas() {
-		return categoriasProcessadas;
+	public long getTotalDeCategorias(List<Pedido> listaDePedidos) {
+		return listaDePedidos.stream().distinct().count();
 	}
 
 	public BigDecimal getMontanteDeVendas(List<Pedido> listaDePedidos) {

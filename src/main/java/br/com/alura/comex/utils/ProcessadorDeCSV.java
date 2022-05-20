@@ -2,6 +2,8 @@ package br.com.alura.comex.utils;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.List;
 
 import com.opencsv.bean.CsvToBean;
@@ -9,17 +11,16 @@ import com.opencsv.bean.CsvToBeanBuilder;
 
 import br.com.alura.comex.Pedido;
 
-public class ProcessadorDeCSV implements Processador{
+public class ProcessadorDeCSV implements Processador {
 
-	static final String arquivoCSV = "C:\\Users\\Darkn\\Desktop\\CI&T\\comex\\src\\main\\resources\\pedidos.csv";
-	
+	static final String ARQUIVO_CSV = "pedidos.csv";
+
 	@Override
-	public List<Pedido> lerRegistros() throws FileNotFoundException {
+	public List<Pedido> lerRegistros() throws FileNotFoundException, URISyntaxException {
 
-		FileReader reader = new FileReader(arquivoCSV);
-		CsvToBean<Pedido> csvToBean = new CsvToBeanBuilder<Pedido>(reader)
-				.withType(Pedido.class)
-				.withSeparator(',')
+		URL recursoCSV = ClassLoader.getSystemResource(ARQUIVO_CSV);
+		FileReader reader = new FileReader(recursoCSV.toURI().getPath());
+				CsvToBean<Pedido> csvToBean = new CsvToBeanBuilder<Pedido>(reader).withType(Pedido.class).withSeparator(',')
 				.build();
 		return csvToBean.parse();
 

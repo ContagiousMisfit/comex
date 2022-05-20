@@ -1,7 +1,6 @@
 package br.com.alura.comex.relatorios;
 
 import java.util.List;
-import java.util.Map;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
@@ -9,7 +8,7 @@ import br.com.alura.comex.Pedido;
 
 public class RelatorioFidelidade implements Relatorio{
 
-	private Map<String, Long> clientesFieis;
+	private TreeMap<String, Long> clientesFieis;
 	
 	@Override
 	public void filtrarRelatorio(List<Pedido> listaDePedidos) {

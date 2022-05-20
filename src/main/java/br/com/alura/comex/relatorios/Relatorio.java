@@ -6,8 +6,6 @@ import br.com.alura.comex.Pedido;
 
 public interface Relatorio {
 	
-	public static final List<Pedido> listaDePedidos = null; 
-
 	public void filtrarRelatorio(List<Pedido> listaDePedidos);
 	
 	public void imprimirRelatorio();
