@@ -14,10 +14,6 @@ public class RelatorioSintetico extends Relatorio {
 	}
 
 	@Override
-	public void filtrarRelatorio() {	
-	}
-
-	@Override
 	public void imprimirRelatorio() {
 		
 		  System.out.println("#### RELATÓRIO DE VALORES TOTAIS");
@@ -29,7 +25,5 @@ public class RelatorioSintetico extends Relatorio {
 	        System.out.printf("- PEDIDO MAIS CARO: %s (%s)\n", NumberFormat.getCurrencyInstance(new Locale("pt", "BR")).format(getPedidoMaisCaro().getValorTotal()), getPedidoMaisCaro().getProduto());
 	    			
 	}
-
-	
 
 }

@@ -1,7 +1,5 @@
 package br.com.alura.comex;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.List;
 
 import br.com.alura.comex.model.Pedido;
@@ -22,7 +20,7 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
         
-    	ProcessadorDeCSV processadorDeCSV = new ProcessadorDeCSV();
+    	Processador processadorDeCSV = new ProcessadorDeCSV();
     	List<Pedido> listaDePedidos = processadorDeCSV.lerRegistros();
     	
     	Processador processadorDeJSON = new ProcessadorDeJSON();
@@ -32,27 +30,21 @@ public class Main {
     	List<Pedido> listaDePedidosXML = processadorDeXML.lerRegistros();
     	
     	Relatorio relatorioSintetico = new RelatorioSintetico(listaDePedidos);
-    	relatorioSintetico.filtrarRelatorio();
-    	relatorioSintetico.imprimirRelatorio();
+    	relatorioSintetico.executa();
 
     	Relatorio relatorioFidelidade = new RelatorioFidelidade(listaDePedidos);
-    	relatorioFidelidade.filtrarRelatorio();
-    	relatorioFidelidade.imprimirRelatorio();
+    	relatorioFidelidade.executa();
 
     	Relatorio relatorioVendasPorCategoria = new RelatorioVendasPorCategoria(listaDePedidos);
-    	relatorioVendasPorCategoria.filtrarRelatorio();
-    	relatorioVendasPorCategoria.imprimirRelatorio();
+    	relatorioVendasPorCategoria.executa();
       
     	Relatorio relatorioProdutosMaisVendidos = new RelatorioProdutosMaisVendidos(listaDePedidosXML);
-    	relatorioProdutosMaisVendidos.filtrarRelatorio();
-    	relatorioProdutosMaisVendidos.imprimirRelatorio();
+    	relatorioProdutosMaisVendidos.executa();
       
     	Relatorio relatorioProdutosMaisCaros = new RelatorioProdutosMaisCaros(listaDePedidosXML);
-    	relatorioProdutosMaisCaros.filtrarRelatorio();
-    	relatorioProdutosMaisCaros.imprimirRelatorio();
+    	relatorioProdutosMaisCaros.executa();
       
     	Relatorio relatorioClientesMaisLucrativos = new RelatorioClientesMaisLucrativos(listaDePedidosXML);
-    	relatorioClientesMaisLucrativos.filtrarRelatorio();
-    	relatorioClientesMaisLucrativos.imprimirRelatorio();
+    	relatorioClientesMaisLucrativos.executa();
     }
 }

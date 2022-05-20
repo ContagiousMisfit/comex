@@ -56,6 +56,11 @@ public abstract class Relatorio {
 	
 	public void imprimirRelatorio() {
 	}
+	
+	public void executa() {
+		filtrarRelatorio();
+		imprimirRelatorio();
+	}
 
 
 }
