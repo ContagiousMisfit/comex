@@ -2,56 +2,56 @@ package br.com.alura.comex.menu;
 
 import br.com.alura.comex.model.Pedido;
 import br.com.alura.comex.relatorios.*;
-import br.com.alura.comex.utils.Processador;
-import br.com.alura.comex.utils.ProcessadorDeCSV;
-import br.com.alura.comex.utils.ProcessadorDeJSON;
-import br.com.alura.comex.utils.ProcessadorDeXML;
+import br.com.alura.comex.utils.*;
 
 import java.util.List;
 import java.util.Scanner;
 
+import static br.com.alura.comex.relatorios.CategoriaRelatorio.*;
+
 public class MenuRelatorio {
 
-    Scanner sc = new Scanner(System.in);
+    Scanner input = new Scanner(System.in);
 
     private List<Pedido> escolherArquivo() throws Exception {
         imprimirOpcoesProcessador();
         System.out.print("Digite: ");
-        int opcao = sc.nextInt();
-
-        switch (opcao) {
-            case 1:
+        String opcao = input.nextLine();
+        CategoriaProcessador categoria = CategoriaProcessador.valueOf(opcao);
+            switch (categoria) {
+            case CSV:
                 return ((Processador) new ProcessadorDeCSV()).lerRegistros();
-            case 2:
+            case JSON:
                 return ((Processador) new ProcessadorDeJSON()).lerRegistros();
-            case 3:
+            case XML:
                 return ((Processador) new ProcessadorDeXML()).lerRegistros();
         }
-        return null;
+        return escolherArquivo();
     }
 
     private void escolherRelatorio(List<Pedido> listaDePedidos) {
         imprimirOpcoesRelatorio();
         System.out.print("Digite: ");
-        int opcao = sc.nextInt();
+        String opcao = input.nextLine();
+        CategoriaRelatorio categoria = CategoriaRelatorio.valueOf(opcao);
 
-        switch (opcao) {
-            case 1:
+        switch (categoria) {
+            case RELATORIO_SINTETICO:
                 new RelatorioSintetico(listaDePedidos).executa();
                 break;
-            case 2:
+            case RELATORIO_CLIENTES_FIEIS:
                 new RelatorioFidelidade(listaDePedidos).executa();
                 break;
-            case 3:
+            case RELATORIO_VENDAS_POR_CATEGORIA:
                 new RelatorioVendasPorCategoria(listaDePedidos).executa();
                 break;
-            case 4:
+            case RELATORIO_PRODUTOS_MAIS_VENDIDOS:
                 new RelatorioProdutosMaisVendidos(listaDePedidos).executa();
                 break;
-            case 5:
+            case RELATORIO_PRODUTOS_MAIS_CAROS:
                 new RelatorioProdutosMaisCaros(listaDePedidos).executa();
                 break;
-            case 6:
+            case RELATORIO_CLIENTES_MAIS_LUCRATIVOS:
                 new RelatorioClientesMaisLucrativos(listaDePedidos).executa();
                 break;
         }
@@ -59,11 +59,11 @@ public class MenuRelatorio {
 
     private void imprimirOpcoesProcessador() {
         System.out.println("----BEM VINDO----");
-        System.out.println("Escolha uma opção no menu abaixo:");
+        System.out.println("Digite uma opção do menu abaixo em letras maiúsculas");
         System.out.println("Que tipo de arquivo deseja processar?");
-        System.out.println("1 - CSV");
-        System.out.println("2 - JSON");
-        System.out.println("3 - XML");
+        System.out.println("1) CSV");
+        System.out.println("2) JSON");
+        System.out.println("3) XML");
     }
 
     private void imprimirOpcoesRelatorio() {
