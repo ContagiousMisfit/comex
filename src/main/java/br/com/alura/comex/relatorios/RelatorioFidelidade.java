@@ -22,9 +22,9 @@ public class RelatorioFidelidade extends Relatorio{
 
 	@Override
 	public void imprimirRelatorio() {
-		System.out.println("\n#### RELATÓRIO DE CLIENTES FIÉIS");
+		System.out.println("\n#### RELATÃ“RIO DE CLIENTES FIÃ‰IS");
 		clientesFieis.entrySet().forEach(cliente -> {
-			System.out.println("NOME: " + cliente.getKey() + "\nNº DE PEDIDOS: " + cliente.getValue() + "\n");
+			System.out.println("NOME: " + cliente.getKey() + "\nNÂº DE PEDIDOS: " + cliente.getValue() + "\n");
 		});
 	}
 	

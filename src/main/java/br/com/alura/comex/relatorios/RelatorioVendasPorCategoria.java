@@ -26,17 +26,12 @@ public class RelatorioVendasPorCategoria extends Relatorio {
 	public void imprimirRelatorio() {
 		System.out.println("\n#### RELAT�RIO DE VENDAS POR CATEGORIA");
 		vendasPorCategoria.entrySet().stream().sorted(Map.Entry.<String, List<Pedido>>comparingByKey())
-				.forEach(entry -> {
-					System.out.println("CATEGORIA: " + entry.getKey() 
-							+ "\nQUANTIDADE VENDIDA: "+ entry.getValue().stream().mapToInt(pedido -> pedido.getQuantidade()).sum()
-							+ "\nMONTANTE: " + Formatador.formatarValorTotal(getMontante(entry))
+				.forEach(cliente -> {
+					System.out.println("CATEGORIA: " + cliente.getKey()
+							+ "\nQUANTIDADE VENDIDA: "+ cliente.getValue().stream().mapToInt(pedido -> pedido.getQuantidade()).sum()
+							+ "\nMONTANTE: " + Formatador.formatarValorTotal(getMontanteCliente(cliente))
 							+ "\n");
 				});
-	}
-
-	private BigDecimal getMontante(Map.Entry<String, List<Pedido>> entry) {
-		return entry.getValue().stream()
-				.map(pedido -> pedido.getValorTotal()).reduce(BigDecimal.ZERO, BigDecimal::add);
 	}
 
 

@@ -1,4 +1,4 @@
-package br.com.alura.comex.utils;
+package br.com.alura.comex.processador;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;

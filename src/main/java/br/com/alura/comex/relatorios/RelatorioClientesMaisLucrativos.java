@@ -10,10 +10,7 @@ import br.com.alura.comex.utils.Formatador;
 
 public class RelatorioClientesMaisLucrativos extends Relatorio {
 
-	public RelatorioClientesMaisLucrativos(List<Pedido> listaDePedidos) {
-		super(listaDePedidos);
-		// TODO Auto-generated constructor stub
-	}
+	public RelatorioClientesMaisLucrativos(List<Pedido> listaDePedidos) {super(listaDePedidos);}
 
 	Map<String, List<Pedido>> clientesMaisLucrativos;
 
@@ -30,14 +27,9 @@ public class RelatorioClientesMaisLucrativos extends Relatorio {
 					System.out.println("NOME: " + cliente.getKey() + "\nN� DE PEDIDOS: "
 							+ cliente.getValue().stream().map(pedido -> pedido.getQuantidade()).count()
 							+ "\nMONTANTE GASTO: "
-							+ Formatador.formatarValorTotal(getMontante(cliente))
+							+ Formatador.formatarValorTotal(getMontanteCliente(cliente))
 							+ "\n");
 				});
-	}
-
-	private BigDecimal getMontante(Map.Entry<String, List<Pedido>> cliente) {
-		return cliente.getValue().stream().map(pedido -> pedido.getValorTotal())
-				.reduce(BigDecimal.ZERO, BigDecimal::add);
 	}
 
 }

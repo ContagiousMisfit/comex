@@ -69,4 +69,9 @@ public class Pedido {
 		return getPreco().multiply(new BigDecimal(getQuantidade()));
 	}
 
+	public static BigDecimal getMontanteCliente(Map.Entry<String, List<Pedido>> cliente) {
+		return cliente.getValue().stream().map(pedido -> pedido.getValorTotal())
+				.reduce(BigDecimal.ZERO, BigDecimal::add);
+	}
+
 }

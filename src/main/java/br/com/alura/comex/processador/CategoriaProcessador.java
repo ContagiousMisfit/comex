@@ -1,4 +1,4 @@
-package br.com.alura.comex.utils;
+package br.com.alura.comex.processador;
 
 import java.util.Arrays;
 

@@ -3,26 +3,20 @@ package br.com.alura.comex.relatorios;
 import java.math.BigDecimal;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 
 import br.com.alura.comex.model.Pedido;
 
 public abstract class Relatorio {
-	
+
 	public static List<Pedido> listaDePedidos = null;
-	int totalDeProdutosVendidos = 0;
-
-	BigDecimal montanteDeVendas = BigDecimal.ZERO;
-	public static final Pedido pedidoMaisBarato = new Pedido();
-	public static final Pedido pedidoMaisCaro = new Pedido();
-
 	public Relatorio(List<Pedido> listaDePedidos) {
 		Relatorio.listaDePedidos = listaDePedidos;
 	}
 
 	protected Relatorio() {
 	}
-
 
 	public int getTotalDeProdutosVendidos() { 
 		return listaDePedidos
@@ -39,6 +33,13 @@ public abstract class Relatorio {
 		return listaDePedidos.stream().distinct().count();
 	}
 
+	public Pedido getPedidoMaisBarato() {
+		return listaDePedidos.stream().min(Comparator.comparing(Pedido::getValorTotal)).orElseThrow(() -> new IllegalStateException("A lista de pedidos n�o deveria estar vazia."));
+	}
+
+	public Pedido getPedidoMaisCaro() {
+		return listaDePedidos.stream().max(Comparator.comparing(Pedido::getValorTotal)).orElseThrow(() -> new IllegalStateException("A lista de pedidos n�o deveria estar vazia."));
+	}
 	public BigDecimal getMontanteDeVendas() {
 		Function<Pedido, BigDecimal> mapaPedidos = pedido -> pedido.getValorTotal();
 		return listaDePedidos
@@ -47,21 +48,14 @@ public abstract class Relatorio {
 				.reduce(BigDecimal.ZERO, BigDecimal::add);
 	}
 
-	public Pedido getPedidoMaisBarato() {
-		return listaDePedidos.stream().min(Comparator.comparing(Pedido::getValorTotal)).orElseThrow(() -> new IllegalStateException("A lista de pedidos n�o deveria estar vazia."));
+	public BigDecimal getMontanteCliente(Map.Entry<String, List<Pedido>> cliente) {
+		return cliente.getValue().stream().map(pedido -> pedido.getValorTotal())
+				.reduce(BigDecimal.ZERO, BigDecimal::add);
 	}
 
-	public Pedido getPedidoMaisCaro() {
-		return listaDePedidos.stream().max(Comparator.comparing(Pedido::getValorTotal)).orElseThrow(() -> new IllegalStateException("A lista de pedidos n�o deveria estar vazia."));
-	}
-	
 	public abstract void filtrarRelatorio();
 
 	public abstract void imprimirRelatorio();
-
-	public void filtrarRelatorio(Relatorio relatorio) {
-
-	}
 
 	public void executa() {
 		filtrarRelatorio();
