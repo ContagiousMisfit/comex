@@ -34,25 +34,32 @@ public class MenuRelatorio {
         System.out.print("Digite: ");
         String opcao = input.nextLine();
         CategoriaRelatorio categoria = CategoriaRelatorio.valueOf(opcao);
+        Relatorio tipoRelatorio;
 
         switch (categoria) {
             case RELATORIO_SINTETICO:
-                new RelatorioSintetico(listaDePedidos).executa();
+                tipoRelatorio = new RelatorioSintetico(listaDePedidos);
+                new RelatorioProxy(tipoRelatorio).executa();
                 break;
             case RELATORIO_CLIENTES_FIEIS:
-                new RelatorioFidelidade(listaDePedidos).executa();
+                tipoRelatorio = new RelatorioFidelidade(listaDePedidos);
+                new RelatorioProxy(tipoRelatorio).executa();
                 break;
             case RELATORIO_VENDAS_POR_CATEGORIA:
-                new RelatorioVendasPorCategoria(listaDePedidos).executa();
+                tipoRelatorio = new RelatorioVendasPorCategoria(listaDePedidos);
+                new RelatorioProxy(tipoRelatorio).executa();
                 break;
             case RELATORIO_PRODUTOS_MAIS_VENDIDOS:
-                new RelatorioProdutosMaisVendidos(listaDePedidos).executa();
+                tipoRelatorio = new RelatorioProdutosMaisVendidos(listaDePedidos);
+                new RelatorioProxy(tipoRelatorio).executa();
                 break;
             case RELATORIO_PRODUTOS_MAIS_CAROS:
-                new RelatorioProdutosMaisCaros(listaDePedidos).executa();
+                tipoRelatorio = new RelatorioProdutosMaisCaros(listaDePedidos);
+                new RelatorioProxy(tipoRelatorio).executa();
                 break;
             case RELATORIO_CLIENTES_MAIS_LUCRATIVOS:
-                new RelatorioClientesMaisLucrativos(listaDePedidos).executa();
+                tipoRelatorio = new RelatorioClientesMaisLucrativos(listaDePedidos);
+                new RelatorioProxy(tipoRelatorio).executa();
                 break;
         }
     }

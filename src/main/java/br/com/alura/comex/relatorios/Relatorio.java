@@ -19,7 +19,11 @@ public abstract class Relatorio {
 	public Relatorio(List<Pedido> listaDePedidos) {
 		Relatorio.listaDePedidos = listaDePedidos;
 	}
-	
+
+	protected Relatorio() {
+	}
+
+
 	public int getTotalDeProdutosVendidos() { 
 		return listaDePedidos
 				.stream()
@@ -44,23 +48,24 @@ public abstract class Relatorio {
 	}
 
 	public Pedido getPedidoMaisBarato() {
-		return listaDePedidos.stream().min(Comparator.comparing(Pedido::getValorTotal)).orElseThrow(() -> new IllegalStateException("A lista de pedidos não deveria estar vazia."));
+		return listaDePedidos.stream().min(Comparator.comparing(Pedido::getValorTotal)).orElseThrow(() -> new IllegalStateException("A lista de pedidos nï¿½o deveria estar vazia."));
 	}
 
 	public Pedido getPedidoMaisCaro() {
-		return listaDePedidos.stream().max(Comparator.comparing(Pedido::getValorTotal)).orElseThrow(() -> new IllegalStateException("A lista de pedidos não deveria estar vazia."));
+		return listaDePedidos.stream().max(Comparator.comparing(Pedido::getValorTotal)).orElseThrow(() -> new IllegalStateException("A lista de pedidos nï¿½o deveria estar vazia."));
 	}
 	
-	public void filtrarRelatorio() {
+	public abstract void filtrarRelatorio();
+
+	public abstract void imprimirRelatorio();
+
+	public void filtrarRelatorio(Relatorio relatorio) {
+
 	}
-	
-	public void imprimirRelatorio() {
-	}
-	
+
 	public void executa() {
 		filtrarRelatorio();
 		imprimirRelatorio();
 	}
-
 
 }
