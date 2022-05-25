@@ -4,6 +4,7 @@ public class RelatorioProxy extends Relatorio{
 
     private Relatorio relatorio;
     public RelatorioProxy(Relatorio relatorio) {
+        super();
         this.relatorio = relatorio;
     }
 

@@ -24,7 +24,7 @@ public class RelatorioClientesMaisLucrativos extends Relatorio {
 		System.out.println("\n#### CLIENTES MAIS LUCRATIVOS");
 		clientesMaisLucrativos.entrySet().stream().sorted(Map.Entry.<String, List<Pedido>>comparingByKey()).filter(cliente -> cliente.getValue().stream().map(pedido -> pedido.getQuantidade()).count() > 3)
 				.forEach(cliente -> {
-					System.out.println("NOME: " + cliente.getKey() + "\nN� DE PEDIDOS: "
+					System.out.println("NOME: " + cliente.getKey() + "\nNº DE PEDIDOS: "
 							+ cliente.getValue().stream().map(pedido -> pedido.getQuantidade()).count()
 							+ "\nMONTANTE GASTO: "
 							+ Formatador.formatarValorTotal(getMontanteCliente(cliente))

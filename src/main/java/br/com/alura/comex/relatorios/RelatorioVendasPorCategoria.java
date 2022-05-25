@@ -14,7 +14,7 @@ public class RelatorioVendasPorCategoria extends Relatorio {
 		super(listaDePedidos);
 	}
 
-	Map<String, List<Pedido>> vendasPorCategoria;
+	private Map<String, List<Pedido>> vendasPorCategoria;
 
 	@Override
 	public void filtrarRelatorio() {
@@ -24,7 +24,7 @@ public class RelatorioVendasPorCategoria extends Relatorio {
 
 	@Override
 	public void imprimirRelatorio() {
-		System.out.println("\n#### RELAT�RIO DE VENDAS POR CATEGORIA");
+		System.out.println("\n#### RELATÓRIO DE VENDAS POR CATEGORIA");
 		vendasPorCategoria.entrySet().stream().sorted(Map.Entry.<String, List<Pedido>>comparingByKey())
 				.forEach(cliente -> {
 					System.out.println("CATEGORIA: " + cliente.getKey()

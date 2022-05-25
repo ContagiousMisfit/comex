@@ -18,7 +18,7 @@ public class RelatorioSintetico extends Relatorio {
 	@Override
 	public void imprimirRelatorio() {
 		
-		  System.out.println("#### RELAT?RIO DE VALORES TOTAIS");
+		  System.out.println("#### RELATÓRIO DE VALORES TOTAIS");
 	        System.out.printf("- TOTAL DE PEDIDOS REALIZADOS: %s\n", getTotalDePedidosRealizados());
 	        System.out.printf("- TOTAL DE PRODUTOS VENDIDOS: %s\n", getTotalDeProdutosVendidos());
 	        System.out.printf("- TOTAL DE CATEGORIAS: %s\n", getTotalDeCategorias());

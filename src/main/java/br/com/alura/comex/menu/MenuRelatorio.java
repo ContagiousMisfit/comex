@@ -4,6 +4,7 @@ import br.com.alura.comex.model.Pedido;
 import br.com.alura.comex.processador.*;
 import br.com.alura.comex.relatorios.*;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -16,50 +17,20 @@ public class MenuRelatorio {
         System.out.print("Digite: ");
         String opcao = input.nextLine();
         CategoriaProcessador categoria = CategoriaProcessador.valueOf(opcao);
-            switch (categoria) {
-            case CSV:
-                return ((Processador) new ProcessadorDeCSV()).lerRegistros();
-            case JSON:
-                return ((Processador) new ProcessadorDeJSON()).lerRegistros();
-            case XML:
-                return ((Processador) new ProcessadorDeXML()).lerRegistros();
-        }
-        return escolherArquivo();
+        Processador processador = categoria.getProcessador();
+        return processador.lerRegistros();
     }
 
     private void escolherRelatorio(List<Pedido> listaDePedidos) {
         imprimirOpcoesRelatorio();
         System.out.print("Digite: ");
         String opcao = input.nextLine();
-        CategoriaRelatorio categoria = CategoriaRelatorio.valueOf(opcao);
-
-        switch (categoria) {
-            case SINTETICO:
-                new RelatorioProxy(new RelatorioSintetico(listaDePedidos)).executa();
-                break;
-            case CLIENTES_FIEIS:
-                new RelatorioProxy(new RelatorioFidelidade(listaDePedidos)).executa();
-                break;
-            case VENDAS_POR_CATEGORIA:
-                new RelatorioProxy(new RelatorioVendasPorCategoria(listaDePedidos)).executa();
-                break;
-            case PRODUTOS_MAIS_VENDIDOS:
-                new RelatorioProxy(new RelatorioProdutosMaisVendidos(listaDePedidos)).executa();
-                break;
-            case PRODUTOS_MAIS_CAROS:
-                new RelatorioProxy(new RelatorioProdutosMaisCaros(listaDePedidos)).executa();
-                break;
-            case CLIENTES_MAIS_LUCRATIVOS:
-                new RelatorioProxy(new RelatorioClientesMaisLucrativos(listaDePedidos)).executa();
-                break;
-            case TODOS:
-                new RelatorioProxy(new RelatorioSintetico(listaDePedidos)).executa();
-                new RelatorioProxy(new RelatorioFidelidade(listaDePedidos)).executa();
-                new RelatorioProxy(new RelatorioVendasPorCategoria(listaDePedidos)).executa();
-                new RelatorioProxy(new RelatorioProdutosMaisVendidos(listaDePedidos)).executa();
-                new RelatorioProxy(new RelatorioProdutosMaisCaros(listaDePedidos)).executa();
-                new RelatorioProxy(new RelatorioClientesMaisLucrativos(listaDePedidos)).executa();
-                break;
+        if ("TODOS".equals(opcao))
+            Arrays.stream(CategoriaRelatorio.values()).forEach(categoriaRelatorio -> categoriaRelatorio.getRelatorio(listaDePedidos).executa());
+        else {
+            CategoriaRelatorio categoria = CategoriaRelatorio.valueOf(opcao);
+            Relatorio relatorio = categoria.getRelatorio(listaDePedidos);
+            relatorio.executa();
         }
     }
 
@@ -80,6 +51,7 @@ public class MenuRelatorio {
         System.out.println("4 - Relatório de produtos mais vendidos");
         System.out.println("5 - Relatório de produtos mais caros em cada categoria");
         System.out.println("6 - Relatório de clientes mais lucrativos");
+        System.out.println("7 - TODOS");
     }
 
     public void executar() throws Exception {

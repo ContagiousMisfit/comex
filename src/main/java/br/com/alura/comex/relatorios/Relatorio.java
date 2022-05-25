@@ -1,6 +1,7 @@
 package br.com.alura.comex.relatorios;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -10,13 +11,13 @@ import br.com.alura.comex.model.Pedido;
 
 public abstract class Relatorio {
 
-	public static List<Pedido> listaDePedidos = null;
+	List<Pedido> listaDePedidos = new ArrayList<>();
+
 	public Relatorio(List<Pedido> listaDePedidos) {
-		Relatorio.listaDePedidos = listaDePedidos;
+		this.listaDePedidos = listaDePedidos;
 	}
 
-	protected Relatorio() {
-	}
+	Relatorio() {}
 
 	public int getTotalDeProdutosVendidos() { 
 		return listaDePedidos

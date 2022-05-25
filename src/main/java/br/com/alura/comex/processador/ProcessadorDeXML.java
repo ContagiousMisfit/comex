@@ -7,22 +7,21 @@ import java.net.URL;
 import java.util.List;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
 import br.com.alura.comex.model.Pedido;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
-public class ProcessadorDeXML implements Processador {
+public class ProcessadorDeXML extends ProcessadorJackson {
 
-	static final String ARQUIVO_XML = "pedidos.xml";
-	
+	private static final String ARQUIVO_XML = "pedidos.xml";
 	@Override
-	public List<Pedido> lerRegistros() throws URISyntaxException, IOException {
-		URL recursoXML= ClassLoader.getSystemResource(ARQUIVO_XML);
-		FileReader reader = new FileReader(recursoXML.toURI().getPath());
-		XmlMapper objectMapper = new XmlMapper();
-		objectMapper.registerModule(new JavaTimeModule());
-		return objectMapper.readValue(reader, new TypeReference<List<Pedido>>() {});
+	public ObjectMapper getMapper() {
+		return new XmlMapper();
 	}
-
+	@Override
+	public String getNomeArquivo() {
+		return ARQUIVO_XML;
+	}
 }
