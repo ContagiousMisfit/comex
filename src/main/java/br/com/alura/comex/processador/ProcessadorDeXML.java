@@ -10,6 +10,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
 import br.com.alura.comex.model.Pedido;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 public class ProcessadorDeXML implements Processador {
 
@@ -20,6 +21,7 @@ public class ProcessadorDeXML implements Processador {
 		URL recursoXML= ClassLoader.getSystemResource(ARQUIVO_XML);
 		FileReader reader = new FileReader(recursoXML.toURI().getPath());
 		XmlMapper objectMapper = new XmlMapper();
+		objectMapper.registerModule(new JavaTimeModule());
 		return objectMapper.readValue(reader, new TypeReference<List<Pedido>>() {});
 	}
 

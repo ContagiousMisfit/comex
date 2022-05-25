@@ -1,10 +1,13 @@
 package br.com.alura.comex.model;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.opencsv.bean.CsvBindByName;
+import com.opencsv.bean.CsvDate;
 
 public class Pedido {
 	
@@ -17,16 +20,17 @@ public class Pedido {
 	@CsvBindByName(column = "QUANTIDADE", required=true)
 	private int quantidade;
 	@CsvBindByName(column = "DATA", required=true)
-	private String data;
+	@CsvDate(value = "dd/MM/yyyy")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+	private LocalDate data;
 	@CsvBindByName(column = "CLIENTE", required=true)
 	private String cliente;
 
-	
 	public Pedido() {
 		super();
 	}
 
-	public Pedido(String categoria, String produto, String cliente, BigDecimal preco, int quantidade, String data) {
+	public Pedido(String categoria, String produto, String cliente, BigDecimal preco, int quantidade, LocalDate data) {
 		this.categoria = categoria;
 		this.produto = produto;
 		this.cliente = cliente;
@@ -55,9 +59,7 @@ public class Pedido {
 		return quantidade;
 	}
 
-	public String getData() {
-		return data;
-	}
+	public LocalDate getData() {return data;}
 
 	@Override
 	public String toString() {
