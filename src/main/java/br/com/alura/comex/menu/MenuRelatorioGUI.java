@@ -13,11 +13,11 @@ public class MenuRelatorioGUI {
         int opcao = pedirEscolhaProcessador();
         switch (opcao) {
             case 0:
-                return ((Processador) new ProcessadorDeCSV()).lerRegistros();
+                return ((Processador) new ProcessadorDeCSV("pedidos.csv")).lerRegistros();
             case 1:
-                return ((Processador) new ProcessadorDeJSON()).lerRegistros();
+                return ((Processador) new ProcessadorDeJSON("pedidos.json")).lerRegistros();
             case 2:
-                return ((Processador) new ProcessadorDeXML()).lerRegistros();
+                return ((Processador) new ProcessadorDeXML("pedidos.xml")).lerRegistros();
         }
         return escolherArquivo();
     }

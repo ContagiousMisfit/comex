@@ -15,13 +15,16 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 public class ProcessadorDeXML extends ProcessadorJackson {
 
-	private static final String ARQUIVO_XML = "pedidos.xml";
+	private String arquivo = "";
 	@Override
 	public ObjectMapper getMapper() {
 		return new XmlMapper();
 	}
 	@Override
 	public String getNomeArquivo() {
-		return ARQUIVO_XML;
+		return arquivo;
+	}
+	public ProcessadorDeXML(String arquivo) {
+		this.arquivo = arquivo;
 	}
 }

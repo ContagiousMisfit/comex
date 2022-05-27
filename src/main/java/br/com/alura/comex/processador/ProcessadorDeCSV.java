@@ -13,17 +13,28 @@ import br.com.alura.comex.model.Pedido;
 
 public class ProcessadorDeCSV implements Processador {
 
-	static final String ARQUIVO_CSV = "pedidos.csv";
+    private String arquivo = "";
 
-	@Override
-	public List<Pedido> lerRegistros() throws FileNotFoundException, URISyntaxException {
+    public ProcessadorDeCSV(String arquivo) {
+        this.arquivo = arquivo;
+    }
 
-		URL recursoCSV = ClassLoader.getSystemResource(ARQUIVO_CSV);
-		FileReader reader = new FileReader(recursoCSV.toURI().getPath());
-				CsvToBean<Pedido> csvToBean = new CsvToBeanBuilder<Pedido>(reader).withType(Pedido.class).withSeparator(',')
-				.build();
-		return csvToBean.parse();
+    @Override
+    public List<Pedido> lerRegistros() throws FileNotFoundException, URISyntaxException {
 
-	}
+        if (arquivo == null)
+            throw new IllegalArgumentException("O arquivo não pode estar nulo!");
+
+        URL recursoCSV = ClassLoader.getSystemResource(arquivo);
+        FileReader reader = new FileReader(recursoCSV.toURI().getPath());
+        CsvToBean<Pedido> csvToBean = new CsvToBeanBuilder<Pedido>(reader).withType(Pedido.class).withSeparator(',')
+                .build();
+
+        List<Pedido> listaDePedidos = csvToBean.parse();
+		if (listaDePedidos.isEmpty() || listaDePedidos.get(1) == null)
+			throw new IllegalArgumentException("O relatório não pode ser gerado com a lista vazia ou com apenas um item!");
+
+		return listaDePedidos;
+    }
 
 }

@@ -1,10 +1,13 @@
 package br.com.alura.comex.processador;
 
+import br.com.alura.comex.model.Pedido;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.util.List;
 
 public class ProcessadorDeJSON extends ProcessadorJackson {
 
-	private static final String ARQUIVO_JSON = "pedidos.json";
+	private String arquivo = "";
 
 	@Override
 	public ObjectMapper getMapper() {
@@ -13,6 +16,10 @@ public class ProcessadorDeJSON extends ProcessadorJackson {
 
 	@Override
 	public String getNomeArquivo() {
-		return ARQUIVO_JSON;
+		return arquivo;
+	}
+
+	public ProcessadorDeJSON(String arquivo) {
+		this.arquivo = arquivo;
 	}
 }
