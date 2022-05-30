@@ -1,10 +1,12 @@
 package br.com.alura.comex.relatorios;
 
 import br.com.alura.comex.model.Pedido;
-import br.com.alura.comex.utils.PedidoBuilder;
+import br.com.alura.comex.model.builder.PedidoBuilder;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,22 +43,10 @@ class RelatorioVendasPorCategoriaTest {
                 .comData(LocalDate.of(2022,10,23))
                 .build();
 
-        Pedido quartoPedido = new PedidoBuilder()
-                .comCategoria("ELETRÔNICOS")
-                .comProduto("Playstation 5")
-                .comCliente("Gianna")
-                .comValor("4350.00")
-                .comQuantidade(1)
-                .comData(LocalDate.of(2021, 8, 20))
-                .build();
-
-
         List<Pedido> listaDePedidos = new ArrayList<>();
         listaDePedidos.add(primeiroPedido);
         listaDePedidos.add(segundoPedido);
         listaDePedidos.add(terceiroPedido);
-        listaDePedidos.add(quartoPedido);
-
 
         Consumer consumer = Mockito.mock(Consumer.class);
 
@@ -64,7 +54,17 @@ class RelatorioVendasPorCategoriaTest {
         relatorio.executa();
 
         List<RelatorioVendasPorCategoria.VendasPorCategoria> resultado = relatorio.getVendasPorCategoria();
-        Assertions.assertEquals(3, resultado.size());
+        Assertions.assertEquals(2, resultado.size());
+
+        RelatorioVendasPorCategoria.VendasPorCategoria vendasPorCategoria1 = resultado.get(0);
+        Assertions.assertEquals("JOGOS", vendasPorCategoria1.getCategoria());
+        Assertions.assertEquals(new BigDecimal("235.99"), vendasPorCategoria1.getMontante());
+        Assertions.assertEquals(1, vendasPorCategoria1.getQuantidadeVendida());
+
+        RelatorioVendasPorCategoria.VendasPorCategoria vendasPorCategoria2 = resultado.get(1);
+        Assertions.assertEquals("LIVROS", vendasPorCategoria2.getCategoria());
+        Assertions.assertEquals(new BigDecimal("96.13"), vendasPorCategoria2.getMontante());
+        Assertions.assertEquals(2, vendasPorCategoria2.getQuantidadeVendida());
     }
     @Test
     public void deveGerarRelatorioComUmPedido() throws Exception {
@@ -98,9 +98,5 @@ class RelatorioVendasPorCategoriaTest {
         Consumer consumer = Mockito.mock(Consumer.class);
         RelatorioVendasPorCategoria relatorio = new RelatorioVendasPorCategoria(pedidos, consumer);
         Assertions.assertThrows(IllegalArgumentException.class, () -> relatorio.executa());
-    }
-
-    public void inicializarCenario() {
-
     }
 }

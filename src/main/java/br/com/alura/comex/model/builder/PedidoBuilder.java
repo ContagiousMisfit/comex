@@ -1,19 +1,18 @@
-package br.com.alura.comex.utils;
+package br.com.alura.comex.model.builder;
 
 import br.com.alura.comex.model.Pedido;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class PedidoBuilder {
 
-    String categoria;
-    String produto;
-    String cliente;
-    BigDecimal valor;
-    int quantidade;
-    LocalDate data;
+    private String categoria;
+    private String produto;
+    private String cliente;
+    private BigDecimal valor;
+    private int quantidade;
+    private LocalDate data;
 
     public PedidoBuilder comCategoria(String categoria) {
         this.categoria = categoria;

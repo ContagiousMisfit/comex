@@ -19,6 +19,11 @@ public class RelatorioProdutosMaisVendidos extends Relatorio {
 		this.impressoraDoRelatorio = impressoraDoRelatorio;
 	}
 
+	public List<RelatorioProdutosMaisVendidos.ProdutosMaisVendidos> getProdutosMaisVendidos() {
+		return produtosMaisVendidos;
+	}
+
+
 	@Override
 	public void filtrarRelatorio() {
 		if (listaDePedidos == null)

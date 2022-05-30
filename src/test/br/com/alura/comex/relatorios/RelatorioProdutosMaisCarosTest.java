@@ -1,52 +1,49 @@
 package br.com.alura.comex.relatorios;
 
 import br.com.alura.comex.model.Pedido;
-import br.com.alura.comex.utils.PedidoBuilder;
+import br.com.alura.comex.model.builder.PedidoBuilder;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class RelatorioProdutosMaisCarosTest {
 
     @Test
-    public void deveGerarRelatorio() {
-
-    }
-
     public void deveGerarRelatorioComUmPedido() throws Exception {
 
         Pedido pedido = new PedidoBuilder()
-                .comCategoria("LIVROS")
-                .comProduto("O guia do mochileiro das galáxias")
-                .comCliente("Alexandre")
-                .comValor("44.90")
-                .comQuantidade(1)
-                .comData(LocalDate.of(2022,5,30))
+                .comCategoria("ELETRÔNICOS")
+                .comProduto("Playstation 5")
+                .comCliente("Gianna")
+                .comValor("4350.00")
+                .comQuantidade(3)
+                .comData(LocalDate.of(2021, 8, 20))
                 .build();
 
         List<Pedido> pedidos = List.of(pedido);
         Consumer consumer = Mockito.mock(Consumer.class);
 
-        RelatorioVendasPorCategoria relatorio = new RelatorioVendasPorCategoria(pedidos, consumer);
+        RelatorioProdutosMaisCaros relatorio = new RelatorioProdutosMaisCaros(pedidos, consumer);
         relatorio.executa();
 
-        List<RelatorioVendasPorCategoria.VendasPorCategoria> resultado = relatorio.getVendasPorCategoria();
+        List<RelatorioProdutosMaisCaros.ProdutosMaisCaros> resultado = relatorio.getProdutosMaisCaros();
         Assertions.assertEquals(1, resultado.size());
-        RelatorioVendasPorCategoria.VendasPorCategoria primeiraVenda = resultado.get(0);
+        RelatorioProdutosMaisCaros.ProdutosMaisCaros primeiraVenda = resultado.get(0);
 
-        Assertions.assertEquals("LIVROS", primeiraVenda.getCategoria());
-        Assertions.assertEquals(1, primeiraVenda.getQuantidadeVendida());
+        Assertions.assertEquals("ELETRÔNICOS", primeiraVenda.getCategoria());
+        Assertions.assertEquals(new BigDecimal("4350.00"), primeiraVenda.getPreco());
+        Assertions.assertEquals("Playstation 5", primeiraVenda.getProduto());
     }
 
     @Test
-    public void recebeListaVaziaDeveLancarIllegalArgumentException() throws Exception {
-        List<Pedido> pedidos = null;
+    public void recebeListaSemPedidosDeveLancarIllegalArgumentException() throws Exception {
+        List<Pedido> pedidos = new ArrayList<>();
         Consumer consumer = Mockito.mock(Consumer.class);
         RelatorioVendasPorCategoria relatorio = new RelatorioVendasPorCategoria(pedidos, consumer);
         Assertions.assertThrows(IllegalArgumentException.class, () -> relatorio.executa());
