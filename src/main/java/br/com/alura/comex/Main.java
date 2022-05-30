@@ -5,13 +5,12 @@ import br.com.alura.comex.menu.MenuRelatorioGUI;
 
 public class Main {
 
-
     public static void main(String[] args) throws Exception {
 
-        MenuRelatorio menu = new MenuRelatorio();
-        menu.executar();
+        /*MenuRelatorio menu = new MenuRelatorio();
+        menu.executar();*/
         
-        /*MenuRelatorioGUI menu2 = new MenuRelatorioGUI();
-        menu2.executar();*/
+        MenuRelatorioGUI menuJanelasGraficas = new MenuRelatorioGUI();
+        menuJanelasGraficas.executar();
     }
 }

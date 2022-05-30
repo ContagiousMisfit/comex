@@ -11,6 +11,9 @@ public class RelatorioFidelidade extends Relatorio {
 
     private List<ClientesFieis> clientesFieis;
     private final Consumer<String> impressoraDoRelatorio;
+    public List<RelatorioFidelidade.ClientesFieis> getClientesFieis() {
+        return clientesFieis;
+    }
     public RelatorioFidelidade(List<Pedido> listaDePedidos, Consumer<String> impressoraDoRelatorio) {
         super(listaDePedidos);
         this.impressoraDoRelatorio = impressoraDoRelatorio;

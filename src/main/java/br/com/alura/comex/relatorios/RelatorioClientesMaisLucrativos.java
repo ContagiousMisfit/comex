@@ -19,6 +19,10 @@ public class RelatorioClientesMaisLucrativos extends Relatorio {
         this.impressoraDoRelatorio = impressoraDoRelatorio;
     }
 
+    public List<RelatorioClientesMaisLucrativos.ClientesMaisLucrativos> getClientesMaisLucrativos() {
+        return clientesMaisLucrativos;
+    }
+
     @Override
     public void filtrarRelatorio() {
         if (listaDePedidos == null)
@@ -26,7 +30,7 @@ public class RelatorioClientesMaisLucrativos extends Relatorio {
         if (listaDePedidos.isEmpty())
             throw new IllegalArgumentException("A lista não pode estar vazia!");
         clientesMaisLucrativos = listaDePedidos.stream().collect(Collectors.groupingBy(Pedido::getCliente))
-                .entrySet().stream().sorted(Map.Entry.comparingByKey()).filter(cliente -> cliente.getValue().stream().map(pedido -> pedido.getQuantidade()).count() > 3)
+                .entrySet().stream().sorted(Map.Entry.comparingByKey())
                 .map(cliente -> {
                     String nome = cliente.getKey();
                     Long numPedidos = cliente.getValue().stream().map(Pedido::getQuantidade).count();
