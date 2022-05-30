@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-class TesteRelatorioVendasPorCategoria {
+class RelatorioVendasPorCategoriaTest {
 
     @Test
     public void deveGerarRelatorioComVariosPedidos() throws Exception {
@@ -60,7 +60,7 @@ class TesteRelatorioVendasPorCategoria {
 
         Consumer consumer = Mockito.mock(Consumer.class);
 
-        RelatorioVendasPorCategoria relatorio = new RelatorioVendasPorCategoria(pedidos, consumer);
+        RelatorioVendasPorCategoria relatorio = new RelatorioVendasPorCategoria(listaDePedidos, consumer);
         relatorio.executa();
 
         List<RelatorioVendasPorCategoria.VendasPorCategoria> resultado = relatorio.getVendasPorCategoria();

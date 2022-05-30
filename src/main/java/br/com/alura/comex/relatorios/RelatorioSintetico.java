@@ -1,31 +1,33 @@
 package br.com.alura.comex.relatorios;
 
-import java.util.List;
 import br.com.alura.comex.model.Pedido;
 import br.com.alura.comex.utils.Formatador;
 
+import java.util.List;
+import java.util.function.Consumer;
+
 public class RelatorioSintetico extends Relatorio {
 
-	public RelatorioSintetico(List<Pedido> listaDePedidos) {
-		super(listaDePedidos);
-	}
+    private final Consumer<String> impressoraDoRelatorio;
+    public RelatorioSintetico(List<Pedido> listaDePedidos, Consumer<String> impressoraDoRelatorio) {
+        super(listaDePedidos);
+        this.impressoraDoRelatorio = impressoraDoRelatorio;
+    }
 
-	@Override
-	public void filtrarRelatorio() {
+    @Override
+    public void filtrarRelatorio() {
 
-	}
+    }
 
-	@Override
-	public void imprimirRelatorio() {
-		
-		  System.out.println("#### RELATÓRIO DE VALORES TOTAIS");
-	        System.out.printf("- TOTAL DE PEDIDOS REALIZADOS: %s\n", getTotalDePedidosRealizados());
-	        System.out.printf("- TOTAL DE PRODUTOS VENDIDOS: %s\n", getTotalDeProdutosVendidos());
-	        System.out.printf("- TOTAL DE CATEGORIAS: %s\n", getTotalDeCategorias());
-	        System.out.printf("- MONTANTE DE VENDAS: %s\n", Formatador.formatarValorTotal(getMontanteDeVendas()));
-	        System.out.printf("- PEDIDO MAIS BARATO: %s (%s)\n", Formatador.formatarValorTotal(getPedidoMaisBarato().getValorTotal()), getPedidoMaisBarato().getProduto());
-	        System.out.printf("- PEDIDO MAIS CARO: %s (%s)\n", Formatador.formatarValorTotal(getPedidoMaisCaro().getValorTotal()), getPedidoMaisCaro().getProduto());
-	    			
-	}
+    @Override
+    public void imprimirRelatorio() {
+
+        impressoraDoRelatorio.accept("#### RELATÓRIO DE VALORES TOTAIS" + "\n- TOTAL DE PEDIDOS REALIZADOS: "
+                + getTotalDePedidosRealizados() + "\n- TOTAL DE PRODUTOS VENDIDOS: " + getTotalDeProdutosVendidos()
+                + "\n- TOTAL DE CATEGORIAS: " + getTotalDeCategorias()
+                + "\n- MONTANTE DE VENDAS: " + Formatador.formatarValorTotal(getMontanteDeVendas())
+                + "\n- PEDIDO MAIS BARATO: " + Formatador.formatarValorTotal(getPedidoMaisBarato().getValorTotal()) + " " + getPedidoMaisBarato().getProduto()
+                + "\n- PEDIDO MAIS CARO: "+ Formatador.formatarValorTotal(getPedidoMaisCaro().getValorTotal()) + " " + getPedidoMaisCaro().getProduto());
+    }
 
 }

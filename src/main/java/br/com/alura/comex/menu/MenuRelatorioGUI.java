@@ -9,7 +9,7 @@ import java.util.List;
 
 public class MenuRelatorioGUI {
 
-    private List<Pedido> escolherArquivo() throws Exception {
+    /*private List<Pedido> escolherArquivo() throws Exception {
         int opcao = pedirEscolhaProcessador();
         switch (opcao) {
             case 0:
@@ -68,6 +68,6 @@ public class MenuRelatorioGUI {
     public void executar() throws Exception {
         List<Pedido> listaDePedidos = escolherArquivo();
         escolherRelatorio(listaDePedidos);
-    }
+    }*/
 
 }

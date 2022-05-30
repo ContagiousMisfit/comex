@@ -11,7 +11,7 @@ public class Main {
         MenuRelatorio menu = new MenuRelatorio();
         menu.executar();
         
-        MenuRelatorioGUI menu2 = new MenuRelatorioGUI();
-        menu2.executar();
+        /*MenuRelatorioGUI menu2 = new MenuRelatorioGUI();
+        menu2.executar();*/
     }
 }

@@ -1,31 +1,61 @@
 package br.com.alura.comex.relatorios;
 
-import java.util.List;
-import java.util.TreeMap;
-import java.util.stream.Collectors;
-
 import br.com.alura.comex.model.Pedido;
 
-public class RelatorioFidelidade extends Relatorio{
+import java.util.List;
+import java.util.TreeMap;
+import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
-	public RelatorioFidelidade(List<Pedido> listaDePedidos) {
-		super(listaDePedidos);
-	}
+public class RelatorioFidelidade extends Relatorio {
 
-	private TreeMap<String, Long> clientesFieis;
-	
+    private List<ClientesFieis> clientesFieis;
+    private final Consumer<String> impressoraDoRelatorio;
+    public RelatorioFidelidade(List<Pedido> listaDePedidos, Consumer<String> impressoraDoRelatorio) {
+        super(listaDePedidos);
+        this.impressoraDoRelatorio = impressoraDoRelatorio;
+    }
 	@Override
-	public void filtrarRelatorio() {
-		clientesFieis = listaDePedidos.stream()
-				.collect(Collectors.groupingBy(Pedido::getCliente, TreeMap::new, Collectors.counting()));		
-	}
+    public void filtrarRelatorio() {
+        if (listaDePedidos == null)
+            throw new IllegalArgumentException("A lista de pedidos de um relatório não pode ser nula!");
+        if (listaDePedidos.isEmpty())
+            throw new IllegalArgumentException("A lista não pode estar vazia!");
+        clientesFieis = listaDePedidos.stream()
+                .collect(Collectors.groupingBy(Pedido::getCliente, TreeMap::new, Collectors.counting()))
+                .entrySet().stream()
+                .map(entry -> {
+                    String cliente = entry.getKey();
+                    Long numPedidos = entry.getValue();
+                    return new ClientesFieis(cliente, numPedidos);
+                })
+                .toList();
+    }
 
-	@Override
-	public void imprimirRelatorio() {
-		System.out.println("\n#### RELATÓRIO DE CLIENTES FIÉIS");
-		clientesFieis.entrySet().forEach(cliente -> {
-			System.out.println("NOME: " + cliente.getKey() + "\nNº DE PEDIDOS: " + cliente.getValue() + "\n");
-		});
-	}
-	
+    @Override
+    public void imprimirRelatorio() {
+        impressoraDoRelatorio.accept("\n#### RELATÓRIO DE CLIENTES FIÉIS");
+        clientesFieis.forEach(cliente -> {
+            impressoraDoRelatorio.accept("NOME: " + cliente.getCliente() + "\nNº DE PEDIDOS: " + cliente.getNumPedidos() + "\n");
+        });
+    }
+
+    public class ClientesFieis {
+        private final String cliente;
+        private final Long numPedidos;
+
+        public ClientesFieis(String cliente, Long numPedidos) {
+            this.cliente = cliente;
+            this.numPedidos = numPedidos;
+        }
+
+        public String getCliente() {
+            return cliente;
+        }
+
+        public Long getNumPedidos() {
+            return numPedidos;
+        }
+    }
+
 }
