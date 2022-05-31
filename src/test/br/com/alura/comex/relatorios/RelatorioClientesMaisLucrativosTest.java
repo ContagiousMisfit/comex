@@ -2,7 +2,6 @@ package br.com.alura.comex.relatorios;
 
 import br.com.alura.comex.model.Pedido;
 import br.com.alura.comex.model.builder.PedidoBuilder;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
@@ -16,7 +15,7 @@ import java.util.function.Consumer;
 class RelatorioClientesMaisLucrativosTest {
 
     @Test
-    public void deveGerarRelatorioComVariosPedidosDoMesmoCliente() throws Exception {
+    public void deveGerarRelatorioComVariosPedidosDoMesmoCliente()  {
         Pedido primeiroPedido = new PedidoBuilder()
                 .comCategoria("DECORAÇÃO")
                 .comProduto("Pintura Óleo sobre Tela")
@@ -63,11 +62,12 @@ class RelatorioClientesMaisLucrativosTest {
     }
 
     @Test
-    public void deveGerarRelatorioComTresPedidos() throws Exception {
+    public void deveGerarRelatorioComClientesIguaisSeparadosPorPedidos()  {
+
         Pedido primeiroPedido = new PedidoBuilder()
                 .comCategoria("DECORAÇÃO")
                 .comProduto("Pintura Óleo sobre Tela")
-                .comCliente("Francisco")
+                .comCliente("Chiara")
                 .comValor("3050.90")
                 .comQuantidade(1)
                 .comData(LocalDate.of(2022,5,30))
@@ -108,15 +108,54 @@ class RelatorioClientesMaisLucrativosTest {
         relatorio.executa();
 
         List<RelatorioClientesMaisLucrativos.ClientesMaisLucrativos> resultado = relatorio.getClientesMaisLucrativos();
-
         assertThat(resultado)
                 .hasSize(2)
                 .extracting(RelatorioClientesMaisLucrativos.ClientesMaisLucrativos::getNome,
                         RelatorioClientesMaisLucrativos.ClientesMaisLucrativos::getNumPedidos,
                         RelatorioClientesMaisLucrativos.ClientesMaisLucrativos::getMontanteGasto)
                 .containsExactly(
-                        tuple("Maria", 1L, new BigDecimal("32502")),
-                        tuple("Chiara", 1L, new BigDecimal("7500.99")));
+                        tuple("Chiara", 2L, new BigDecimal("10551.89")),
+                        tuple("Maria", 2L, new BigDecimal("32502.00")));
+        assertThat(resultado).isNotNull();
+    }
+
+    @Test
+    public void deveGerarRelatorioComDoisClientes()  {
+
+        Pedido primeiroPedido = new PedidoBuilder()
+                .comCategoria("MÚSICA")
+                .comProduto("Violino Stradivarius")
+                .comCliente("Chiara")
+                .comValor("7500.99")
+                .comQuantidade(2)
+                .comData(LocalDate.of(2020, 3, 11))
+                .build();
+
+        Pedido segundoPedido = new PedidoBuilder()
+                .comCategoria("MÚSICA")
+                .comProduto("Violoncelo")
+                .comCliente("Maria")
+                .comValor("750.00")
+                .comQuantidade(1)
+                .comData(LocalDate.of(2022,10,23))
+                .build();
+
+        List<Pedido> listaDePedidos = List.of(primeiroPedido, segundoPedido);
+
+        Consumer consumer = Mockito.mock(Consumer.class);
+
+        RelatorioClientesMaisLucrativos relatorio = new RelatorioClientesMaisLucrativos(listaDePedidos, consumer);
+        relatorio.executa();
+
+        List<RelatorioClientesMaisLucrativos.ClientesMaisLucrativos> resultado = relatorio.getClientesMaisLucrativos();
+        assertThat(resultado)
+                .hasSize(2)
+                .extracting(RelatorioClientesMaisLucrativos.ClientesMaisLucrativos::getNome,
+                        RelatorioClientesMaisLucrativos.ClientesMaisLucrativos::getNumPedidos,
+                        RelatorioClientesMaisLucrativos.ClientesMaisLucrativos::getMontanteGasto)
+                .containsExactly(
+                        tuple("Chiara", 1L, new BigDecimal("15001.98")),
+                        tuple("Maria", 1L, new BigDecimal("750.00")));
     }
 
 }
