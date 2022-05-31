@@ -25,9 +25,9 @@ public enum CategoriaRelatorio {
         System.out.println(relatorio);
     })));
 
-    private final Function<List<Pedido>,Relatorio> relatorioSupplier;
+    private final Function<List<Pedido>, Relatorio> relatorioSupplier;
 
-    CategoriaRelatorio(Function<List<Pedido>,Relatorio> relatorioSupplier) {
+    CategoriaRelatorio(Function<List<Pedido>, Relatorio> relatorioSupplier) {
         this.relatorioSupplier = relatorioSupplier;
     }
 

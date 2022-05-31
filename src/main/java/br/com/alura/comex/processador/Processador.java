@@ -1,10 +1,10 @@
 package br.com.alura.comex.processador;
 
-import java.util.List;
-
 import br.com.alura.comex.model.Pedido;
 
+import java.util.List;
+
 public interface Processador {
-	List<Pedido> lerRegistros() throws Exception;
+    List<Pedido> lerRegistros() throws Exception;
 
 }

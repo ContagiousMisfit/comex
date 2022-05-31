@@ -1,4 +1,4 @@
-package br.com.alura.comex.model.builder;
+package br.com.alura.comex.relatorios.utils.builder;
 
 import br.com.alura.comex.model.Pedido;
 

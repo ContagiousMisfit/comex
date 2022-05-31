@@ -1,15 +1,16 @@
 package br.com.alura.comex.relatorios;
 
 import br.com.alura.comex.model.Pedido;
-import br.com.alura.comex.model.builder.PedidoBuilder;
-import org.junit.jupiter.api.Assertions;
+import br.com.alura.comex.relatorios.utils.builder.PedidoBuilder;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+
 import java.time.LocalDate;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.tuple;
 import java.util.List;
 import java.util.function.Consumer;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.tuple;
 
 class RelatorioFidelidadeTest {
 
@@ -21,7 +22,7 @@ class RelatorioFidelidadeTest {
                 .comCliente("Francisco")
                 .comValor("3050.90")
                 .comQuantidade(1)
-                .comData(LocalDate.of(2022,5,30))
+                .comData(LocalDate.of(2022, 5, 30))
                 .build();
 
         Pedido segundoPedido = new PedidoBuilder()
@@ -39,7 +40,7 @@ class RelatorioFidelidadeTest {
                 .comCliente("Jacinta")
                 .comValor("31752.00")
                 .comQuantidade(1)
-                .comData(LocalDate.of(2022,10,23))
+                .comData(LocalDate.of(2022, 10, 23))
                 .build();
 
         List<Pedido> listaDePedidos = List.of(primeiroPedido, segundoPedido, terceiroPedido);
@@ -64,7 +65,7 @@ class RelatorioFidelidadeTest {
                 .comCliente("Francisco")
                 .comValor("3050.90")
                 .comQuantidade(1)
-                .comData(LocalDate.of(2022,5,30))
+                .comData(LocalDate.of(2022, 5, 30))
                 .build();
 
         Pedido segundoPedido = new PedidoBuilder()
@@ -82,7 +83,7 @@ class RelatorioFidelidadeTest {
                 .comCliente("Francisco")
                 .comValor("31752.00")
                 .comQuantidade(1)
-                .comData(LocalDate.of(2022,10,23))
+                .comData(LocalDate.of(2022, 10, 23))
                 .build();
 
         List<Pedido> listaDePedidos = List.of(primeiroPedido, segundoPedido, terceiroPedido);

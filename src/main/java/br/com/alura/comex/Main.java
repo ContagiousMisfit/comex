@@ -1,7 +1,6 @@
 package br.com.alura.comex;
 
 import br.com.alura.comex.menu.MenuRelatorio;
-import br.com.alura.comex.menu.MenuRelatorioGUI;
 
 public class Main {
 

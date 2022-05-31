@@ -1,7 +1,7 @@
 package br.com.alura.comex.relatorios;
 
 import br.com.alura.comex.model.Pedido;
-import br.com.alura.comex.model.builder.PedidoBuilder;
+import br.com.alura.comex.relatorios.utils.builder.PedidoBuilder;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -35,7 +35,7 @@ class RelatorioProdutosMaisCarosTest {
                 .comCliente("Francisco")
                 .comValor("75.99")
                 .comQuantidade(2)
-                .comData(LocalDate.of(2022,5,30))
+                .comData(LocalDate.of(2022, 5, 30))
                 .build();
 
         Pedido terceiroPedido = new PedidoBuilder()
@@ -44,7 +44,7 @@ class RelatorioProdutosMaisCarosTest {
                 .comCliente("Carlo")
                 .comValor("37.90")
                 .comQuantidade(1)
-                .comData(LocalDate.of(2022,5,30))
+                .comData(LocalDate.of(2022, 5, 30))
                 .build();
 
         List<Pedido> pedidos = List.of(primeiroPedido, segundoPedido, terceiroPedido);
@@ -63,6 +63,7 @@ class RelatorioProdutosMaisCarosTest {
                         tuple("DECORAÇÃO", new BigDecimal("200.00"), "Luminária de mesa cereijeira"),
                         tuple("VESTUÁRIO", new BigDecimal("75.99"), "Moletom Stranger Things"));
     }
+
     @Test
     public void deveGerarRelatorioComUmPedido() throws Exception {
 

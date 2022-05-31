@@ -1,7 +1,7 @@
 package br.com.alura.comex.relatorios;
 
 import br.com.alura.comex.model.Pedido;
-import br.com.alura.comex.model.builder.PedidoBuilder;
+import br.com.alura.comex.relatorios.utils.builder.PedidoBuilder;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

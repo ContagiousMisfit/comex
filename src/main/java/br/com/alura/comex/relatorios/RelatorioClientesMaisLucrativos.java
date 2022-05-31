@@ -4,7 +4,6 @@ import br.com.alura.comex.model.Pedido;
 import br.com.alura.comex.utils.Formatador;
 
 import java.math.BigDecimal;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;

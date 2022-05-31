@@ -1,8 +1,9 @@
 package br.com.alura.comex.relatorios;
 
-public class RelatorioProxy extends Relatorio{
+public class RelatorioProxy extends Relatorio {
 
-    private Relatorio relatorio;
+    private final Relatorio relatorio;
+
     public RelatorioProxy(Relatorio relatorio) {
         super();
         this.relatorio = relatorio;

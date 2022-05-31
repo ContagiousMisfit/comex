@@ -1,8 +1,10 @@
 package br.com.alura.comex.menu;
 
 import br.com.alura.comex.model.Pedido;
-import br.com.alura.comex.processador.*;
-import br.com.alura.comex.relatorios.*;
+import br.com.alura.comex.processador.CategoriaProcessador;
+import br.com.alura.comex.processador.Processador;
+import br.com.alura.comex.relatorios.CategoriaRelatorio;
+import br.com.alura.comex.relatorios.Relatorio;
 
 import java.util.Arrays;
 import java.util.List;

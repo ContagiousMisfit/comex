@@ -1,79 +1,81 @@
 package br.com.alura.comex.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.opencsv.bean.CsvBindByName;
+import com.opencsv.bean.CsvDate;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.opencsv.bean.CsvBindByName;
-import com.opencsv.bean.CsvDate;
-
 public class Pedido {
-	
-	@CsvBindByName(column = "CATEGORIA", required=true)
-	private String categoria;
-	@CsvBindByName(column = "PRODUTO", required=true)
-	private String produto;
-	@CsvBindByName(column = "PRECO", required=true)
-	private BigDecimal preco;
-	@CsvBindByName(column = "QUANTIDADE", required=true)
-	private int quantidade;
-	@CsvBindByName(column = "DATA", required=true)
-	@CsvDate(value = "dd/MM/yyyy")
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
-	private LocalDate data;
-	@CsvBindByName(column = "CLIENTE", required=true)
-	private String cliente;
 
-	public Pedido() {
-		super();
-	}
+    @CsvBindByName(column = "CATEGORIA", required = true)
+    private String categoria;
+    @CsvBindByName(column = "PRODUTO", required = true)
+    private String produto;
+    @CsvBindByName(column = "PRECO", required = true)
+    private BigDecimal preco;
+    @CsvBindByName(column = "QUANTIDADE", required = true)
+    private int quantidade;
+    @CsvBindByName(column = "DATA", required = true)
+    @CsvDate(value = "dd/MM/yyyy")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+    private LocalDate data;
+    @CsvBindByName(column = "CLIENTE", required = true)
+    private String cliente;
 
-	public Pedido(String categoria, String produto, String cliente, BigDecimal preco, int quantidade, LocalDate data) {
-		this.categoria = categoria;
-		this.produto = produto;
-		this.cliente = cliente;
-		this.preco = preco;
-		this.quantidade = quantidade;
-		this.data = data;
-	}
+    public Pedido() {
+        super();
+    }
 
-	public String getCategoria() {
-		return categoria;
-	}
+    public Pedido(String categoria, String produto, String cliente, BigDecimal preco, int quantidade, LocalDate data) {
+        this.categoria = categoria;
+        this.produto = produto;
+        this.cliente = cliente;
+        this.preco = preco;
+        this.quantidade = quantidade;
+        this.data = data;
+    }
 
-	public String getProduto() {
-		return produto;
-	}
+    public String getCategoria() {
+        return categoria;
+    }
 
-	public String getCliente() {
-		return cliente;
-	}
+    public String getProduto() {
+        return produto;
+    }
 
-	public BigDecimal getPreco() {
-		return preco;
-	}
+    public String getCliente() {
+        return cliente;
+    }
 
-	public int getQuantidade() {
-		return quantidade;
-	}
+    public BigDecimal getPreco() {
+        return preco;
+    }
 
-	public LocalDate getData() {return data;}
+    public int getQuantidade() {
+        return quantidade;
+    }
 
-	@Override
-	public String toString() {
-		return "Pedido{" + "categoria='" + categoria + '\'' + ", produto='" + produto + '\'' + ", cliente='" + cliente
-				+ '\'' + ", preco=" + preco + ", quantidade=" + quantidade + ", data=" + data + '}';
-	}
-	
-	public BigDecimal getValorTotal() {
-		return getPreco().multiply(new BigDecimal(getQuantidade()));
-	}
+    public LocalDate getData() {
+        return data;
+    }
 
-	public static BigDecimal getMontanteCliente(Map.Entry<String, List<Pedido>> cliente) {
-		return cliente.getValue().stream().map(pedido -> pedido.getValorTotal())
-				.reduce(BigDecimal.ZERO, BigDecimal::add);
-	}
+    @Override
+    public String toString() {
+        return "Pedido{" + "categoria='" + categoria + '\'' + ", produto='" + produto + '\'' + ", cliente='" + cliente
+                + '\'' + ", preco=" + preco + ", quantidade=" + quantidade + ", data=" + data + '}';
+    }
+
+    public BigDecimal getValorTotal() {
+        return getPreco().multiply(new BigDecimal(getQuantidade()));
+    }
+
+    public static BigDecimal getMontanteCliente(Map.Entry<String, List<Pedido>> cliente) {
+        return cliente.getValue().stream().map(pedido -> pedido.getValorTotal())
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
 
 }

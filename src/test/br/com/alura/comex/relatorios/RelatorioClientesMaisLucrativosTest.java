@@ -1,21 +1,22 @@
 package br.com.alura.comex.relatorios;
 
 import br.com.alura.comex.model.Pedido;
-import br.com.alura.comex.model.builder.PedidoBuilder;
+import br.com.alura.comex.relatorios.utils.builder.PedidoBuilder;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.tuple;
 import java.util.List;
 import java.util.function.Consumer;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.tuple;
 
 class RelatorioClientesMaisLucrativosTest {
 
     @Test
-    public void deveGerarRelatorioComVariosPedidosDoMesmoCliente()  {
+    public void deveGerarRelatorioComVariosPedidosDoMesmoCliente() {
 
         Pedido primeiroPedido = new PedidoBuilder()
                 .comCategoria("DECORAÇÃO")
@@ -23,7 +24,7 @@ class RelatorioClientesMaisLucrativosTest {
                 .comCliente("Francisco")
                 .comValor("3050.90")
                 .comQuantidade(1)
-                .comData(LocalDate.of(2022,5,30))
+                .comData(LocalDate.of(2022, 5, 30))
                 .build();
 
         Pedido segundoPedido = new PedidoBuilder()
@@ -41,7 +42,7 @@ class RelatorioClientesMaisLucrativosTest {
                 .comCliente("Francisco")
                 .comValor("31752.00")
                 .comQuantidade(1)
-                .comData(LocalDate.of(2022,10,23))
+                .comData(LocalDate.of(2022, 10, 23))
                 .build();
 
         List<Pedido> listaDePedidos = List.of(primeiroPedido, segundoPedido, terceiroPedido);
@@ -60,7 +61,7 @@ class RelatorioClientesMaisLucrativosTest {
     }
 
     @Test
-    public void deveGerarRelatorioComClientesIguaisSeparadosPorPedidos()  {
+    public void deveGerarRelatorioComClientesIguaisSeparadosPorPedidos() {
 
         Pedido primeiroPedido = new PedidoBuilder()
                 .comCategoria("DECORAÇÃO")
@@ -68,7 +69,7 @@ class RelatorioClientesMaisLucrativosTest {
                 .comCliente("Chiara")
                 .comValor("3050.90")
                 .comQuantidade(1)
-                .comData(LocalDate.of(2022,5,30))
+                .comData(LocalDate.of(2022, 5, 30))
                 .build();
 
         Pedido segundoPedido = new PedidoBuilder()
@@ -86,7 +87,7 @@ class RelatorioClientesMaisLucrativosTest {
                 .comCliente("Maria")
                 .comValor("31752.00")
                 .comQuantidade(1)
-                .comData(LocalDate.of(2022,10,23))
+                .comData(LocalDate.of(2022, 10, 23))
                 .build();
 
         Pedido quartoPedido = new PedidoBuilder()
@@ -95,7 +96,7 @@ class RelatorioClientesMaisLucrativosTest {
                 .comCliente("Maria")
                 .comValor("750.00")
                 .comQuantidade(1)
-                .comData(LocalDate.of(2022,10,23))
+                .comData(LocalDate.of(2022, 10, 23))
                 .build();
 
         List<Pedido> listaDePedidos = List.of(primeiroPedido, segundoPedido, terceiroPedido, quartoPedido);
@@ -116,7 +117,7 @@ class RelatorioClientesMaisLucrativosTest {
     }
 
     @Test
-    public void deveGerarRelatorioComDoisClientes()  {
+    public void deveGerarRelatorioComDoisClientes() {
 
         Pedido primeiroPedido = new PedidoBuilder()
                 .comCategoria("MÚSICA")
@@ -133,7 +134,7 @@ class RelatorioClientesMaisLucrativosTest {
                 .comCliente("Maria")
                 .comValor("750.00")
                 .comQuantidade(1)
-                .comData(LocalDate.of(2022,10,23))
+                .comData(LocalDate.of(2022, 10, 23))
                 .build();
 
         List<Pedido> listaDePedidos = List.of(primeiroPedido, segundoPedido);

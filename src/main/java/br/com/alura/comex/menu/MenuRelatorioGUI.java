@@ -27,30 +27,54 @@ public class MenuRelatorioGUI {
 
         switch (opcao) {
             case 0:
-                new RelatorioProxy(new RelatorioSintetico(listaDePedidos, relatorio -> { JOptionPane.showMessageDialog(null, relatorio);})).executa();
+                new RelatorioProxy(new RelatorioSintetico(listaDePedidos, relatorio -> {
+                    JOptionPane.showMessageDialog(null, relatorio);
+                })).executa();
                 break;
             case 1:
-                new RelatorioProxy(new RelatorioFidelidade(listaDePedidos, relatorio -> { JOptionPane.showMessageDialog(null, relatorio);})).executa();
+                new RelatorioProxy(new RelatorioFidelidade(listaDePedidos, relatorio -> {
+                    JOptionPane.showMessageDialog(null, relatorio);
+                })).executa();
                 break;
             case 2:
-                new RelatorioProxy(new RelatorioVendasPorCategoria(listaDePedidos, relatorio -> { JOptionPane.showMessageDialog(null, relatorio);})).executa();
+                new RelatorioProxy(new RelatorioVendasPorCategoria(listaDePedidos, relatorio -> {
+                    JOptionPane.showMessageDialog(null, relatorio);
+                })).executa();
                 break;
             case 3:
-                new RelatorioProxy(new RelatorioProdutosMaisVendidos(listaDePedidos, relatorio -> { JOptionPane.showMessageDialog(null, relatorio);})).executa();
+                new RelatorioProxy(new RelatorioProdutosMaisVendidos(listaDePedidos, relatorio -> {
+                    JOptionPane.showMessageDialog(null, relatorio);
+                })).executa();
                 break;
             case 4:
-                new RelatorioProxy(new RelatorioProdutosMaisCaros(listaDePedidos, relatorio -> { JOptionPane.showMessageDialog(null, relatorio);})).executa();
+                new RelatorioProxy(new RelatorioProdutosMaisCaros(listaDePedidos, relatorio -> {
+                    JOptionPane.showMessageDialog(null, relatorio);
+                })).executa();
                 break;
             case 5:
-                new RelatorioProxy(new RelatorioClientesMaisLucrativos(listaDePedidos, relatorio -> { JOptionPane.showMessageDialog(null, relatorio);})).executa();
+                new RelatorioProxy(new RelatorioClientesMaisLucrativos(listaDePedidos, relatorio -> {
+                    JOptionPane.showMessageDialog(null, relatorio);
+                })).executa();
                 break;
             case 6:
-                new RelatorioProxy(new RelatorioSintetico(listaDePedidos, relatorio -> { JOptionPane.showMessageDialog(null, relatorio);})).executa();
-                new RelatorioProxy(new RelatorioFidelidade(listaDePedidos, relatorio -> { JOptionPane.showMessageDialog(null, relatorio);})).executa();
-                new RelatorioProxy(new RelatorioVendasPorCategoria(listaDePedidos, relatorio -> { JOptionPane.showMessageDialog(null, relatorio);})).executa();
-                new RelatorioProxy(new RelatorioProdutosMaisVendidos(listaDePedidos, relatorio -> { JOptionPane.showMessageDialog(null, relatorio);})).executa();
-                new RelatorioProxy(new RelatorioProdutosMaisCaros(listaDePedidos, relatorio -> { JOptionPane.showMessageDialog(null, relatorio);})).executa();
-                new RelatorioProxy(new RelatorioClientesMaisLucrativos(listaDePedidos, relatorio -> { JOptionPane.showMessageDialog(null, relatorio);})).executa();
+                new RelatorioProxy(new RelatorioSintetico(listaDePedidos, relatorio -> {
+                    JOptionPane.showMessageDialog(null, relatorio);
+                })).executa();
+                new RelatorioProxy(new RelatorioFidelidade(listaDePedidos, relatorio -> {
+                    JOptionPane.showMessageDialog(null, relatorio);
+                })).executa();
+                new RelatorioProxy(new RelatorioVendasPorCategoria(listaDePedidos, relatorio -> {
+                    JOptionPane.showMessageDialog(null, relatorio);
+                })).executa();
+                new RelatorioProxy(new RelatorioProdutosMaisVendidos(listaDePedidos, relatorio -> {
+                    JOptionPane.showMessageDialog(null, relatorio);
+                })).executa();
+                new RelatorioProxy(new RelatorioProdutosMaisCaros(listaDePedidos, relatorio -> {
+                    JOptionPane.showMessageDialog(null, relatorio);
+                })).executa();
+                new RelatorioProxy(new RelatorioClientesMaisLucrativos(listaDePedidos, relatorio -> {
+                    JOptionPane.showMessageDialog(null, relatorio);
+                })).executa();
                 break;
         }
     }

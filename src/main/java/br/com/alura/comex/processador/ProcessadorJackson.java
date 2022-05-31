@@ -18,7 +18,8 @@ public abstract class ProcessadorJackson implements Processador {
         FileReader reader = new FileReader(recurso.toURI().getPath());
         ObjectMapper objectMapper = getMapper();
         objectMapper.registerModule(new JavaTimeModule());
-        return objectMapper.readValue(reader, new TypeReference<List<Pedido>>() {});
+        return objectMapper.readValue(reader, new TypeReference<List<Pedido>>() {
+        });
     }
 
     public abstract ObjectMapper getMapper();
