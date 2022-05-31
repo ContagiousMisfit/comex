@@ -65,7 +65,6 @@ class RelatorioVendasPorCategoriaTest {
 
     @Test
     public void deveGerarRelatorioComUmPedido() throws Exception {
-
         Pedido pedido = new PedidoBuilder()
                 .comCategoria("LIVROS")
                 .comProduto("O guia do mochileiro das galáxias")

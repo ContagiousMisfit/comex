@@ -43,12 +43,9 @@ class RelatorioFidelidadeTest {
                 .build();
 
         List<Pedido> listaDePedidos = List.of(primeiroPedido, segundoPedido, terceiroPedido);
-
         Consumer consumer = Mockito.mock(Consumer.class);
-
         RelatorioFidelidade relatorio = new RelatorioFidelidade(listaDePedidos, consumer);
         relatorio.executa();
-
         List<RelatorioFidelidade.ClientesFieis> resultado = relatorio.getClientesFieis();
 
         assertThat(resultado)
@@ -89,9 +86,7 @@ class RelatorioFidelidadeTest {
                 .build();
 
         List<Pedido> listaDePedidos = List.of(primeiroPedido, segundoPedido, terceiroPedido);
-
         Consumer consumer = Mockito.mock(Consumer.class);
-
         RelatorioFidelidade relatorio = new RelatorioFidelidade(listaDePedidos, consumer);
         relatorio.executa();
 

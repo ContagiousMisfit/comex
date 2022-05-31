@@ -49,7 +49,6 @@ class RelatorioProdutosMaisCarosTest {
 
         List<Pedido> pedidos = List.of(primeiroPedido, segundoPedido, terceiroPedido);
         Consumer consumer = Mockito.mock(Consumer.class);
-
         RelatorioProdutosMaisCaros relatorio = new RelatorioProdutosMaisCaros(pedidos, consumer);
         relatorio.executa();
 
@@ -81,7 +80,6 @@ class RelatorioProdutosMaisCarosTest {
 
         RelatorioProdutosMaisCaros relatorio = new RelatorioProdutosMaisCaros(pedidos, consumer);
         relatorio.executa();
-
         List<RelatorioProdutosMaisCaros.ProdutosMaisCaros> resultado = relatorio.getProdutosMaisCaros();
 
         assertThat(resultado)

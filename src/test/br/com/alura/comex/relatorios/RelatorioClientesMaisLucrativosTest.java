@@ -16,6 +16,7 @@ class RelatorioClientesMaisLucrativosTest {
 
     @Test
     public void deveGerarRelatorioComVariosPedidosDoMesmoCliente()  {
+
         Pedido primeiroPedido = new PedidoBuilder()
                 .comCategoria("DECORAÇÃO")
                 .comProduto("Pintura Óleo sobre Tela")
@@ -44,12 +45,9 @@ class RelatorioClientesMaisLucrativosTest {
                 .build();
 
         List<Pedido> listaDePedidos = List.of(primeiroPedido, segundoPedido, terceiroPedido);
-
         Consumer consumer = Mockito.mock(Consumer.class);
-
         RelatorioClientesMaisLucrativos relatorio = new RelatorioClientesMaisLucrativos(listaDePedidos, consumer);
         relatorio.executa();
-
         List<RelatorioClientesMaisLucrativos.ClientesMaisLucrativos> resultado = relatorio.getClientesMaisLucrativos();
 
         assertThat(resultado)
@@ -101,13 +99,11 @@ class RelatorioClientesMaisLucrativosTest {
                 .build();
 
         List<Pedido> listaDePedidos = List.of(primeiroPedido, segundoPedido, terceiroPedido, quartoPedido);
-
         Consumer consumer = Mockito.mock(Consumer.class);
-
         RelatorioClientesMaisLucrativos relatorio = new RelatorioClientesMaisLucrativos(listaDePedidos, consumer);
         relatorio.executa();
-
         List<RelatorioClientesMaisLucrativos.ClientesMaisLucrativos> resultado = relatorio.getClientesMaisLucrativos();
+
         assertThat(resultado)
                 .hasSize(2)
                 .extracting(RelatorioClientesMaisLucrativos.ClientesMaisLucrativos::getNome,
@@ -141,13 +137,11 @@ class RelatorioClientesMaisLucrativosTest {
                 .build();
 
         List<Pedido> listaDePedidos = List.of(primeiroPedido, segundoPedido);
-
         Consumer consumer = Mockito.mock(Consumer.class);
-
         RelatorioClientesMaisLucrativos relatorio = new RelatorioClientesMaisLucrativos(listaDePedidos, consumer);
         relatorio.executa();
-
         List<RelatorioClientesMaisLucrativos.ClientesMaisLucrativos> resultado = relatorio.getClientesMaisLucrativos();
+
         assertThat(resultado)
                 .hasSize(2)
                 .extracting(RelatorioClientesMaisLucrativos.ClientesMaisLucrativos::getNome,

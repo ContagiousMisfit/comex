@@ -64,9 +64,7 @@ class RelatorioProdutosMaisVendidosTest {
 
     @Test
     public void deveGerarRelatorioComTresProdutosIguaisSeparadosPorPedidos() {
-
         //Cenário não coberto atualmente
-
         Pedido primeiroPedido = new PedidoBuilder()
                 .comCategoria("ELETRÔNICOS")
                 .comProduto("Monitor Gamer Samsung Odyssey G9 49' Curvo")
