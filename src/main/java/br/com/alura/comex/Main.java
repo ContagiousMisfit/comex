@@ -7,8 +7,8 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 
-        /*MenuRelatorio menu = new MenuRelatorio();
-        menu.executar();*/
+        MenuRelatorio menu = new MenuRelatorio();
+        menu.executar();
         
         MenuRelatorioGUI menuJanelasGraficas = new MenuRelatorioGUI();
         menuJanelasGraficas.executar();

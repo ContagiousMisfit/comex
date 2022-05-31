@@ -4,6 +4,8 @@ import br.com.alura.comex.model.Pedido;
 import br.com.alura.comex.utils.Formatador;
 
 import java.math.BigDecimal;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
@@ -42,7 +44,10 @@ public class RelatorioClientesMaisLucrativos extends Relatorio {
     @Override
     public void imprimirRelatorio() {
         impressoraDoRelatorio.accept("\n#### CLIENTES MAIS LUCRATIVOS");
-        clientesMaisLucrativos.forEach(cliente -> {
+        clientesMaisLucrativos.stream()
+                .sorted(Comparator.comparing(ClientesMaisLucrativos::getMontanteGasto).reversed())
+                .limit(2)
+                .forEach(cliente -> {
                     impressoraDoRelatorio.accept("NOME: " + cliente.getNome() + "\nNº DE PEDIDOS: "
                             + cliente.getNumPedidos()
                             + "\nMONTANTE GASTO: "

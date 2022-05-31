@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
+import static org.assertj.core.api.Assertions.*;
 
 class RelatorioVendasPorCategoriaTest {
 
@@ -54,17 +55,14 @@ class RelatorioVendasPorCategoriaTest {
         relatorio.executa();
 
         List<RelatorioVendasPorCategoria.VendasPorCategoria> resultado = relatorio.getVendasPorCategoria();
-        Assertions.assertEquals(2, resultado.size());
-
-        RelatorioVendasPorCategoria.VendasPorCategoria vendasPorCategoria1 = resultado.get(0);
-        Assertions.assertEquals("JOGOS", vendasPorCategoria1.getCategoria());
-        Assertions.assertEquals(new BigDecimal("235.99"), vendasPorCategoria1.getMontante());
-        Assertions.assertEquals(1, vendasPorCategoria1.getQuantidadeVendida());
-
-        RelatorioVendasPorCategoria.VendasPorCategoria vendasPorCategoria2 = resultado.get(1);
-        Assertions.assertEquals("LIVROS", vendasPorCategoria2.getCategoria());
-        Assertions.assertEquals(new BigDecimal("96.13"), vendasPorCategoria2.getMontante());
-        Assertions.assertEquals(2, vendasPorCategoria2.getQuantidadeVendida());
+        assertThat(resultado)
+                .hasSize(2)
+                .extracting(RelatorioVendasPorCategoria.VendasPorCategoria::getCategoria,
+                        RelatorioVendasPorCategoria.VendasPorCategoria::getMontante,
+                        RelatorioVendasPorCategoria.VendasPorCategoria::getQuantidadeVendida)
+                .containsExactly(
+                        tuple("JOGOS", new BigDecimal("235.99"), 1),
+                        tuple("LIVROS", new BigDecimal("96.13"), 2));
     }
     @Test
     public void deveGerarRelatorioComUmPedido() throws Exception {
@@ -85,11 +83,13 @@ class RelatorioVendasPorCategoriaTest {
         relatorio.executa();
 
         List<RelatorioVendasPorCategoria.VendasPorCategoria> resultado = relatorio.getVendasPorCategoria();
-        Assertions.assertEquals(1, resultado.size());
-        RelatorioVendasPorCategoria.VendasPorCategoria primeiraVenda = resultado.get(0);
-
-        Assertions.assertEquals("LIVROS", primeiraVenda.getCategoria());
-        Assertions.assertEquals(1, primeiraVenda.getQuantidadeVendida());
+        assertThat(resultado)
+                .hasSize(1)
+                .extracting(RelatorioVendasPorCategoria.VendasPorCategoria::getCategoria,
+                        RelatorioVendasPorCategoria.VendasPorCategoria::getMontante,
+                        RelatorioVendasPorCategoria.VendasPorCategoria::getQuantidadeVendida)
+                .containsExactly(
+                        tuple("LIVROS", new BigDecimal("44.90"), 1));
     }
 
     @Test
