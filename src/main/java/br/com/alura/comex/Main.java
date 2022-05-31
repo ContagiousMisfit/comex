@@ -9,8 +9,6 @@ public class Main {
 
         MenuRelatorio menu = new MenuRelatorio();
         menu.executar();
-        
-        MenuRelatorioGUI menuJanelasGraficas = new MenuRelatorioGUI();
-        menuJanelasGraficas.executar();
+
     }
 }

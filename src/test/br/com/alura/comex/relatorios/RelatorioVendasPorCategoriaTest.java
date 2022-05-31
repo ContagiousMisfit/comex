@@ -8,10 +8,11 @@ import org.mockito.Mockito;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
-import static org.assertj.core.api.Assertions.*;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.tuple;
 
 class RelatorioVendasPorCategoriaTest {
 
@@ -23,7 +24,7 @@ class RelatorioVendasPorCategoriaTest {
                 .comCliente("Ale")
                 .comValor("44.90")
                 .comQuantidade(1)
-                .comData(LocalDate.of(2022,5,30))
+                .comData(LocalDate.of(2022, 5, 30))
                 .build();
 
         Pedido segundoPedido = new PedidoBuilder()
@@ -41,13 +42,10 @@ class RelatorioVendasPorCategoriaTest {
                 .comCliente("Teresa")
                 .comValor("51.23")
                 .comQuantidade(1)
-                .comData(LocalDate.of(2022,10,23))
+                .comData(LocalDate.of(2022, 10, 23))
                 .build();
 
-        List<Pedido> listaDePedidos = new ArrayList<>();
-        listaDePedidos.add(primeiroPedido);
-        listaDePedidos.add(segundoPedido);
-        listaDePedidos.add(terceiroPedido);
+        List<Pedido> listaDePedidos = List.of(primeiroPedido, segundoPedido, terceiroPedido);
 
         Consumer consumer = Mockito.mock(Consumer.class);
 
@@ -64,6 +62,7 @@ class RelatorioVendasPorCategoriaTest {
                         tuple("JOGOS", new BigDecimal("235.99"), 1),
                         tuple("LIVROS", new BigDecimal("96.13"), 2));
     }
+
     @Test
     public void deveGerarRelatorioComUmPedido() throws Exception {
 
@@ -73,7 +72,7 @@ class RelatorioVendasPorCategoriaTest {
                 .comCliente("Alexandre")
                 .comValor("44.90")
                 .comQuantidade(1)
-                .comData(LocalDate.of(2022,5,30))
+                .comData(LocalDate.of(2022, 5, 30))
                 .build();
 
         List<Pedido> pedidos = List.of(pedido);
