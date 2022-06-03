@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import java.util.List;
 
 @Entity
 @Data
@@ -19,5 +21,8 @@ public class Cliente extends AbstractEntity {
 
     @Embedded
     private Endereco endereco;
+
+    @OneToMany
+    private List<Pedido> listaDePedidos;
 
 }

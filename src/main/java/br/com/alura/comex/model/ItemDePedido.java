@@ -23,5 +23,4 @@ public class ItemDePedido extends AbstractEntity {
     private BigDecimal desconto;
     private TipoDesconto tipoDesconto;
 
-
 }

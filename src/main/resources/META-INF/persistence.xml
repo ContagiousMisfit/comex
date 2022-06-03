@@ -10,6 +10,7 @@
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/comexdb" />
             <property name="javax.persistence.jdbc.user" value="root" />
             <property name="javax.persistence.jdbc.password" value="AMDG" />
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
         </properties>
     </persistence-unit>
 
