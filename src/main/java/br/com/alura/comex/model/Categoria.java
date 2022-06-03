@@ -24,4 +24,8 @@ public class Categoria extends AbstractEntity {
     @OneToMany
     private List<Produto> listaDeProdutos;
 
+    public Categoria(String nome, Status status) {
+        this.nome = nome;
+        this.status = status;
+    }
 }

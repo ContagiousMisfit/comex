@@ -6,7 +6,8 @@ import javax.persistence.Persistence;
 
 public class JPAUtil {
 
-    private static final EntityManagerFactory FACTORY = Persistence.createEntityManagerFactory("comex");
+    private static final EntityManagerFactory FACTORY = Persistence
+            .createEntityManagerFactory("comexdb");
 
     public static EntityManager getEntityManager() {return FACTORY.createEntityManager();}
 
