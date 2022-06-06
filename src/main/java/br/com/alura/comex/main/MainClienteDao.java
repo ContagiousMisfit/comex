@@ -5,13 +5,32 @@ import br.com.alura.comex.model.Cliente;
 import br.com.alura.comex.model.utils.ClienteBuilder;
 import br.com.alura.comex.model.utils.EnderecoBuilder;
 import br.com.alura.comex.util.JPAUtil;
+import br.com.alura.comex.vo.RelatorioQuantidadePedidosPorClienteVo;
 
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainClienteDao {
 
-    public void main(String[] args) {
+
+    public static void main(String[] args) {
+
+        EntityManager em = JPAUtil.getEntityManager();
+        popularBancoDeDados();
+
+        ClienteDAO clienteDAO = new ClienteDAO(em);
+        List<Cliente> clientes = clienteDAO.listarPorNome("Chiara");
+        clientes.forEach(System.out::println);
+
+        List<RelatorioQuantidadePedidosPorClienteVo> pedidosPorCliente = clienteDAO.getRelatorioPedidosPorCliente();
+        pedidosPorCliente.forEach(System.out::println);
+
+    }
+
+    private static void popularBancoDeDados() {
+        EntityManager em = JPAUtil.getEntityManager();
+
         Cliente cliente1 = new ClienteBuilder()
                 .comNome("Teresa").comCpf("123456789").comTelefone("11232323")
                 .comEndereco(new EnderecoBuilder().comRua("Champs Elysees").comBairro("Arrondissement 1").comNumero("123").comCidade("Paris").comComplemento("Flat").comEstado("Ilha da França").build())
@@ -30,8 +49,6 @@ public class MainClienteDao {
                 .comListaDePedidos(new ArrayList<>())
                 .build();
 
-
-        EntityManager em = JPAUtil.getEntityManager();
         ClienteDAO clienteDAO = new ClienteDAO(em);
 
         em.getTransaction().begin();
@@ -42,8 +59,6 @@ public class MainClienteDao {
 
         em.getTransaction().commit();
         em.close();
-
-        clienteDAO.listarPorNome("Chiara");
     }
 
 }

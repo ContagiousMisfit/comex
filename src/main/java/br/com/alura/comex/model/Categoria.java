@@ -4,27 +4,29 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
+
+import br.com.alura.comex.model.StatusCategoria.*;
 
 @Data
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class Categoria extends AbstractEntity {
+@Table(name = "categorias")
+public class Categoria {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false)
     private String nome;
 
     @Enumerated(EnumType.STRING)
-    private Status status;
+    private StatusCategoria status;
 
-    @OneToMany
-    private List<Produto> listaDeProdutos;
-
-    public Categoria(String nome, Status status) {
+    public Categoria(String nome, StatusCategoria status) {
         this.nome = nome;
         this.status = status;
     }

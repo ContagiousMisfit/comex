@@ -1,6 +1,5 @@
 package br.com.alura.comex.model;
 
-public enum Status {
-
+public enum StatusCategoria {
     ATIVA, INATIVA
 }

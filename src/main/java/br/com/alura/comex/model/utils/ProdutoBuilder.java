@@ -1,9 +1,11 @@
 package br.com.alura.comex.model.utils;
 
 import br.com.alura.comex.model.Categoria;
+import br.com.alura.comex.model.ItemDePedido;
 import br.com.alura.comex.model.Produto;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public class ProdutoBuilder {
 
@@ -11,6 +13,8 @@ public class ProdutoBuilder {
     private String descricao;
     private BigDecimal precoUnitario;
     private long quantidadeEmEstoque;
+
+    private List<ItemDePedido> listaDeItensDePedidos;
 
     private Categoria categoria;
 

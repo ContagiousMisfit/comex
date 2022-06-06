@@ -1,6 +1,7 @@
 package br.com.alura.comex.dao;
 
 import br.com.alura.comex.model.Cliente;
+import br.com.alura.comex.vo.RelatorioQuantidadePedidosPorClienteVo;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -35,11 +36,23 @@ public class ClienteDAO {
         return em.createQuery(queryJPQL, Cliente.class).getResultList();
     }
 
-    public Cliente listarPorNome(String nome) {
+    public List<Cliente> listarPorNome(String nome) {
         String queryJPQL = "SELECT cliente FROM Cliente cliente WHERE cliente.nome = :nome";
         return em.createQuery(queryJPQL, Cliente.class)
                 .setParameter("nome", nome)
-                .getSingleResult();
+                .getResultList();
+    }
+
+    public List<RelatorioQuantidadePedidosPorClienteVo> getRelatorioPedidosPorCliente() {
+
+        String jpql = "SELECT new br.com.alura.comex.vo.RelatorioQuantidadePedidosPorClienteVo(" +
+                "pedido.cliente.nome," +
+                "COUNT(pedido.cliente))" +
+                "FROM Pedido pedido " +
+                "GROUP BY pedido.cliente.nome ";
+
+        return em.createQuery(jpql, RelatorioQuantidadePedidosPorClienteVo.class)
+                .getResultList();
     }
 
 }

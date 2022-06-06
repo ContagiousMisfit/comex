@@ -6,13 +6,13 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Embeddable;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
-@Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Embeddable
-public class Endereco extends AbstractEntity {
+public class Endereco {
 
     private String rua;
     private String numero;

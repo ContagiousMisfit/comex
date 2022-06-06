@@ -1,13 +1,11 @@
 package br.com.alura.comex.model;
 
+import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -15,19 +13,26 @@ import java.util.List;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class Produto extends AbstractEntity {
+@Table(name = "produtos")
+public class Produto {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false)
     private String nome;
+
     private String descricao;
+
+    @Column(name = "preco_unitario", nullable = false)
     private BigDecimal precoUnitario;
+
+    @Column(name = "quantidade_em_estoque", nullable = false)
     private long quantidadeEmEstoque;
 
-    @ManyToOne
-    @JoinColumn(name = "categoria_id")
+    @ManyToOne(optional = false, cascade=CascadeType.ALL)
     private Categoria categoria;
-
-    @OneToMany
-    private List<ItemDePedido> itensDePedido;
 
     public Produto(String nome, String descricao, BigDecimal precoUnitario, long quantidadeEmEstoque, Categoria categoria) {
         this.nome = nome;
@@ -36,4 +41,5 @@ public class Produto extends AbstractEntity {
         this.quantidadeEmEstoque = quantidadeEmEstoque;
         this.categoria = categoria;
     }
+
 }

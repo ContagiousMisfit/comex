@@ -7,24 +7,46 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Pedido extends AbstractEntity {
+@Table(name = "pedidos")
+public class Pedido {
 
-    private LocalDate dataPedido;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @ManyToOne
+    @Column(nullable = false)
+    private LocalDateTime data;
+
+    @Column(name = "valor_total")
+    private BigDecimal valorTotal = BigDecimal.ZERO;
+
+    @ManyToOne(optional = false)
     private Cliente cliente;
 
+    @Column(nullable = false)
     private BigDecimal desconto;
 
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private TipoDesconto tipoDesconto;
+    private TipoDescontoPedido tipoDesconto;
 
-    @OneToMany
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
     private List<ItemDePedido> listaDePedidos;
+
+    public void adicionarItem(ItemDePedido item) {
+        item.setPedido(this);
+        this.getItens().add(item);
+        this.valorTotal = this.valorTotal.add(item.getValor());
+    }
+
+    public List<ItemDePedido> getItens() {
+        return listaDePedidos;
+    }
 }

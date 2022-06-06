@@ -24,9 +24,9 @@ public class ProdutoDAO {
     }
 
     public List<Produto> listarIndisponiveis() {
-        String queryJPQL = "SELECT produto FROM Produto produto WHERE produto.quantidade = :quantidade";
+        String queryJPQL = "SELECT produto FROM Produto produto WHERE produto.quantidadeEmEstoque = :quantidadeEmEstoque";
         return em.createQuery(queryJPQL, Produto.class)
-                .setParameter("quantidade", 0)
+                .setParameter("quantidadeEmEstoque", 0)
                 .getResultList();
     }
 

@@ -1,7 +1,7 @@
 package br.com.alura.comex.dao;
 
 import br.com.alura.comex.model.Categoria;
-import br.com.alura.comex.model.Status;
+import br.com.alura.comex.model.StatusCategoria;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -34,7 +34,7 @@ public class CategoriaDAO {
     public List<Categoria> listarInativas() {
         String queryJPQL = "SELECT categoria FROM Categoria categoria WHERE categoria.status = :status";
         return em.createQuery(queryJPQL, Categoria.class)
-                .setParameter("status", Status.INATIVA)
+                .setParameter("status", StatusCategoria.INATIVA)
                 .getResultList();
     }
 
