@@ -1,7 +1,6 @@
 package br.com.alura.comex.model.utils;
 
 import br.com.alura.comex.model.Categoria;
-import br.com.alura.comex.model.Endereco;
 import br.com.alura.comex.model.StatusCategoria;
 
 public class CategoriaBuilder {
@@ -20,6 +19,8 @@ public class CategoriaBuilder {
         return this;
     }
 
-    public Categoria build() {return new Categoria(nome, status);}
+    public Categoria build() {
+        return new Categoria(nome, status);
+    }
 
 }

@@ -1,9 +1,6 @@
 package br.com.alura.comex.dao;
 
 import br.com.alura.comex.vo.RelatorioMontantePorCategoriaVo;
-import br.com.alura.comex.vo.RelatorioProdutosMaisVendidosVo;
-import br.com.alura.comex.vo.RelatorioProdutosNuncaVendidosVo;
-import br.com.alura.comex.vo.RelatorioQuantidadePedidosPorClienteVo;
 
 import javax.persistence.EntityManager;
 import java.util.List;

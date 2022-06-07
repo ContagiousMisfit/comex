@@ -1,8 +1,6 @@
 package br.com.alura.comex.dao;
 
 import br.com.alura.comex.model.Produto;
-import br.com.alura.comex.vo.RelatorioProdutosMaisVendidosVo;
-import br.com.alura.comex.vo.RelatorioProdutosNuncaVendidosVo;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -32,27 +30,26 @@ public class ProdutoDAO {
                 .getResultList();
     }
 
-    public List<RelatorioProdutosMaisVendidosVo> getProdutosMaisVendidos() {
+    public List<Produto> getProdutosMaisVendidos() {
 
-        String jpql = "SELECT new br.com.alura.comex.vo.RelatorioProdutosMaisVendidosVo(produto) " +
+        String jpql = "SELECT produto " +
                 "FROM ItemDePedido item " +
                 "JOIN item.produto produto " +
                 "WHERE (item.quantidade > 3) " +
-                "GROUP BY item.quantidade " +
                 "ORDER BY item.quantidade DESC ";
 
-        return em.createQuery(jpql, RelatorioProdutosMaisVendidosVo.class)
+        return em.createQuery(jpql, Produto.class)
                 .getResultList();
     }
-    public List<RelatorioProdutosNuncaVendidosVo> getProdutosNuncaVendidos() {
 
-        String jpql = "SELECT new br.com.alura.comex.vo.RelatorioProdutosNuncaVendidosVo(produto) " +
+    public List<Produto> getProdutosNuncaVendidos() {
+
+        String jpql = "SELECT produto " +
                 "FROM ItemDePedido item " +
                 "JOIN item.produto produto " +
-                "WHERE item.quantidade > 3 " +
-                "GROUP BY item.quantidade DESC";
+                "WHERE item.pedido is null ";
 
-        return em.createQuery(jpql, RelatorioProdutosNuncaVendidosVo.class)
+        return em.createQuery(jpql, Produto.class)
                 .getResultList();
 
     }

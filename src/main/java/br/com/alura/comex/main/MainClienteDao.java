@@ -5,7 +5,6 @@ import br.com.alura.comex.model.Cliente;
 import br.com.alura.comex.model.utils.ClienteBuilder;
 import br.com.alura.comex.model.utils.EnderecoBuilder;
 import br.com.alura.comex.util.JPAUtil;
-import br.com.alura.comex.vo.RelatorioClientesMaisLucrativosVo;
 import br.com.alura.comex.vo.RelatorioQuantidadePedidosPorClienteVo;
 
 import javax.persistence.EntityManager;
@@ -27,7 +26,7 @@ public class MainClienteDao {
         List<RelatorioQuantidadePedidosPorClienteVo> pedidosPorCliente = clienteDAO.getRelatorioPedidosPorCliente();
         pedidosPorCliente.forEach(System.out::println);
 
-        List<RelatorioClientesMaisLucrativosVo> clientesMaisLucrativos = clienteDAO.getRelatorioClientesMaisLucrativos();
+        List<Cliente> clientesMaisLucrativos = clienteDAO.getRelatorioClientesMaisLucrativos();
         clientesMaisLucrativos.forEach(System.out::println);
 
     }
