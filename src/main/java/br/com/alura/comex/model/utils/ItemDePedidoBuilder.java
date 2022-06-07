@@ -1,6 +1,9 @@
 package br.com.alura.comex.model.utils;
 
-import br.com.alura.comex.model.*;
+import br.com.alura.comex.model.ItemDePedido;
+import br.com.alura.comex.model.Pedido;
+import br.com.alura.comex.model.Produto;
+import br.com.alura.comex.model.TipoDescontoItemPedido;
 
 import java.math.BigDecimal;
 

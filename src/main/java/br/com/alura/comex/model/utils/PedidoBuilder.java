@@ -4,7 +4,6 @@ import br.com.alura.comex.model.Cliente;
 import br.com.alura.comex.model.ItemDePedido;
 import br.com.alura.comex.model.Pedido;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -31,6 +30,8 @@ public class PedidoBuilder {
         return this;
     }
 
-    public Pedido build() {return new Pedido(data, cliente, listaDePedidos);}
+    public Pedido build() {
+        return new Pedido(data, cliente, listaDePedidos);
+    }
 
 }

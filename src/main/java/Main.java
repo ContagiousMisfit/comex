@@ -2,7 +2,6 @@ import br.com.alura.comex.dao.ClienteDAO;
 import br.com.alura.comex.dao.PedidoDAO;
 import br.com.alura.comex.dao.ProdutoDAO;
 import br.com.alura.comex.dto.PedidoDTO;
-import br.com.alura.comex.main.MainClienteDao;
 import br.com.alura.comex.model.*;
 import br.com.alura.comex.model.utils.*;
 import br.com.alura.comex.processador.ProcessadorDeCSV;
@@ -11,7 +10,6 @@ import br.com.alura.comex.util.JPAUtil;
 import javax.persistence.EntityManager;
 import java.io.FileNotFoundException;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Main {

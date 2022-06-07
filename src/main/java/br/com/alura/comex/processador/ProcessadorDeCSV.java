@@ -1,7 +1,6 @@
 package br.com.alura.comex.processador;
 
 import br.com.alura.comex.dto.PedidoDTO;
-import br.com.alura.comex.model.Pedido;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 import lombok.AllArgsConstructor;
@@ -28,6 +27,5 @@ public class ProcessadorDeCSV {
         List<PedidoDTO> listaDePedidos = csvToBean.parse();
         return listaDePedidos;
     }
-
 
 }
