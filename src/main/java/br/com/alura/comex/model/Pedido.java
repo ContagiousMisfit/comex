@@ -39,6 +39,12 @@ public class Pedido {
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
     private List<ItemDePedido> listaDePedidos;
 
+    public Pedido(LocalDateTime data, Cliente cliente, List<ItemDePedido> listaDePedidos) {
+        this.data = data;
+        this.cliente = cliente;
+        this.listaDePedidos = listaDePedidos;
+    }
+
     public void adicionarItem(ItemDePedido item) {
         item.setPedido(this);
         this.getItens().add(item);

@@ -3,6 +3,7 @@ package br.com.alura.comex.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.inferred.freebuilder.FreeBuilder;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -29,6 +30,15 @@ public class ItemDePedido {
     private Pedido pedido;
     private BigDecimal desconto;
     private TipoDescontoItemPedido tipoDesconto;
+
+    public ItemDePedido(BigDecimal precoUnitario, long quantidade, Produto produto, Pedido pedido, BigDecimal desconto, TipoDescontoItemPedido tipoDesconto) {
+        this.precoUnitario = precoUnitario;
+        this.quantidade = quantidade;
+        this.produto = produto;
+        this.pedido = pedido;
+        this.desconto = desconto;
+        this.tipoDesconto = tipoDesconto;
+    }
 
     public BigDecimal getValor() {
         return precoUnitario.multiply(new BigDecimal(quantidade));
