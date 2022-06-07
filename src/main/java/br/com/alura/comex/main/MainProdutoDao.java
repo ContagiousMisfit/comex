@@ -6,12 +6,9 @@ import br.com.alura.comex.model.Produto;
 import br.com.alura.comex.model.StatusCategoria;
 import br.com.alura.comex.model.utils.ProdutoBuilder;
 import br.com.alura.comex.util.JPAUtil;
-import br.com.alura.comex.vo.RelatorioQuantidadePedidosPorClienteVo;
 
 import javax.persistence.EntityManager;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainProdutoDao {
 
@@ -75,7 +72,6 @@ public class MainProdutoDao {
         em.getTransaction().commit();
         em.close();
     }
-
 
 
 }

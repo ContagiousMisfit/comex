@@ -18,9 +18,9 @@ public class ProdutoDAO {
     }
 
     public List<Produto> listarTodos() {
-       String queryJPQL = "SELECT produto FROM Produto produto";
-       return em.createQuery(queryJPQL, Produto.class)
-               .getResultList();
+        String queryJPQL = "SELECT produto FROM Produto produto";
+        return em.createQuery(queryJPQL, Produto.class)
+                .getResultList();
     }
 
     public List<Produto> listarIndisponiveis() {

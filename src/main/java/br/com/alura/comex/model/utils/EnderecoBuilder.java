@@ -15,6 +15,7 @@ public class EnderecoBuilder {
         this.rua = rua;
         return this;
     }
+
     public EnderecoBuilder comNumero(String numero) {
         this.numero = numero;
         return this;

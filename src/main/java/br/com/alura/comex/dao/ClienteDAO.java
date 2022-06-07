@@ -46,10 +46,11 @@ public class ClienteDAO {
     public List<RelatorioQuantidadePedidosPorClienteVo> getRelatorioPedidosPorCliente() {
 
         String jpql = "SELECT new br.com.alura.comex.vo.RelatorioQuantidadePedidosPorClienteVo(" +
-                "pedido.cliente.nome," +
-                "COUNT(pedido.cliente))" +
-                "FROM Pedido pedido " +
-                "GROUP BY pedido.cliente.nome ";
+                "cliente.nome," +
+                "COUNT(cliente))" +
+                "FROM Pedido pedido" +
+                "JOIN pedido.cliente cliente" +
+                "GROUP BY cliente.nome ";
 
         return em.createQuery(jpql, RelatorioQuantidadePedidosPorClienteVo.class)
                 .getResultList();

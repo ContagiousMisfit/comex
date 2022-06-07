@@ -5,9 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
-
-import br.com.alura.comex.model.StatusCategoria.*;
 
 @Data
 @Entity

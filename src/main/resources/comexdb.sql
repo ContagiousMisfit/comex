@@ -1,7 +1,4 @@
-DROP DATABASE dbtest;
-CREATE DATABASE dbtest;
-USE dbtest;
-
+DROP DATABASE comexdb;
 USE comexdb;
 
 DROP TABLE categorias;
@@ -12,15 +9,14 @@ DROP TABLE itens_de_pedidos;
 
 CREATE TABLE categorias(
 id bigint AUTO_INCREMENT,
-nome varchar(200) NOT NULL,
-status varchar(20) NOT NULL,
+nome varchar(255) NOT NULL,
+status varchar(30) NOT NULL,
 PRIMARY KEY (id)
 );
 
 CREATE TABLE produtos(
--- mudar depois bigint
 id bigint AUTO_INCREMENT,
-nome varchar(200) NOT NULL,
+nome varchar(255) NOT NULL,
 descricao varchar(500),
 preco_unitario decimal(38,2) NOT NULL,
 categoria_id bigint NOT NULL,
@@ -31,25 +27,25 @@ ALTER TABLE produtos
 ADD FOREIGN KEY (categoria_id) REFERENCES categorias(id);
 
 CREATE TABLE clientes(
-id int(4) AUTO_INCREMENT,
-nome varchar(200) NOT NULL,
-cpf varchar(11) NOT NULL,
-telefone varchar(15) NOT NULL,
-rua varchar(30) NOT NULL,
+id bigint AUTO_INCREMENT,
+nome varchar(255) NOT NULL,
+cpf varchar(30) NOT NULL,
+telefone varchar(30) NOT NULL,
+rua varchar(150) NOT NULL,
 numero varchar(10) NOT NULL,
-complemento varchar(15),
-bairro varchar(15) NOT NULL,
-cidade varchar(30) NOT NULL,
-estado varchar(30) NOT NULL,
+complemento varchar(30),
+bairro varchar(50) NOT NULL,
+cidade varchar(50) NOT NULL,
+estado varchar(50) NOT NULL,
 PRIMARY KEY (id)
 );
 
 
 CREATE TABLE pedidos(
-id int(4) AUTO_INCREMENT,
+id bigint AUTO_INCREMENT,
 data datetime not null,
 cliente_id bigint not null,
-desconto double,
+desconto decimal(38,2),
 tipo_de_desconto varchar(10) not null,
 PRIMARY KEY (id)
 );
@@ -58,12 +54,12 @@ ALTER TABLE pedidos
 ADD FOREIGN KEY (cliente_id) REFERENCES clientes(id);
 
 CREATE TABLE itens_de_pedidos(
-id int(4) AUTO_INCREMENT,
-preco_unitario double NOT NULL,
-quantidade int NOT NULL,
-produto_id int(4) NOT NULL,
-pedido_id int(4) NOT NULL,
-desconto double,
+id bigint AUTO_INCREMENT,
+preco_unitario bigint NOT NULL,
+quantidade bigint NOT NULL,
+produto_id bigint NOT NULL,
+pedido_id bigint NOT NULL,
+desconto decimal(38,2),
 tipo_de_desconto varchar(10) NOT NULL,
 PRIMARY KEY (id)
 );
@@ -73,6 +69,4 @@ ADD FOREIGN KEY (produto_id) REFERENCES produtos(id);
 
 ALTER TABLE itens_de_pedidos
 ADD FOREIGN KEY (pedido_id) REFERENCES pedidos(id);
-
-SELECT * FROM categorias;
 

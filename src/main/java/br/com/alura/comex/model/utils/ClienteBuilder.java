@@ -3,7 +3,6 @@ package br.com.alura.comex.model.utils;
 import br.com.alura.comex.model.Cliente;
 import br.com.alura.comex.model.Endereco;
 import br.com.alura.comex.model.Pedido;
-import br.com.alura.comex.model.Produto;
 
 import java.util.List;
 

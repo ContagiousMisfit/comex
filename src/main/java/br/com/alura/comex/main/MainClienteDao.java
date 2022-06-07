@@ -13,7 +13,6 @@ import java.util.List;
 
 public class MainClienteDao {
 
-
     public static void main(String[] args) {
 
         EntityManager em = JPAUtil.getEntityManager();

@@ -1,13 +1,11 @@
 package br.com.alura.comex.model;
 
-import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.List;
 
 @Data
 @Entity
@@ -31,7 +29,7 @@ public class Produto {
     @Column(name = "quantidade_em_estoque", nullable = false)
     private long quantidadeEmEstoque;
 
-    @ManyToOne(optional = false, cascade=CascadeType.ALL)
+    @ManyToOne(optional = false, cascade = CascadeType.ALL)
     private Categoria categoria;
 
     public Produto(String nome, String descricao, BigDecimal precoUnitario, long quantidadeEmEstoque, Categoria categoria) {

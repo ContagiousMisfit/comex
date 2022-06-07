@@ -1,10 +1,11 @@
 # Comex
 
 ## Informações gerais dos pedidos em _pedidos.csv_
+
 - Campos: **CATEGORIA, PRODUTO, PREÇO, QUANTIDADE, DATA, CLIENTE**
 
-
 ### RELATÓRIO DE VALORES TOTAIS
+
 - TOTAL DE PEDIDOS REALIZADOS: 16
 - TOTAL DE PRODUTOS VENDIDOS: 35
 - TOTAL DE CATEGORIAS: 5
