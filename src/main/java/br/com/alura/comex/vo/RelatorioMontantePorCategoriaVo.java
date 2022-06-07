@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class RelatorioMontantePorCategoriaVo {
 
-    String nome;
-    long quantidade;
+    private String nome;
+    private long quantidade;
 
 }

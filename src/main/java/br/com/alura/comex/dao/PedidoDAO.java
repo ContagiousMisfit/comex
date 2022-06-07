@@ -27,4 +27,16 @@ public class PedidoDAO {
                 .getResultList();
     }
 
+    public List<RelatorioQuantidadePedidosPorClienteVo> getProdutosMaisVendidos() {
+
+        String jpql = "SELECT new br.com.alura.comex.vo.RelatorioProdutosMaisVendidosVo(produto)" +
+                "FROM ItemDePedido item" +
+                "JOIN item.produto produto" +
+                "WHERE item.quantidade > 3" +
+                "GROUP BY item.quantidade DESC";
+
+        return em.createQuery(jpql, RelatorioQuantidadePedidosPorClienteVo.class)
+                .getResultList();
+    }
+
 }

@@ -1,6 +1,7 @@
 package br.com.alura.comex.dao;
 
 import br.com.alura.comex.model.Cliente;
+import br.com.alura.comex.vo.RelatorioClientesMaisLucrativosVo;
 import br.com.alura.comex.vo.RelatorioQuantidadePedidosPorClienteVo;
 
 import javax.persistence.EntityManager;
@@ -53,6 +54,20 @@ public class ClienteDAO {
                 "GROUP BY cliente.nome ";
 
         return em.createQuery(jpql, RelatorioQuantidadePedidosPorClienteVo.class)
+                .getResultList();
+    }
+
+    public List<RelatorioClientesMaisLucrativosVo> getRelatorioClientesMaisLucrativos() {
+
+        String jpql = "SELECT new br.com.alura.comex.vo.RelatorioClientesMaisLucrativosVo(" +
+                "cliente)" +
+                "FROM Cliente cliente" +
+                "JOIN cliente.listaDePedidos pedidos" +
+                "GROUP BY cliente.nome " +
+                "ORDER BY pedidos.valorTotal DESC";
+
+        return em.createQuery(jpql, RelatorioClientesMaisLucrativosVo.class)
+                .setMaxResults(3)
                 .getResultList();
     }
 

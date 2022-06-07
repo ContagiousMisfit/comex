@@ -42,7 +42,7 @@ public class Pedido {
     public void adicionarItem(ItemDePedido item) {
         item.setPedido(this);
         this.getItens().add(item);
-        this.valorTotal = this.valorTotal.add(item.getValor());
+        this.valorTotal = this.valorTotal.add(item.getValor().subtract(this.getDesconto()));
     }
 
     public List<ItemDePedido> getItens() {

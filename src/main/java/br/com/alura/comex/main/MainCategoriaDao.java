@@ -7,7 +7,6 @@ import br.com.alura.comex.util.JPAUtil;
 
 import javax.persistence.EntityManager;
 
-
 public class MainCategoriaDao {
 
     public static void main(String[] args) {

@@ -1,6 +1,8 @@
 package br.com.alura.comex.dao;
 
 import br.com.alura.comex.model.Produto;
+import br.com.alura.comex.vo.RelatorioProdutosMaisVendidosVo;
+import br.com.alura.comex.vo.RelatorioQuantidadePedidosPorClienteVo;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -27,6 +29,18 @@ public class ProdutoDAO {
         String queryJPQL = "SELECT produto FROM Produto produto WHERE produto.quantidadeEmEstoque = :quantidadeEmEstoque";
         return em.createQuery(queryJPQL, Produto.class)
                 .setParameter("quantidadeEmEstoque", 0)
+                .getResultList();
+    }
+
+    public List<RelatorioProdutosMaisVendidosVo> getProdutosMaisVendidos() {
+
+        String jpql = "SELECT new br.com.alura.comex.vo.RelatorioProdutosMaisVendidosVo(produto)" +
+                "FROM ItemDePedido item" +
+                "JOIN item.produto produto" +
+                "WHERE item.quantidade > 3" +
+                "GROUP BY item.quantidade DESC";
+
+        return em.createQuery(jpql, RelatorioProdutosMaisVendidosVo.class)
                 .getResultList();
     }
 
