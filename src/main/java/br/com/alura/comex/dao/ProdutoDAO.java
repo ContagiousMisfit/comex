@@ -2,7 +2,7 @@ package br.com.alura.comex.dao;
 
 import br.com.alura.comex.model.Produto;
 import br.com.alura.comex.vo.RelatorioProdutosMaisVendidosVo;
-import br.com.alura.comex.vo.RelatorioQuantidadePedidosPorClienteVo;
+import br.com.alura.comex.vo.RelatorioProdutosNuncaVendidosVo;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -34,14 +34,26 @@ public class ProdutoDAO {
 
     public List<RelatorioProdutosMaisVendidosVo> getProdutosMaisVendidos() {
 
-        String jpql = "SELECT new br.com.alura.comex.vo.RelatorioProdutosMaisVendidosVo(produto)" +
-                "FROM ItemDePedido item" +
-                "JOIN item.produto produto" +
-                "WHERE item.quantidade > 3" +
-                "GROUP BY item.quantidade DESC";
+        String jpql = "SELECT new br.com.alura.comex.vo.RelatorioProdutosMaisVendidosVo(produto) " +
+                "FROM ItemDePedido item " +
+                "JOIN item.produto produto " +
+                "WHERE (item.quantidade > 3) " +
+                "GROUP BY item.quantidade " +
+                "ORDER BY item.quantidade DESC ";
 
         return em.createQuery(jpql, RelatorioProdutosMaisVendidosVo.class)
                 .getResultList();
     }
+    public List<RelatorioProdutosNuncaVendidosVo> getProdutosNuncaVendidos() {
 
+        String jpql = "SELECT new br.com.alura.comex.vo.RelatorioProdutosNuncaVendidosVo(produto) " +
+                "FROM ItemDePedido item " +
+                "JOIN item.produto produto " +
+                "WHERE item.quantidade > 3 " +
+                "GROUP BY item.quantidade DESC";
+
+        return em.createQuery(jpql, RelatorioProdutosNuncaVendidosVo.class)
+                .getResultList();
+
+    }
 }

@@ -1,6 +1,6 @@
 package br.com.alura.comex.vo;
 
-import br.com.alura.comex.model.Cliente;
+import br.com.alura.comex.model.Produto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,8 +11,8 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class RelatorioClientesMaisLucrativosVo {
+public class RelatorioProdutosNuncaVendidosVo {
 
-    private List<Cliente> clientesMaisLucrativos = new ArrayList<>();
+    public List<Produto> produtosNuncaVendidos = new ArrayList<>();
 
 }

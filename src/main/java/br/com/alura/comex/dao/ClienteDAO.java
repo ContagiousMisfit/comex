@@ -47,10 +47,10 @@ public class ClienteDAO {
     public List<RelatorioQuantidadePedidosPorClienteVo> getRelatorioPedidosPorCliente() {
 
         String jpql = "SELECT new br.com.alura.comex.vo.RelatorioQuantidadePedidosPorClienteVo(" +
-                "cliente.nome," +
-                "COUNT(cliente))" +
-                "FROM Pedido pedido" +
-                "JOIN pedido.cliente cliente" +
+                "cliente.nome, " +
+                "COUNT(cliente)) " +
+                "FROM Pedido pedido " +
+                "JOIN pedido.cliente cliente " +
                 "GROUP BY cliente.nome ";
 
         return em.createQuery(jpql, RelatorioQuantidadePedidosPorClienteVo.class)
@@ -60,9 +60,9 @@ public class ClienteDAO {
     public List<RelatorioClientesMaisLucrativosVo> getRelatorioClientesMaisLucrativos() {
 
         String jpql = "SELECT new br.com.alura.comex.vo.RelatorioClientesMaisLucrativosVo(" +
-                "cliente)" +
-                "FROM Cliente cliente" +
-                "JOIN cliente.listaDePedidos pedidos" +
+                "cliente) " +
+                "FROM Cliente cliente " +
+                "JOIN cliente.listaDePedidos pedidos " +
                 "GROUP BY cliente.nome " +
                 "ORDER BY pedidos.valorTotal DESC";
 
