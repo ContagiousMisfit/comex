@@ -1,0 +1,17 @@
+package br.com.alura.comex.controller.form.atualizacao;
+
+import br.com.alura.comex.model.StatusCategoria;
+import com.sun.istack.NotNull;
+import lombok.Data;
+import org.hibernate.validator.constraints.Length;
+
+@Data
+public class AtualizarCategoriaForm {
+
+    @NotNull
+    @Length(min=2)
+    String nome;
+
+    StatusCategoria status;
+
+}
