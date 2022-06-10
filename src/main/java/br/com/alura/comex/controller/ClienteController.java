@@ -1,16 +1,10 @@
 package br.com.alura.comex.controller;
 
-import br.com.alura.comex.controller.dto.CategoriaDto;
 import br.com.alura.comex.controller.dto.ClienteDto;
-import br.com.alura.comex.controller.form.atualizacao.AtualizarCategoriaForm;
 import br.com.alura.comex.controller.form.atualizacao.AtualizarClienteForm;
-import br.com.alura.comex.controller.form.cadastro.CategoriaForm;
 import br.com.alura.comex.controller.form.cadastro.ClienteForm;
-import br.com.alura.comex.model.Categoria;
 import br.com.alura.comex.model.Cliente;
-import br.com.alura.comex.repository.CategoriaRepository;
 import br.com.alura.comex.repository.ClienteRepository;
-import ch.qos.logback.core.net.server.Client;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/clientes")
+@RequestMapping("/cliente")
 public class ClienteController {
 
     @Autowired
@@ -42,7 +36,7 @@ public class ClienteController {
         return ResponseEntity.notFound().build();
     }
 
-    @PostMapping
+    @PostMapping("/cadastrar")
     @Transactional
     public ResponseEntity<ClienteDto> cadastrar(@RequestBody @Valid ClienteForm form, UriComponentsBuilder uriBuilder) {
         return ResponseEntity.notFound().build();

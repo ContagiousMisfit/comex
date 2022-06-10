@@ -1,6 +1,10 @@
 package br.com.alura.comex.controller.form.atualizacao;
 
+import br.com.alura.comex.model.Categoria;
+import br.com.alura.comex.model.Produto;
 import br.com.alura.comex.model.StatusCategoria;
+import br.com.alura.comex.repository.CategoriaRepository;
+import br.com.alura.comex.repository.ProdutoRepository;
 import com.sun.istack.NotNull;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
@@ -9,9 +13,13 @@ import org.hibernate.validator.constraints.Length;
 public class AtualizarCategoriaForm {
 
     @NotNull
-    @Length(min=2)
+    @Length(min = 2)
     String nome;
 
-    StatusCategoria status;
+    public Categoria atualizar(Long id, CategoriaRepository categoriaRepository) {
+        Categoria categoria = categoriaRepository.getReferenceById(id);
+        categoria.setNome(this.nome);
+        return categoria;
+    }
 
 }

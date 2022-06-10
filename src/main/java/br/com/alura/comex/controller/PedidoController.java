@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/pedidos")
+@RequestMapping("/pedido")
 public class PedidoController {
 
     @Autowired
@@ -35,7 +35,7 @@ public class PedidoController {
         return ResponseEntity.notFound().build();
     }
 
-    @PostMapping
+    @PostMapping("/cadastrar")
     @Transactional
     public ResponseEntity<PedidoDto> cadastrar(@RequestBody @Valid ClienteForm clienteForm, UriComponentsBuilder uriBuilder) {
         return ResponseEntity.notFound().build();
