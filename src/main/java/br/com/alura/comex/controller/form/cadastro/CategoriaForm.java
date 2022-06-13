@@ -2,15 +2,15 @@ package br.com.alura.comex.controller.form.cadastro;
 
 import br.com.alura.comex.model.Categoria;
 import br.com.alura.comex.model.StatusCategoria;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Data
+@AllArgsConstructor
 public class CategoriaForm {
-
-    //programe voltado à interface/especificação e não à uma implementação
     @NotNull
     @Size(min = 2)
     private String nome;

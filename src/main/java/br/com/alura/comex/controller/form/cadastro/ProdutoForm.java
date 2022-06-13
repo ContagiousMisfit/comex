@@ -3,14 +3,18 @@ package br.com.alura.comex.controller.form.cadastro;
 import br.com.alura.comex.model.Categoria;
 import br.com.alura.comex.model.Produto;
 import br.com.alura.comex.repository.CategoriaRepository;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.ToString;
 
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.util.Optional;
-@ToString
-public class ProdutoForm {
 
+@AllArgsConstructor
+@ToString
+@Data
+public class ProdutoForm {
 
     @NotNull
     @Size(min = 2)
