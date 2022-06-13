@@ -19,7 +19,7 @@ public class ClienteDto {
 
     private final EnderecoDto endereco;
 
-    private List<PedidoDto> listaDePedidos;
+    private List<DetalhesDoPedidoDto> listaDePedidos;
 
     public ClienteDto(Cliente cliente) {
         this.id = cliente.getId();
@@ -27,7 +27,7 @@ public class ClienteDto {
         this.cpf = cliente.getCpf();
         this.telefone = cliente.getTelefone();
         this.endereco = new EnderecoDto(cliente.getEndereco());
-        this.listaDePedidos.addAll(cliente.getListaDePedidos().stream().map(PedidoDto::new).collect(Collectors.toList()));
+        this.listaDePedidos.addAll(cliente.getListaDePedidos().stream().map(DetalhesDoPedidoDto::new).collect(Collectors.toList()));
     }
 
     public static List<ClienteDto> converter(List<Cliente> clientes) {

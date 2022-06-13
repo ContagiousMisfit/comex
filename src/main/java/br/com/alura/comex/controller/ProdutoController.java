@@ -1,6 +1,5 @@
 package br.com.alura.comex.controller;
 
-import br.com.alura.comex.controller.dto.CategoriaDto;
 import br.com.alura.comex.controller.dto.ProdutoDto;
 import br.com.alura.comex.controller.form.atualizacao.AtualizarProdutoForm;
 import br.com.alura.comex.controller.form.cadastro.ProdutoForm;
@@ -45,10 +44,12 @@ public class ProdutoController {
     @PostMapping
     @Transactional
     public ResponseEntity<ProdutoDto> cadastrar(@RequestBody @Valid ProdutoForm form, UriComponentsBuilder uriBuilder) {
+        System.out.println(form);
+
         Produto produto = form.converter(categoriaRepository);
         produtoRepository.save(produto);
 
-        URI uri = uriBuilder.path("/api/produto/{id}").buildAndExpand(produto.getId()).toUri();
+        URI uri = uriBuilder.path("/produto/{id}").buildAndExpand(produto.getId()).toUri();
         return ResponseEntity.created(uri).body(new ProdutoDto(produto));
     }
 

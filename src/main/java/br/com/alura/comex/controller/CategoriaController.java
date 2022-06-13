@@ -1,12 +1,10 @@
 package br.com.alura.comex.controller;
 
 import br.com.alura.comex.controller.dto.CategoriaDto;
-import br.com.alura.comex.controller.dto.PedidoDto;
-import br.com.alura.comex.controller.dto.ProdutoDto;
+import br.com.alura.comex.controller.dto.DetalhesDoPedidoDto;
 import br.com.alura.comex.controller.form.atualizacao.AtualizarCategoriaForm;
 import br.com.alura.comex.controller.form.cadastro.CategoriaForm;
 import br.com.alura.comex.model.Categoria;
-import br.com.alura.comex.model.Produto;
 import br.com.alura.comex.repository.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -46,7 +44,7 @@ public class CategoriaController {
         Categoria categoria = form.converter();
         categoriaRepository.save(categoria);
 
-        URI uri = uriBuilder.path("/api/categorias/{id}").buildAndExpand(categoria.getId()).toUri();
+        URI uri = uriBuilder.path("/categorias/{id}").buildAndExpand(categoria.getId()).toUri();
         return ResponseEntity.created(uri).body(new CategoriaDto(categoria));
     }
 
@@ -73,7 +71,7 @@ public class CategoriaController {
     }
 
     @GetMapping("/produtos")
-    public List<PedidoDto> listarPedidosPorCategoria() {
+    public List<DetalhesDoPedidoDto> listarPedidosPorCategoria() {
         return null;
     }
 

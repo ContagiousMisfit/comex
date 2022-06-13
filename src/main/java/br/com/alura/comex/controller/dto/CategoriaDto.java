@@ -5,7 +5,6 @@ import br.com.alura.comex.model.StatusCategoria;
 import lombok.Data;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Data
 public class CategoriaDto {
@@ -23,7 +22,7 @@ public class CategoriaDto {
     }
 
     public static List<CategoriaDto> converter(List<Categoria> categorias) {
-        return categorias.stream().map(CategoriaDto::new).collect(Collectors.toList());
+        return categorias.stream().map(CategoriaDto::new).toList();
     }
 
 }

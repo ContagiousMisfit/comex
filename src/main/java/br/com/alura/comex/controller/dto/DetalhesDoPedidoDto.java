@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Data
-public class PedidoDto {
+public class DetalhesDoPedidoDto {
 
     private final Long id;
 
@@ -24,7 +24,7 @@ public class PedidoDto {
 
     private final TipoDescontoPedido tipoDesconto;
 
-    public PedidoDto(Pedido pedido) {
+    public DetalhesDoPedidoDto(Pedido pedido) {
         this.id = pedido.getId();
         this.data = pedido.getData();
         this.valorTotal = pedido.getValorTotal();
@@ -34,8 +34,8 @@ public class PedidoDto {
 
     }
 
-    public static List<PedidoDto> converter(List<Pedido> pedidos) {
-        return pedidos.stream().map(PedidoDto::new).collect(Collectors.toList());
+    public static List<DetalhesDoPedidoDto> converter(List<Pedido> pedidos) {
+        return pedidos.stream().map(DetalhesDoPedidoDto::new).collect(Collectors.toList());
     }
 
 }

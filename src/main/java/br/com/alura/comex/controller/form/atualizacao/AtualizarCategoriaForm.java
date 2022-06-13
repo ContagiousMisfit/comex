@@ -1,10 +1,7 @@
 package br.com.alura.comex.controller.form.atualizacao;
 
 import br.com.alura.comex.model.Categoria;
-import br.com.alura.comex.model.Produto;
-import br.com.alura.comex.model.StatusCategoria;
 import br.com.alura.comex.repository.CategoriaRepository;
-import br.com.alura.comex.repository.ProdutoRepository;
 import com.sun.istack.NotNull;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;

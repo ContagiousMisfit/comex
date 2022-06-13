@@ -2,21 +2,21 @@ package br.com.alura.comex.controller.form.cadastro;
 
 import br.com.alura.comex.model.Categoria;
 import br.com.alura.comex.model.StatusCategoria;
-import com.sun.istack.NotNull;
 import lombok.Data;
-import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Data
 public class CategoriaForm {
 
+    //programe voltado à interface/especificação e não à uma implementação
     @NotNull
-    @Length(min = 2)
-    String nome;
-
-    StatusCategoria status;
+    @Size(min = 2)
+    private String nome;
 
     public Categoria converter() {
-        return new Categoria(nome, status);
+        return new Categoria(nome, StatusCategoria.ATIVA);
     }
 
 }
