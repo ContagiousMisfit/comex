@@ -2,11 +2,15 @@ package br.com.alura.comex.controller.dto;
 
 import br.com.alura.comex.model.Categoria;
 import br.com.alura.comex.model.StatusCategoria;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class CategoriaDto {
 
     private Long id;

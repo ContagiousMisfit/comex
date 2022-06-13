@@ -2,6 +2,7 @@ package br.com.alura.comex.controller;
 
 import br.com.alura.comex.controller.dto.CategoriaDto;
 import br.com.alura.comex.controller.dto.DetalhesDoPedidoDto;
+import br.com.alura.comex.controller.dto.projections.PedidosPorCategoriaProjection;
 import br.com.alura.comex.controller.form.atualizacao.AtualizarCategoriaForm;
 import br.com.alura.comex.controller.form.cadastro.CategoriaForm;
 import br.com.alura.comex.model.Categoria;
@@ -70,9 +71,11 @@ public class CategoriaController {
         return ResponseEntity.notFound().build();
     }
 
-    @GetMapping("/produtos")
-    public List<DetalhesDoPedidoDto> listarPedidosPorCategoria() {
-        return null;
+    @GetMapping("/pedidos")
+    public List<PedidosPorCategoriaProjection> listarPedidosPorCategoria() {
+        List<PedidosPorCategoriaProjection> listaDePedidos = categoriaRepository.findPedidosPorCategoria();
+        listaDePedidos.forEach(System.out::println);
+        return listaDePedidos;
     }
 
     @PatchMapping("/{id}")

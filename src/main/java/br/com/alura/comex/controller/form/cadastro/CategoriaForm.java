@@ -4,12 +4,14 @@ import br.com.alura.comex.model.Categoria;
 import br.com.alura.comex.model.StatusCategoria;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class CategoriaForm {
     @NotNull
     @Size(min = 2)

@@ -7,6 +7,10 @@ import br.com.alura.comex.model.Produto;
 import br.com.alura.comex.repository.CategoriaRepository;
 import br.com.alura.comex.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -28,9 +32,11 @@ public class ProdutoController {
     private CategoriaRepository categoriaRepository;
 
     @GetMapping
-    public List<ProdutoDto> listarTodos() {
-        List<Produto> produtos = produtoRepository.findAll();
-        return ProdutoDto.converter(produtos);
+    public ResponseEntity<Page<ProdutoDto>> listarTodos() {
+        Pageable pageable = PageRequest.of(0, 5, Sort.by(Sort.Direction.ASC, "nome"));
+        Page<Produto> produtos = produtoRepository.findAll(pageable);
+        Page<ProdutoDto> produtosDto = ProdutoDto.converterPagina(produtos);
+        return ResponseEntity.ok().body(produtosDto);
     }
 
     @GetMapping("/{id}")
