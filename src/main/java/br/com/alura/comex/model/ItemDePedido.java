@@ -28,6 +28,8 @@ public class ItemDePedido {
     @ManyToOne
     private Pedido pedido;
     private BigDecimal desconto;
+
+    @Enumerated(EnumType.STRING)
     private TipoDescontoItemPedido tipoDesconto;
 
     public ItemDePedido(BigDecimal precoUnitario, long quantidade, Produto produto, Pedido pedido, BigDecimal desconto, TipoDescontoItemPedido tipoDesconto) {

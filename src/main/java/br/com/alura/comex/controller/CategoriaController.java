@@ -74,7 +74,6 @@ public class CategoriaController {
     @GetMapping("/pedidos")
     public List<PedidosPorCategoriaProjection> listarPedidosPorCategoria() {
         List<PedidosPorCategoriaProjection> listaDePedidos = categoriaRepository.findPedidosPorCategoria();
-        listaDePedidos.forEach(System.out::println);
         return listaDePedidos;
     }
 
