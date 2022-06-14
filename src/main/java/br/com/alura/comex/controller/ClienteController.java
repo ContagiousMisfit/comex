@@ -6,6 +6,10 @@ import br.com.alura.comex.controller.form.cadastro.ClienteForm;
 import br.com.alura.comex.model.Cliente;
 import br.com.alura.comex.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -24,9 +28,11 @@ public class ClienteController {
     private ClienteRepository clienteRepository;
 
     @GetMapping
-    public List<ClienteDto> listarTodos() {
-        List<Cliente> clientes = clienteRepository.findAll();
-        return ClienteDto.converter(clientes);
+    public ResponseEntity<Page<ClienteDto>> listarTodos() {
+        Pageable pageable = PageRequest.of(0, 5, Sort.by(Sort.Direction.ASC, "nome"));
+        Page<Cliente> clientes = clienteRepository.findAll(pageable);
+        Page<ClienteDto> clienteDtos = ClienteDto.converterPagina(clientes);
+        return ResponseEntity.ok().body(clienteDtos);
     }
 
     @GetMapping("/{id}")

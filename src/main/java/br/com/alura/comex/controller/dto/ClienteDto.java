@@ -2,6 +2,7 @@ package br.com.alura.comex.controller.dto;
 
 import br.com.alura.comex.model.Cliente;
 import lombok.Data;
+import org.springframework.data.domain.Page;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,15 +11,15 @@ import java.util.stream.Collectors;
 @Data
 public class ClienteDto {
 
-    private final Long id;
+    private Long id;
 
-    private final String nome;
+    private String nome;
 
-    private final String cpf;
+    private String cpf;
 
-    private final String telefone;
+    private String telefone;
 
-    private final EnderecoDto endereco;
+    private String local;
 
     private List<DetalhesDoPedidoDto> listaDePedidos = new ArrayList<>();
 
@@ -27,12 +28,15 @@ public class ClienteDto {
         this.nome = cliente.getNome();
         this.cpf = cliente.getCpf();
         this.telefone = cliente.getTelefone();
-        this.endereco = new EnderecoDto(cliente.getEndereco());
-        this.listaDePedidos.addAll(cliente.getListaDePedidos().stream().map(DetalhesDoPedidoDto::new).toList());
+        this.local = cliente.getEndereco().getCidade() + cliente.getEndereco().getEstado();
     }
 
     public static List<ClienteDto> converter(List<Cliente> clientes) {
         return clientes.stream().map(ClienteDto::new).collect(Collectors.toList());
+    }
+
+    public static Page<ClienteDto> converterPagina(Page<Cliente> clientes) {
+        return clientes.map(ClienteDto::new);
     }
 
 
