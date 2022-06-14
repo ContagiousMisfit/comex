@@ -26,10 +26,10 @@ public class ProdutoDto {
     public ProdutoDto(Produto produto) {
         this.id = produto.getId();
         this.nome = produto.getNome();
-        this.descricao = produto.getDescricao();
-        this.precoUnitario = produto.getPrecoUnitario();
-        this.quantidadeEmEstoque = produto.getQuantidadeEmEstoque();
         this.categoria = new CategoriaDto(produto.getCategoria());
+        this.descricao = produto.getDescricao();
+        this.quantidadeEmEstoque = produto.getQuantidadeEmEstoque();
+        this.precoUnitario = produto.getPrecoUnitario();
     }
 
     public static List<ProdutoDto> converter(List<Produto> produtos) {

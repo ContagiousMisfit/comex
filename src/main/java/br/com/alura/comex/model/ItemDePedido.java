@@ -1,5 +1,6 @@
 package br.com.alura.comex.model;
 
+import br.com.alura.comex.controller.dto.ProdutoDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -39,10 +40,6 @@ public class ItemDePedido {
         this.pedido = pedido;
         this.desconto = desconto;
         this.tipoDesconto = tipoDesconto;
-    }
-
-    public BigDecimal getValor() {
-        return precoUnitario.multiply(new BigDecimal(quantidade));
     }
 
 }

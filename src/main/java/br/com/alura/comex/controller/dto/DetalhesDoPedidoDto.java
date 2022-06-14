@@ -1,37 +1,36 @@
 package br.com.alura.comex.controller.dto;
 
+import br.com.alura.comex.model.ItemDePedido;
 import br.com.alura.comex.model.Pedido;
 import br.com.alura.comex.model.TipoDescontoPedido;
 import lombok.Data;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Data
 public class DetalhesDoPedidoDto {
 
-    private final Long id;
+    private  LocalDateTime data;
 
-    private final LocalDateTime data;
+    private BigDecimal valorTotal;
 
-    private BigDecimal valorTotal = BigDecimal.ZERO;
+    private BigDecimal desconto;
 
-    private final ClienteDto cliente;
+    private List<ItemDePedidoDto> itemDePedidoDtos;
 
-    private final BigDecimal desconto;
-
-    private final TipoDescontoPedido tipoDesconto;
+    private ClienteDto cliente;
 
     public DetalhesDoPedidoDto(Pedido pedido) {
-        this.id = pedido.getId();
         this.data = pedido.getData();
         this.valorTotal = pedido.getValorTotal();
-        this.cliente = new ClienteDto(pedido.getCliente());
         this.desconto = pedido.getDesconto();
-        this.tipoDesconto = pedido.getTipoDesconto();
-
+        this.itemDePedidoDtos = new ArrayList<>();
+        this.itemDePedidoDtos.addAll(pedido.getItens().stream().map(ItemDePedidoDto::new).toList());
+        this.cliente = new ClienteDto(pedido.getCliente());
     }
 
     public static List<DetalhesDoPedidoDto> converter(List<Pedido> pedidos) {
