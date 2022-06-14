@@ -12,6 +12,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,7 +40,11 @@ public class ClienteController {
     @PostMapping
     @Transactional
     public ResponseEntity<ClienteDto> cadastrar(@RequestBody @Valid ClienteForm form, UriComponentsBuilder uriBuilder) {
-        return ResponseEntity.notFound().build();
+        Cliente cliente = form.converter();
+        clienteRepository.save(cliente);
+
+        URI uri = uriBuilder.path("/clientes/{id}").buildAndExpand(cliente.getId()).toUri();
+        return ResponseEntity.created(uri).body(new ClienteDto(cliente));
     }
 
     @PutMapping("/{id}")

@@ -3,6 +3,7 @@ package br.com.alura.comex.controller.dto;
 import br.com.alura.comex.model.Cliente;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,7 +20,7 @@ public class ClienteDto {
 
     private final EnderecoDto endereco;
 
-    private List<DetalhesDoPedidoDto> listaDePedidos;
+    private List<DetalhesDoPedidoDto> listaDePedidos = new ArrayList<>();
 
     public ClienteDto(Cliente cliente) {
         this.id = cliente.getId();
@@ -27,7 +28,7 @@ public class ClienteDto {
         this.cpf = cliente.getCpf();
         this.telefone = cliente.getTelefone();
         this.endereco = new EnderecoDto(cliente.getEndereco());
-        this.listaDePedidos.addAll(cliente.getListaDePedidos().stream().map(DetalhesDoPedidoDto::new).collect(Collectors.toList()));
+        this.listaDePedidos.addAll(cliente.getListaDePedidos().stream().map(DetalhesDoPedidoDto::new).toList());
     }
 
     public static List<ClienteDto> converter(List<Cliente> clientes) {

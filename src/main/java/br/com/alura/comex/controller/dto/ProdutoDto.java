@@ -6,7 +6,6 @@ import org.springframework.data.domain.Page;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Data
 public class ProdutoDto {
@@ -35,6 +34,7 @@ public class ProdutoDto {
     public static List<ProdutoDto> converter(List<Produto> produtos) {
         return produtos.stream().map(ProdutoDto::new).toList();
     }
+
     public static Page<ProdutoDto> converterPagina(Page<Produto> produtos) {
         return produtos.map(ProdutoDto::new);
     }

@@ -7,7 +7,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.ToString;
 
-import javax.validation.constraints.*;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.util.Optional;
 
@@ -23,9 +26,11 @@ public class ProdutoForm {
     private String descricao;
 
     @DecimalMin(value = "0.0", inclusive = false)
+    @NotNull
     private BigDecimal precoUnitario;
 
     @Min(value = 0)
+    @NotNull
     private long quantidadeEmEstoque;
 
     @NotNull

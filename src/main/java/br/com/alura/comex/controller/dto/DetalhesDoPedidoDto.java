@@ -1,8 +1,6 @@
 package br.com.alura.comex.controller.dto;
 
-import br.com.alura.comex.model.ItemDePedido;
 import br.com.alura.comex.model.Pedido;
-import br.com.alura.comex.model.TipoDescontoPedido;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -14,7 +12,7 @@ import java.util.stream.Collectors;
 @Data
 public class DetalhesDoPedidoDto {
 
-    private  LocalDateTime data;
+    private LocalDateTime data;
 
     private BigDecimal valorTotal;
 
@@ -22,7 +20,9 @@ public class DetalhesDoPedidoDto {
 
     private List<ItemDePedidoDto> itemDePedidoDtos;
 
-    private ClienteDto cliente;
+    private Long idCliente;
+
+    private String nomeCliente;
 
     public DetalhesDoPedidoDto(Pedido pedido) {
         this.data = pedido.getData();
@@ -30,7 +30,8 @@ public class DetalhesDoPedidoDto {
         this.desconto = pedido.getDesconto();
         this.itemDePedidoDtos = new ArrayList<>();
         this.itemDePedidoDtos.addAll(pedido.getItens().stream().map(ItemDePedidoDto::new).toList());
-        this.cliente = new ClienteDto(pedido.getCliente());
+        this.idCliente = pedido.getCliente().getId();
+        this.nomeCliente = pedido.getCliente().getNome();
     }
 
     public static List<DetalhesDoPedidoDto> converter(List<Pedido> pedidos) {

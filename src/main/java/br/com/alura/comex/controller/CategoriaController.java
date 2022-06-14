@@ -1,7 +1,6 @@
 package br.com.alura.comex.controller;
 
 import br.com.alura.comex.controller.dto.CategoriaDto;
-import br.com.alura.comex.controller.dto.DetalhesDoPedidoDto;
 import br.com.alura.comex.controller.dto.projections.PedidosPorCategoriaProjection;
 import br.com.alura.comex.controller.form.atualizacao.AtualizarCategoriaForm;
 import br.com.alura.comex.controller.form.cadastro.CategoriaForm;

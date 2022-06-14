@@ -1,7 +1,6 @@
 package br.com.alura.comex.controller.dto;
 
 import br.com.alura.comex.model.ItemDePedido;
-import br.com.alura.comex.model.Pedido;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,13 +14,16 @@ public class ItemDePedidoDto {
 
     private Long id;
 
-    private ProdutoDto produtoDto;
+    private String nomeProduto;
+
+    private String categoriaProduto;
     private long quantidade;
     private BigDecimal precoUnitario;
 
     public ItemDePedidoDto(ItemDePedido itemDePedido) {
         this.id = itemDePedido.getId();
-        this.produtoDto = new ProdutoDto(itemDePedido.getProduto());
+        this.nomeProduto = itemDePedido.getProduto().getNome();
+        this.categoriaProduto = itemDePedido.getProduto().getCategoria().getNome();
         this.quantidade = itemDePedido.getQuantidade();
         this.precoUnitario = itemDePedido.getPrecoUnitario();
     }
