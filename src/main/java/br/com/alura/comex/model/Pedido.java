@@ -39,16 +39,16 @@ public class Pedido {
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
     private List<ItemDePedido> listaDePedidos;
 
-    public List<ItemDePedido> getItens() {
-        return listaDePedidos;
-    }
-
     public Pedido(LocalDateTime data, Cliente cliente, BigDecimal desconto, TipoDescontoPedido tipoDesconto, List<ItemDePedido> listaDePedidos) {
         this.data = data;
         this.cliente = cliente;
         this.desconto = desconto;
         this.tipoDesconto = tipoDesconto;
         this.listaDePedidos = listaDePedidos;
+    }
+
+    public List<ItemDePedido> getItens() {
+        return listaDePedidos;
     }
 
     public long getQuantidadeItens() {

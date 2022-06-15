@@ -1,7 +1,6 @@
 package br.com.alura.comex.model.utils;
 
 import br.com.alura.comex.model.ItemDePedido;
-import br.com.alura.comex.model.Pedido;
 import br.com.alura.comex.model.Produto;
 import br.com.alura.comex.model.TipoDescontoItemPedido;
 
@@ -36,8 +35,7 @@ public class ItemDePedidoBuilder {
         if (quantidade > 10) {
             this.tipoDesconto = TipoDescontoItemPedido.QUANTIDADE;
             this.desconto = BigDecimal.TEN;
-        }
-        else {
+        } else {
             this.tipoDesconto = TipoDescontoItemPedido.NENHUM;
             this.desconto = BigDecimal.ZERO;
         }

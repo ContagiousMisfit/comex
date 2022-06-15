@@ -1,8 +1,9 @@
 package br.com.alura.comex.model.utils;
 
-import br.com.alura.comex.model.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import br.com.alura.comex.model.Cliente;
+import br.com.alura.comex.model.ItemDePedido;
+import br.com.alura.comex.model.Pedido;
+import br.com.alura.comex.model.TipoDescontoPedido;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -54,8 +55,7 @@ public class PedidoBuilder {
         if (cliente.getListaDePedidos().size() > 5) {
             this.tipoDesconto = TipoDescontoPedido.FIDELIDADE;
             this.desconto = new BigDecimal(0.5);
-        }
-        else {
+        } else {
             this.tipoDesconto = TipoDescontoPedido.NENHUM;
             this.desconto = BigDecimal.ZERO;
         }
