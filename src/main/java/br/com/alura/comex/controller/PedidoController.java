@@ -1,11 +1,18 @@
 package br.com.alura.comex.controller;
 
+import br.com.alura.comex.controller.dto.ClienteDto;
 import br.com.alura.comex.controller.dto.DetalhesDoPedidoDto;
+import br.com.alura.comex.controller.dto.PedidoDto;
 import br.com.alura.comex.controller.form.atualizacao.AtualizarPedidoForm;
 import br.com.alura.comex.controller.form.cadastro.PedidoForm;
+import br.com.alura.comex.model.Cliente;
 import br.com.alura.comex.model.Pedido;
 import br.com.alura.comex.repository.PedidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -23,10 +30,14 @@ public class PedidoController {
     @Autowired
     private PedidoRepository pedidoRepository;
 
-    public List<DetalhesDoPedidoDto> listarTodos() {
-        List<Pedido> pedidos = pedidoRepository.findAll();
-        return DetalhesDoPedidoDto.converter(pedidos);
+    @GetMapping
+    public ResponseEntity<Page<PedidoDto>> listarTodos() {
+        Pageable pageable = PageRequest.of(0, 5,Sort.by("data").descending().and(Sort.by("cliente").ascending()));
+        Page<Pedido> pedidos = pedidoRepository.findAll(pageable);
+        Page<PedidoDto> pedidoDtos = PedidoDto.converterPagina(pedidos);
+        return ResponseEntity.ok().body(pedidoDtos);
     }
+
 
     @GetMapping("/{id}")
     public ResponseEntity<DetalhesDoPedidoDto> detalhar(@PathVariable Long id) {

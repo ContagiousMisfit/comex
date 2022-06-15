@@ -48,4 +48,25 @@ public class Pedido {
     public List<ItemDePedido> getItens() {
         return listaDePedidos;
     }
+
+    public long getQuantidadeItens() {
+        return this.listaDePedidos.stream()
+                .mapToLong(ItemDePedido::getQuantidade)
+                .sum();
+    }
+
+    public BigDecimal getValorTotalDescontos(){
+        return this.listaDePedidos.stream()
+                .map(ItemDePedido::getDesconto)
+                .reduce(BigDecimal.ZERO, BigDecimal::add)
+                .add(this.desconto);
+    }
+
+    public BigDecimal getValorTotalPedido() {
+        return this.listaDePedidos.stream()
+                .map(ItemDePedido::getValorTotal)
+                .reduce(BigDecimal.ZERO, BigDecimal::add)
+                .subtract(this.getValorTotalDescontos());
+    }
+
 }

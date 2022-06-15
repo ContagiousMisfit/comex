@@ -2,13 +2,14 @@ package br.com.alura.comex.controller.dto;
 
 import br.com.alura.comex.model.Cliente;
 import lombok.Data;
+import lombok.Getter;
 import org.springframework.data.domain.Page;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Data
+@Getter
 public class ClienteDto {
 
     private Long id;
@@ -38,6 +39,5 @@ public class ClienteDto {
     public static Page<ClienteDto> converterPagina(Page<Cliente> clientes) {
         return clientes.map(ClienteDto::new);
     }
-
 
 }

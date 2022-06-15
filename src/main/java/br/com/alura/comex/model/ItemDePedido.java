@@ -41,4 +41,8 @@ public class ItemDePedido {
         this.tipoDesconto = tipoDesconto;
     }
 
+    public BigDecimal getValorTotal(){
+        return this.precoUnitario.multiply(new BigDecimal(this.quantidade));
+    }
+
 }
