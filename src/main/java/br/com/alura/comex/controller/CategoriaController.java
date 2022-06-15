@@ -3,6 +3,7 @@ package br.com.alura.comex.controller;
 import br.com.alura.comex.controller.dto.CategoriaDto;
 import br.com.alura.comex.controller.dto.projections.PedidosPorCategoriaProjection;
 import br.com.alura.comex.controller.form.atualizacao.AtualizarCategoriaForm;
+import br.com.alura.comex.controller.form.atualizacao.AtualizarStatusCategoriaForm;
 import br.com.alura.comex.controller.form.cadastro.CategoriaForm;
 import br.com.alura.comex.model.Categoria;
 import br.com.alura.comex.repository.CategoriaRepository;
@@ -77,7 +78,13 @@ public class CategoriaController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<CategoriaDto> atualizarCategoria(@PathVariable Long id) {
+    @Transactional
+    public ResponseEntity<CategoriaDto> atualizarStatusCategoria(@PathVariable Long id, @Valid AtualizarStatusCategoriaForm form) {
+        Optional<Categoria> optional = categoriaRepository.findById(id);
+        if (optional.isPresent()) {
+            Categoria categoria = form.atualizarStatus(id, categoriaRepository);
+            return ResponseEntity.ok(new CategoriaDto(categoria));
+        }
         return ResponseEntity.notFound().build();
     }
 
