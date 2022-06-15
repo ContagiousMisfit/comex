@@ -41,7 +41,15 @@ public class ItemDePedido {
         this.tipoDesconto = tipoDesconto;
     }
 
-    public BigDecimal getValorTotal(){
+    public ItemDePedido(BigDecimal precoUnitario, long quantidade, Produto produto, BigDecimal desconto, TipoDescontoItemPedido tipoDesconto) {
+        this.precoUnitario = precoUnitario;
+        this.quantidade = quantidade;
+        this.produto = produto;
+        this.desconto = desconto;
+        this.tipoDesconto = tipoDesconto;
+    }
+
+    public BigDecimal getValorTotal() {
         return this.precoUnitario.multiply(new BigDecimal(this.quantidade));
     }
 

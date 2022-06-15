@@ -17,7 +17,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.net.URI;
-import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -62,6 +61,11 @@ public class ClienteController {
     @DeleteMapping("/{id}")
     @Transactional
     public ResponseEntity<?> deletar(@PathVariable Long id) {
+        Optional<Cliente> optional = clienteRepository.findById(id);
+        if (optional.isPresent()) {
+            clienteRepository.deleteById(id);
+            return ResponseEntity.ok().build();
+        }
         return ResponseEntity.notFound().build();
     }
 

@@ -1,7 +1,6 @@
 package br.com.alura.comex.controller.dto;
 
 import br.com.alura.comex.model.Cliente;
-import lombok.Data;
 import lombok.Getter;
 import org.springframework.data.domain.Page;
 

@@ -14,8 +14,7 @@ public class ItemDePedidoBuilder {
 
     private Produto produto;
 
-    private Pedido pedido;
-    private BigDecimal desconto;
+    private BigDecimal desconto = BigDecimal.ZERO;
     private TipoDescontoItemPedido tipoDesconto;
 
     public ItemDePedidoBuilder comPrecoUnitario(BigDecimal precoUnitario) {
@@ -33,23 +32,21 @@ public class ItemDePedidoBuilder {
         return this;
     }
 
-    public ItemDePedidoBuilder comDesconto(BigDecimal desconto) {
-        this.desconto = desconto;
+    public ItemDePedidoBuilder aplicarDesconto() {
+        if (quantidade > 10) {
+            this.tipoDesconto = TipoDescontoItemPedido.QUANTIDADE;
+            this.desconto = BigDecimal.TEN;
+        }
+        else {
+            this.tipoDesconto = TipoDescontoItemPedido.NENHUM;
+            this.desconto = BigDecimal.ZERO;
+        }
         return this;
     }
 
-    public ItemDePedidoBuilder comTipoDesconto(TipoDescontoItemPedido tipoDesconto) {
-        this.tipoDesconto = tipoDesconto;
-        return this;
-    }
-
-    public ItemDePedidoBuilder comPedido(Pedido pedido) {
-        this.produto = produto;
-        return this;
-    }
 
     public ItemDePedido build() {
-        return new ItemDePedido(precoUnitario, quantidade, produto, pedido, desconto, tipoDesconto);
+        return new ItemDePedido(precoUnitario, quantidade, produto, desconto, tipoDesconto);
     }
 
 }

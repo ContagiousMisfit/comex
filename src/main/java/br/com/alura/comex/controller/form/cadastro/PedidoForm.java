@@ -1,25 +1,41 @@
 package br.com.alura.comex.controller.form.cadastro;
 
+import br.com.alura.comex.model.ItemDePedido;
 import br.com.alura.comex.model.Pedido;
-import br.com.alura.comex.model.TipoDescontoPedido;
+import br.com.alura.comex.model.utils.PedidoBuilder;
+import br.com.alura.comex.repository.ClienteRepository;
+import br.com.alura.comex.repository.ProdutoRepository;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
+@Getter
+@AllArgsConstructor
 public class PedidoForm {
-
-    private LocalDateTime data;
-
-    private BigDecimal valorTotal = BigDecimal.ZERO;
 
     private Long idCliente;
 
-    private BigDecimal desconto;
+    private List<ItemDePedidoForm> listaDeItens;
 
-    private TipoDescontoPedido tipoDesconto;
+    public Pedido converter(ClienteRepository clienteRepository, ProdutoRepository produtoRepository) {
 
-    public Pedido converter() {
-        return new Pedido();
+        List<ItemDePedido> lista = new ArrayList<>();
+
+        listaDeItens.forEach(item -> {
+            lista.add(item.converter(produtoRepository));
+        });
+
+        Pedido pedido = new PedidoBuilder()
+                .comCliente(clienteRepository.findById(idCliente).get())
+                .comDataAtual()
+                .comListaDePedidos(lista)
+                .aplicarDesconto()
+                .build();
+
+        return pedido;
+
     }
 
 }

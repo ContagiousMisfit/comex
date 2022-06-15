@@ -1,13 +1,13 @@
 package br.com.alura.comex.controller;
 
-import br.com.alura.comex.controller.dto.ClienteDto;
 import br.com.alura.comex.controller.dto.DetalhesDoPedidoDto;
 import br.com.alura.comex.controller.dto.PedidoDto;
 import br.com.alura.comex.controller.form.atualizacao.AtualizarPedidoForm;
 import br.com.alura.comex.controller.form.cadastro.PedidoForm;
-import br.com.alura.comex.model.Cliente;
 import br.com.alura.comex.model.Pedido;
+import br.com.alura.comex.repository.ClienteRepository;
 import br.com.alura.comex.repository.PedidoRepository;
+import br.com.alura.comex.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -20,7 +20,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.net.URI;
-import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -30,9 +29,15 @@ public class PedidoController {
     @Autowired
     private PedidoRepository pedidoRepository;
 
+    @Autowired
+    private ClienteRepository clienteRepository;
+
+    @Autowired
+    private ProdutoRepository produtoRepository;
+
     @GetMapping
     public ResponseEntity<Page<PedidoDto>> listarTodos() {
-        Pageable pageable = PageRequest.of(0, 5,Sort.by("data").descending().and(Sort.by("cliente").ascending()));
+        Pageable pageable = PageRequest.of(0, 5, Sort.by("data").descending().and(Sort.by("cliente").ascending()));
         Page<Pedido> pedidos = pedidoRepository.findAll(pageable);
         Page<PedidoDto> pedidoDtos = PedidoDto.converterPagina(pedidos);
         return ResponseEntity.ok().body(pedidoDtos);
@@ -50,7 +55,7 @@ public class PedidoController {
     @PostMapping
     @Transactional
     public ResponseEntity<DetalhesDoPedidoDto> cadastrar(@RequestBody @Valid PedidoForm form, UriComponentsBuilder uriBuilder) {
-        Pedido pedido = form.converter();
+        Pedido pedido = form.converter(clienteRepository, produtoRepository);
         pedidoRepository.save(pedido);
 
         URI uri = uriBuilder.path("api/pedidos/{id}").buildAndExpand(pedido.getId()).toUri();
@@ -66,6 +71,11 @@ public class PedidoController {
     @DeleteMapping("/{id}")
     @Transactional
     public ResponseEntity<?> deletar(@PathVariable Long id) {
+        Optional<Pedido> optional = pedidoRepository.findById(id);
+        if (optional.isPresent()) {
+            pedidoRepository.deleteById(id);
+            return ResponseEntity.ok().build();
+        }
         return ResponseEntity.notFound().build();
     }
 

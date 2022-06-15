@@ -1,21 +1,14 @@
 package br.com.alura.comex.controller.form.cadastro;
 
-import br.com.alura.comex.controller.dto.EnderecoDto;
 import br.com.alura.comex.model.Cliente;
 import br.com.alura.comex.model.Endereco;
-import br.com.alura.comex.model.ItemDePedido;
-import br.com.alura.comex.model.Pedido;
-import br.com.alura.comex.repository.ClienteRepository;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
-import java.util.List;
 
 @AllArgsConstructor
 @ToString

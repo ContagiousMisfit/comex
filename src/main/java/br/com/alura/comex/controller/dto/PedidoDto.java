@@ -1,12 +1,10 @@
 package br.com.alura.comex.controller.dto;
 
-import br.com.alura.comex.model.Cliente;
 import br.com.alura.comex.model.Pedido;
 import lombok.Getter;
 import org.springframework.data.domain.Page;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
