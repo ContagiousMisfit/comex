@@ -3,16 +3,20 @@ package br.com.alura.comex.controller.form.atualizacao;
 import br.com.alura.comex.model.Produto;
 import br.com.alura.comex.repository.CategoriaRepository;
 import br.com.alura.comex.repository.ProdutoRepository;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
-
+@Getter
+@AllArgsConstructor
 public class AtualizarProdutoForm {
 
     @NotNull
-    @Length(min = 2)
+    @Size(min = 2)
     private String nome;
 
     private String descricao;
@@ -32,7 +36,6 @@ public class AtualizarProdutoForm {
         produto.setPrecoUnitario(this.precoUnitario);
         produto.setQuantidadeEmEstoque(this.quantidadeEmEstoque);
         produto.setCategoria(categoriaRepository.findById(this.idCategoria).get());
-
         return produto;
     }
 }
