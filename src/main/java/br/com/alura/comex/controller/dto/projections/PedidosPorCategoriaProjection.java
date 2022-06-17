@@ -4,9 +4,9 @@ import java.math.BigDecimal;
 
 public interface PedidosPorCategoriaProjection {
 
-    String getCategoria();
+    String getNomeCategoria();
 
-    long getQuantidadeProdutos();
+    int getQuantidadeProdutosVendidos();
 
     BigDecimal getMontante();
 

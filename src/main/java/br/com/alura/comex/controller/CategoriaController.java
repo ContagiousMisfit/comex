@@ -8,6 +8,7 @@ import br.com.alura.comex.controller.form.cadastro.CategoriaForm;
 import br.com.alura.comex.model.Categoria;
 import br.com.alura.comex.repository.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -72,6 +73,7 @@ public class CategoriaController {
     }
 
     @GetMapping("/pedidos")
+    @Cacheable(value = "listaDePedidosPorCategoria")
     public List<PedidosPorCategoriaProjection> listarPedidosPorCategoria() {
         List<PedidosPorCategoriaProjection> listaDePedidos = categoriaRepository.findPedidosPorCategoria();
         return listaDePedidos;

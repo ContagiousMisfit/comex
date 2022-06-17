@@ -9,6 +9,12 @@ import java.util.List;
 
 public interface CategoriaRepository extends JpaRepository<Categoria, Long> {
 
-    @Query(value = "SELECT categoria.nome, SUM(itens_de_pedido.quantidade), SUM(pedidos.valor_total) FROM categorias categoria INNER JOIN produtos ON produtos.categoria_id = categoria.id INNER JOIN itens_de_pedido ON itens_de_pedido.produto_id = produtos.id INNER JOIN pedidos ON pedidos.id = itens_de_pedido.pedido_id;", nativeQuery = true)
+    @Query(value = "SELECT categoria.nome AS nomeCategoria, COUNT(item.id) AS quantidadeProdutosVendidos, SUM((item.preco_unitario * item.quantidade)) AS montante "
+            + "FROM pedidos "
+            + "JOIN itens_de_pedido item "
+            + "JOIN produtos produto "
+            + "JOIN categorias categoria "
+            + "WHERE pedidos.id = item.pedido_id AND item.produto_id = produto.id AND produto.categoria_id = categoria.id "
+            + "GROUP BY categoria.id, pedidos.id, item.id", nativeQuery = true)
     List<PedidosPorCategoriaProjection> findPedidosPorCategoria();
 }
