@@ -35,6 +35,9 @@ public class Cliente {
     @OneToMany(mappedBy = "cliente")
     private List<Pedido> listaDePedidos;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    private Usuario usuario;
+
     public Cliente(String nome, String cpf, String telefone, Endereco endereco, List<Pedido> listaDePedidos) {
         this.nome = nome;
         this.cpf = cpf;
