@@ -10,6 +10,6 @@ public class LoginForm {
     private String senha;
 
     public UsernamePasswordAuthenticationToken converter() {
-        return new UsernamePasswordAuthenticationToken(email, senha);
+        return new UsernamePasswordAuthenticationToken(this.email, this.senha);
     }
 }

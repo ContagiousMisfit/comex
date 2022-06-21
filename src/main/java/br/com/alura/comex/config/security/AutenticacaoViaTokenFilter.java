@@ -1,5 +1,6 @@
 package br.com.alura.comex.config.security;
 
+import br.com.alura.comex.config.security.form.TokenService;
 import br.com.alura.comex.model.Usuario;
 import br.com.alura.comex.repository.UsuarioRepository;
 import lombok.AllArgsConstructor;

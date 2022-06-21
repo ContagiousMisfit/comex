@@ -1,8 +1,8 @@
 package br.com.alura.comex.config.security.controller;
 
 import br.com.alura.comex.config.security.TokenService;
-import br.com.alura.comex.config.security.form.LoginForm;
 import br.com.alura.comex.config.security.dto.TokenDto;
+import br.com.alura.comex.config.security.form.LoginForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
