@@ -1,6 +1,5 @@
 package br.com.alura.comex.config.security;
 
-import br.com.alura.comex.config.security.form.TokenService;
 import br.com.alura.comex.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -23,7 +22,6 @@ public class SecurityConfigurations {
     @Autowired
     private TokenService tokenService;
 
-    @Autowired
     private UsuarioRepository usuarioRepository;
 
     @Autowired
@@ -35,8 +33,9 @@ public class SecurityConfigurations {
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration, ApplicationContext context, ObjectPostProcessor<Object> objectPostProcessor) throws Exception {
-        authenticationConfiguration.authenticationManagerBuilder(objectPostProcessor, context).userDetailsService(autenticacaoService)
+    protected AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration, ApplicationContext context, ObjectPostProcessor<Object> objectPostProcessor) throws Exception {
+        authenticationConfiguration.authenticationManagerBuilder(objectPostProcessor, context)
+                .userDetailsService(autenticacaoService)
                 .passwordEncoder(new BCryptPasswordEncoder());
         return authenticationConfiguration.getAuthenticationManager();
     }

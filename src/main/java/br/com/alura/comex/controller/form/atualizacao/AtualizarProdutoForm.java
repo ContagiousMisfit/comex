@@ -1,8 +1,8 @@
 package br.com.alura.comex.controller.form.atualizacao;
 
-import br.com.alura.comex.model.Produto;
 import br.com.alura.comex.repository.CategoriaRepository;
 import br.com.alura.comex.repository.ProdutoRepository;
+import br.com.alura.comex.model.Produto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

@@ -52,13 +52,17 @@ public class PedidoBuilder {
     }
 
     public PedidoBuilder aplicarDesconto() {
+
+        this.tipoDesconto = TipoDescontoPedido.NENHUM;
+        this.desconto = BigDecimal.ZERO;
+
+        if (cliente.getListaDePedidos() == null) return this;
+
         if (cliente.getListaDePedidos().size() > 5) {
             this.tipoDesconto = TipoDescontoPedido.FIDELIDADE;
             this.desconto = new BigDecimal(0.5);
-        } else {
-            this.tipoDesconto = TipoDescontoPedido.NENHUM;
-            this.desconto = BigDecimal.ZERO;
         }
+
         return this;
     }
 
