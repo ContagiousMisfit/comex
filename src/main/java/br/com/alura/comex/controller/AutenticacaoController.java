@@ -1,4 +1,4 @@
-package br.com.alura.comex.config.security.controller;
+package br.com.alura.comex.controller;
 
 import br.com.alura.comex.config.security.TokenService;
 import br.com.alura.comex.config.security.dto.TokenDto;
@@ -27,17 +27,15 @@ public class AutenticacaoController {
     private TokenService tokenService;
 
     @PostMapping
-    public ResponseEntity<TokenDto> autenticar(@RequestBody @Valid LoginForm form) {
-
+    public ResponseEntity<TokenDto> autenticar(@RequestBody @Valid LoginForm form ){
         UsernamePasswordAuthenticationToken dadosLogin = form.converter();
         try {
-            Authentication auth = authManager.authenticate(dadosLogin);
-            String token = tokenService.gerarToken(auth);
+            Authentication authentication = authManager.authenticate(dadosLogin);
+            String token = tokenService.gerarToken(authentication);
             return ResponseEntity.ok(new TokenDto(token, "Bearer"));
-        } catch(AuthenticationException e) {
+        }catch (AuthenticationException e){
             return ResponseEntity.badRequest().build();
         }
-
     }
 
 }

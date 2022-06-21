@@ -8,9 +8,13 @@ import br.com.alura.comex.model.utils.CategoriaBuilder;
 import br.com.alura.comex.model.utils.ClienteBuilder;
 import br.com.alura.comex.model.utils.EnderecoBuilder;
 import br.com.alura.comex.model.utils.ProdutoBuilder;
+import br.com.alura.comex.repository.ProdutoRepository;
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,21 +27,27 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.math.BigDecimal;
 import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-@ActiveProfiles("test")
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@ActiveProfiles("testes")
 public class ProdutoControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
     @Autowired
     private TestEntityManager testEntityManager;
+    @Autowired
+    private ProdutoRepository produtoRepository;
 
-    @Test
-    public void deveriaAdicionar3Produtos() throws Exception {
-
+    @BeforeAll
+    public void prepararCenario() throws URISyntaxException {
         Categoria categoria1 =
                 new CategoriaBuilder()
                         .comNome("Instrumentos Musicais")
@@ -83,6 +93,9 @@ public class ProdutoControllerTest {
         testEntityManager.persist(cliente);
         testEntityManager.persist(produto1);
         testEntityManager.persist(produto2);
+    }
+    @Test
+    public void deveriaAdicionar3Produtos() throws Exception {
 
         URI uri = new URI("/pedidos");
 
@@ -103,6 +116,9 @@ public class ProdutoControllerTest {
                         .status()
                         .is(201));
 
+        List<Produto> produtoList = produtoRepository.findAll();
+        assertThat(produtoList).hasSize(3);
     }
+
 
 }

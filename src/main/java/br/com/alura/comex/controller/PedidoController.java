@@ -14,6 +14,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -45,6 +46,7 @@ public class PedidoController {
 
 
     @GetMapping("/{id}")
+    @PreAuthorize(value = "authentication.principal.username.equals(#userId)")
     public ResponseEntity<DetalhesDoPedidoDto> detalhar(@PathVariable Long id) {
         Optional<Pedido> pedido = pedidoRepository.findById(id);
         if (pedido.isPresent())

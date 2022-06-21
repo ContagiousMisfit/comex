@@ -4,6 +4,7 @@ import br.com.alura.comex.controller.dto.projections.PedidosPorCategoriaProjecti
 import br.com.alura.comex.model.utils.*;
 import br.com.alura.comex.model.*;
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -12,6 +13,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -21,14 +23,23 @@ import static org.assertj.core.api.Assertions.tuple;
 @DataJpaTest
 @RunWith(SpringRunner.class)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@ActiveProfiles("test")
+@Transactional
+@ActiveProfiles("testes")
 public class CategoriaRepositoryTest {
 
     @Autowired
     private CategoriaRepository categoriaRepository;
 
     @Autowired
-    private TestEntityManager testEntityManager;
+    private ClienteRepository clienteRepository;
+    @Autowired
+    private PedidoRepository pedidoRepository;
+
+    @Autowired
+    private ProdutoRepository produtoRepository;
+
+    @Autowired
+    private ItemDePedidoRepository itemDePedidoRepository;
 
     @Test
     public void deveriaRetornar2Registros() {
@@ -104,15 +115,15 @@ public class CategoriaRepositoryTest {
                 .aplicarDesconto()
                 .build();
 
-        testEntityManager.persist(categoria1);
-        testEntityManager.persist(categoria2);
-        testEntityManager.persist(cliente);
-        testEntityManager.persist(item1);
-        testEntityManager.persist(item2);
-        testEntityManager.persist(produto1);
-        testEntityManager.persist(produto2);
-        testEntityManager.persist(pedido1);
-        testEntityManager.persist(pedido2);
+        categoriaRepository.save(categoria1);
+        categoriaRepository.save(categoria2);
+        clienteRepository.save(cliente);
+        pedidoRepository.save(pedido1);
+        pedidoRepository.save(pedido2);
+        produtoRepository.save(produto1);
+        produtoRepository.save(produto2);
+        itemDePedidoRepository.save(item1);
+        itemDePedidoRepository.save(item2);
 
         List<PedidosPorCategoriaProjection> resultado = categoriaRepository.findPedidosPorCategoria();
 
@@ -124,6 +135,9 @@ public class CategoriaRepositoryTest {
                                 .containsExactly(
                                         tuple("Instrumentos Musicais", 2, new BigDecimal("7000.00"),
                                                 "Livros", 10, new BigDecimal("400.00")));
+
+
+
     }
 
 }

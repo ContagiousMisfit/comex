@@ -17,7 +17,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
-public class SecurityConfigurations {
+public class SecurityConfiguration {
 
     @Autowired
     private TokenService tokenService;

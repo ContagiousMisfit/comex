@@ -14,15 +14,13 @@ import java.util.Optional;
 @Service
 public class AuthenticationService implements UserDetailsService {
 
+
     @Autowired
     private UsuarioRepository usuarioRepository;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
         Optional<Usuario> usuario = usuarioRepository.findByEmail(username);
-
         if (usuario.isPresent()) return usuario.get();
-
         throw new UsernameNotFoundException("Email não encontrado!");
     }
 }

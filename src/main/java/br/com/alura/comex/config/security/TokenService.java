@@ -12,7 +12,6 @@ import java.util.Date;
 @Service
 public class TokenService {
 
-
     @Value("${forum.jwt.expiration}")
     private String expiration;
 
