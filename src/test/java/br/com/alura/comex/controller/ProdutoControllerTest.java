@@ -8,28 +8,29 @@ import br.com.alura.comex.model.utils.CategoriaBuilder;
 import br.com.alura.comex.model.utils.ClienteBuilder;
 import br.com.alura.comex.model.utils.EnderecoBuilder;
 import br.com.alura.comex.model.utils.ProdutoBuilder;
-import br.com.alura.comex.repository.*;
+import br.com.alura.comex.repository.CategoriaRepository;
+import br.com.alura.comex.repository.ClienteRepository;
+import br.com.alura.comex.repository.ProdutoRepository;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.math.BigDecimal;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -50,8 +51,10 @@ public class ProdutoControllerTest {
     @Autowired
     private ProdutoRepository produtoRepository;
 
+    private String token;
+
     @BeforeAll
-    public void prepararCenario() throws URISyntaxException {
+    public void prepararCenario() throws Exception {
         Categoria categoria1 =
                 new CategoriaBuilder()
                         .comNome("Instrumentos Musicais")
@@ -98,10 +101,35 @@ public class ProdutoControllerTest {
         produtoRepository.save(produto1);
         produtoRepository.save(produto2);
 
+        URI uri = new URI("/auth");
+        String json = "{\"email\":\"cliente@email.com\",\"senha\":\"123456\"}";
+
+        mockMvc.perform(MockMvcRequestBuilders
+                .post(uri)
+                .content(json)
+                .contentType(MediaType.APPLICATION_JSON));
+    }
+
+    public String concederTokenParaAutenticacaoDeUsuarioExistente() throws Exception {
+        String email = "cliente@email.com";
+        String senha = "123456";
+
+        String requestBody = "{\"email\":\"" + email + "\", \"senha\":\"" + senha + "\"}";
+
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/api/auth")
+                        .content(requestBody))
+                .andExpect(status().isOk()).andReturn();
+
+        String response = result.getResponse().getContentAsString();
+        response = response.replace("{\"access_token\": \"", "");
+        return token = response.replace("\"}", "");
+
     }
 
     @Test
     public void deveriaAdicionar3Produtos() throws Exception {
+
+        token = concederTokenParaAutenticacaoDeUsuarioExistente();
 
         URI uri = new URI("/api/pedidos");
 
@@ -111,9 +139,10 @@ public class ProdutoControllerTest {
                 .perform(MockMvcRequestBuilders
                         .post(uri)
                         .content(json)
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers
-                        .status()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .header("Authorization", "Bearer" + token)
+                )
+                .andExpect(status()
                         .is(201));
 
         List<Produto> produtoList = produtoRepository.findAll();
