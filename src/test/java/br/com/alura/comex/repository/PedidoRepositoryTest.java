@@ -3,15 +3,12 @@ package br.com.alura.comex.repository;
 import br.com.alura.comex.controller.dto.projections.PedidosPorCategoriaProjection;
 import br.com.alura.comex.model.*;
 import br.com.alura.comex.model.utils.*;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -19,11 +16,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
 
 @DataJpaTest
-@RunWith(SpringRunner.class)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@Transactional
-@ActiveProfiles("testes")
-public class CategoriaRepositoryTest {
+@ActiveProfiles("test")
+public class PedidoRepositoryTest {
 
     @Autowired
     private CategoriaRepository categoriaRepository;
