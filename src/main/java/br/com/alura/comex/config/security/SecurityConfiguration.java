@@ -44,14 +44,14 @@ public class SecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests(authorizedRequests -> authorizedRequests
-                                .antMatchers(HttpMethod.GET, "/categorias/pedidos").permitAll()
-                                .antMatchers(HttpMethod.GET, "/produtos/**").permitAll()
-                                .antMatchers("/swagger-ui/*").permitAll()
-                                .antMatchers("/v3/api-docs/**").permitAll()
-                                .antMatchers(HttpMethod.POST, "/auth").permitAll()
-                                .anyRequest().authenticated())
-                                .csrf().disable()
-                                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                        .antMatchers(HttpMethod.GET, "/categorias/pedidos").permitAll()
+                        .antMatchers(HttpMethod.GET, "/produtos/**").permitAll()
+                        .antMatchers("/swagger-ui/*").permitAll()
+                        .antMatchers("/v3/api-docs/**").permitAll()
+                        .antMatchers(HttpMethod.POST, "/auth").permitAll()
+                        .anyRequest().authenticated())
+                .csrf().disable()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().addFilterBefore(new AutenticacaoViaTokenFilter(tokenService, usuarioRepository), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }

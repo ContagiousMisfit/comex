@@ -1,8 +1,8 @@
 package br.com.alura.comex.controller.form.cadastro;
 
-import br.com.alura.comex.repository.CategoriaRepository;
 import br.com.alura.comex.model.Categoria;
 import br.com.alura.comex.model.Produto;
+import br.com.alura.comex.repository.CategoriaRepository;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.ToString;

@@ -2,9 +2,7 @@ package br.com.alura.comex.config.security;
 
 import br.com.alura.comex.model.Usuario;
 import br.com.alura.comex.repository.UsuarioRepository;
-import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -22,6 +20,7 @@ public class AutenticacaoViaTokenFilter extends OncePerRequestFilter {
         this.tokenService = tokenService;
         this.repository = repository;
     }
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {

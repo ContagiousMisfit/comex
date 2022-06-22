@@ -1,10 +1,10 @@
 package br.com.alura.comex.controller.form.cadastro;
 
-import br.com.alura.comex.repository.ClienteRepository;
-import br.com.alura.comex.repository.ProdutoRepository;
 import br.com.alura.comex.model.ItemDePedido;
 import br.com.alura.comex.model.Pedido;
 import br.com.alura.comex.model.utils.PedidoBuilder;
+import br.com.alura.comex.repository.ClienteRepository;
+import br.com.alura.comex.repository.ProdutoRepository;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
