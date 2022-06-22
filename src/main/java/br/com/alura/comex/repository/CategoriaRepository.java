@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+
 public interface CategoriaRepository extends JpaRepository<Categoria, Long> {
 
     @Query(value = "SELECT categoria.nome AS nomeCategoria, COUNT(item.id) AS quantidadeProdutosVendidos, SUM((item.preco_unitario * item.quantidade)) AS montante "

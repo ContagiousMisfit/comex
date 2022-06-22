@@ -8,13 +8,12 @@ import br.com.alura.comex.model.utils.CategoriaBuilder;
 import br.com.alura.comex.model.utils.ClienteBuilder;
 import br.com.alura.comex.model.utils.EnderecoBuilder;
 import br.com.alura.comex.model.utils.ProdutoBuilder;
-import br.com.alura.comex.repository.ProdutoRepository;
+import br.com.alura.comex.repository.*;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -41,8 +40,13 @@ public class ProdutoControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
+
     @Autowired
-    private TestEntityManager testEntityManager;
+    private CategoriaRepository categoriaRepository;
+
+    @Autowired
+    private ClienteRepository clienteRepository;
+
     @Autowired
     private ProdutoRepository produtoRepository;
 
@@ -88,30 +92,26 @@ public class ProdutoControllerTest {
                         .build())
                 .build();
 
-        testEntityManager.persist(categoria1);
-        testEntityManager.persist(categoria2);
-        testEntityManager.persist(cliente);
-        testEntityManager.persist(produto1);
-        testEntityManager.persist(produto2);
+        categoriaRepository.save(categoria1);
+        categoriaRepository.save(categoria2);
+        clienteRepository.save(cliente);
+        produtoRepository.save(produto1);
+        produtoRepository.save(produto2);
+
     }
+
     @Test
     public void deveriaAdicionar3Produtos() throws Exception {
 
-        URI uri = new URI("/pedidos");
+        URI uri = new URI("/api/pedidos");
 
-        String json = "{\n" +
-                "    \"nome\": \"Guzheng\",\n" +
-                "    \"descricao\": \"Instrumento musical antigo, uma espécie de cítara chinesa\",\n" +
-                "    \"precoUnitario\": 70000.00,\n" +
-                "    \"quantidadeEmEstoque\": 5,\n" +
-                "    \"idCategoria\": 1\n" +
-                "    }\n";
+        String json = "{\"nome\": \"Guzheng\", \"descricao\": \"Instrumento musical antigo, uma espécie de cítara chinesa\", \"precoUnitario\": 70000.00, \"quantidadeEmEstoque\": 5, \"idCategoria\": 1}";
 
         mockMvc
                 .perform(MockMvcRequestBuilders
-                .post(uri)
-                .content(json)
-                .contentType(MediaType.APPLICATION_JSON))
+                        .post(uri)
+                        .content(json)
+                        .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers
                         .status()
                         .is(201));

@@ -1,15 +1,13 @@
 package br.com.alura.comex.repository;
 
 import br.com.alura.comex.controller.dto.projections.PedidosPorCategoriaProjection;
-import br.com.alura.comex.model.utils.*;
 import br.com.alura.comex.model.*;
+import br.com.alura.comex.model.utils.*;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -129,14 +127,12 @@ public class CategoriaRepositoryTest {
 
         assertThat(resultado)
                 .hasSize(2)
-                        .extracting(PedidosPorCategoriaProjection::getNomeCategoria,
-                                PedidosPorCategoriaProjection::getQuantidadeProdutosVendidos,
-                                PedidosPorCategoriaProjection::getMontante)
-                                .containsExactly(
-                                        tuple("Instrumentos Musicais", 2, new BigDecimal("7000.00"),
-                                                "Livros", 10, new BigDecimal("400.00")));
-
-
+                .extracting(PedidosPorCategoriaProjection::getNomeCategoria,
+                        PedidosPorCategoriaProjection::getQuantidadeProdutosVendidos,
+                        PedidosPorCategoriaProjection::getMontante)
+                .containsExactly(
+                        tuple("Instrumentos Musicais", 2, new BigDecimal("7000.00"),
+                                "Livros", 10, new BigDecimal("400.00")));
 
     }
 
