@@ -108,6 +108,9 @@ public class PedidoRepositoryTest {
                 .aplicarDesconto()
                 .build();
 
+        item1.setPedido(pedido1);
+        item2.setPedido(pedido2);
+
         categoriaRepository.save(categoria1);
         categoriaRepository.save(categoria2);
         clienteRepository.save(cliente);
@@ -126,8 +129,9 @@ public class PedidoRepositoryTest {
                         PedidosPorCategoriaProjection::getQuantidadeProdutosVendidos,
                         PedidosPorCategoriaProjection::getMontante)
                 .containsExactly(
-                        tuple("Instrumentos Musicais", 2, new BigDecimal("7000.00"),
-                                "Livros", 10, new BigDecimal("400.00")));
+                        tuple("Instrumentos Musicais", 1, new BigDecimal("3500.00")),
+                        tuple("Livros", 10, new BigDecimal("400.00"))
+                );
 
     }
 

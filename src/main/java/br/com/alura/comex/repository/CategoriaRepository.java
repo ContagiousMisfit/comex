@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface CategoriaRepository extends JpaRepository<Categoria, Long> {
 
-    @Query(value = "SELECT categoria.nome AS nomeCategoria, COUNT(item.id) AS quantidadeProdutosVendidos, SUM((item.preco_unitario * item.quantidade)) AS montante "
+    @Query(value = "SELECT categoria.nome AS nomeCategoria, SUM(item.quantidade) AS quantidadeProdutosVendidos, SUM((item.preco_unitario * item.quantidade)) AS montante "
             + "FROM pedidos "
             + "JOIN itens_de_pedido item "
             + "JOIN produtos produto "
@@ -18,3 +18,5 @@ public interface CategoriaRepository extends JpaRepository<Categoria, Long> {
             + "GROUP BY categoria.id, pedidos.id, item.id", nativeQuery = true)
     List<PedidosPorCategoriaProjection> findPedidosPorCategoria();
 }
+
+
