@@ -7,7 +7,6 @@ import br.com.alura.comex.model.Produto;
 import br.com.alura.comex.repository.CategoriaRepository;
 import br.com.alura.comex.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Profile;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -23,7 +22,6 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/produtos")
-@Profile(value = {"default", "test"})
 public class ProdutoController {
 
     @Autowired
@@ -50,14 +48,14 @@ public class ProdutoController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<ProdutoDto> cadastrar(@RequestBody @Valid ProdutoForm form, UriComponentsBuilder uriBuilder) {
-        System.out.println(form);
+    public ResponseEntity<ProdutoDto> cadastrar(@RequestBody @Valid ProdutoForm form, UriComponentsBuilder uriBuilder){
 
         Produto produto = form.converter(categoriaRepository);
         produtoRepository.save(produto);
 
-        URI uri = uriBuilder.path("/produto/{id}").buildAndExpand(produto.getId()).toUri();
+        URI uri = uriBuilder.path("/produtos/{id}").buildAndExpand(produto.getId()).toUri();
         return ResponseEntity.created(uri).body(new ProdutoDto(produto));
+
     }
 
     @PutMapping("/{id}")

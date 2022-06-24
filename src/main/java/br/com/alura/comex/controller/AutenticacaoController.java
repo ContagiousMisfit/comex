@@ -21,21 +21,23 @@ import javax.validation.Valid;
 public class AutenticacaoController {
 
     @Autowired
-    private AuthenticationManager authManager;
+    private AuthenticationManager authenticationManager;
 
     @Autowired
     private TokenService tokenService;
 
     @PostMapping
-    public ResponseEntity<TokenDto> autenticar(@RequestBody @Valid LoginForm form) {
+    public ResponseEntity<TokenDto> autenticar(@RequestBody @Valid LoginForm form ){
         UsernamePasswordAuthenticationToken dadosLogin = form.converter();
+
         try {
-            Authentication authentication = authManager.authenticate(dadosLogin);
+            Authentication authentication = authenticationManager.authenticate(dadosLogin);
             String token = tokenService.gerarToken(authentication);
             return ResponseEntity.ok(new TokenDto(token, "Bearer"));
-        } catch (AuthenticationException e) {
+        }catch (AuthenticationException e){
             return ResponseEntity.badRequest().build();
         }
+
     }
 
 }
