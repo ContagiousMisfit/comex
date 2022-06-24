@@ -5,7 +5,7 @@ import br.com.alura.comex.model.Produto;
 import br.com.alura.comex.repository.CategoriaRepository;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.ToString;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Min;
@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 import java.util.Optional;
 
 @AllArgsConstructor
-@ToString
+@NoArgsConstructor
 @Data
 public class ProdutoForm {
 

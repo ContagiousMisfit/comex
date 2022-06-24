@@ -1,7 +1,8 @@
 package br.com.alura.comex.controller;
 
-import br.com.alura.comex.model.Produto;
 import br.com.alura.comex.repository.ProdutoRepository;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -13,10 +14,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.net.URI;
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
-
 @AutoConfigureMockMvc
 @SpringBootTest
 @ActiveProfiles("test")
@@ -31,23 +28,29 @@ public class ProdutoControllerTest {
     @Test
     public void deveriaAdicionarProdutos() throws Exception {
 
-        URI uri = new URI("/api/produtos");
+        URI uri = new URI("/produtos");
 
-        String json = "{\"nome\": \"Guzheng\", \"descricao\": \"Instrumento musical antigo, uma espécie de cítara chinesa\", \"precoUnitario\": 70000.00, \"quantidadeEmEstoque\": 5, \"idCategoria\": 1}";
+        JSONObject json = criarObjetoJson();
+        String request = json.toString();
 
         mockMvc
                 .perform(MockMvcRequestBuilders
                         .post(uri)
-                        .content(json)
+                        .content(request)
                         .contentType(MediaType.APPLICATION_JSON)
                 )
                 .andExpect(MockMvcResultMatchers
                         .status()
                         .is(201));
 
-        List<Produto> produtoList = produtoRepository.findAll();
-        assertThat(produtoList).hasSize(1);
-
+    }
+    private JSONObject criarObjetoJson() throws JSONException {
+        return new JSONObject()
+                .put("nome","Guzheng")
+                .put("descricao", "Instrumento musical antigo, uma espécie de cítara chinesa")
+                .put("precoUnitario",70000.00)
+                .put("quantidadeEmEstoque", 5)
+                .put("idCategoria", 3);
     }
 
 }
