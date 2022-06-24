@@ -1,5 +1,6 @@
 package br.com.alura.comex.controller;
 
+import br.com.alura.comex.repository.CategoriaRepository;
 import br.com.alura.comex.repository.ProdutoRepository;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,6 +26,9 @@ public class ProdutoControllerTest {
     @Autowired
     private ProdutoRepository produtoRepository;
 
+    @Autowired
+    private CategoriaRepository categoriaRepository;
+
     @Test
     public void deveriaAdicionarProdutos() throws Exception {
 
@@ -44,13 +48,14 @@ public class ProdutoControllerTest {
                         .is(201));
 
     }
+
     private JSONObject criarObjetoJson() throws JSONException {
         return new JSONObject()
                 .put("nome","Guzheng")
                 .put("descricao", "Instrumento musical antigo, uma espécie de cítara chinesa")
                 .put("precoUnitario",70000.00)
                 .put("quantidadeEmEstoque", 5)
-                .put("idCategoria", 3);
+                .put("idCategoria", 10);
     }
 
 }

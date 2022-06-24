@@ -1,12 +1,18 @@
 package br.com.alura.comex.controller;
 
-import br.com.alura.comex.repository.CategoriaRepository;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+
+import java.net.URI;
 
 @AutoConfigureMockMvc
 @SpringBootTest
@@ -16,17 +22,51 @@ public class CategoriaControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @Autowired
-    private CategoriaRepository categoriaRepository;
-
     @Test
     public void deveriaCriarUmaCategoria() throws Exception {
+
+        URI uri = new URI("/categorias");
+
+        JSONObject json = criarObjetoJson();
+        String request = json.toString();
+
+        mockMvc
+                .perform(MockMvcRequestBuilders
+                        .post(uri)
+                        .content(request)
+                        .contentType(MediaType.APPLICATION_JSON)
+                )
+                .andExpect(MockMvcResultMatchers
+                        .status()
+                        .is(201));
+
 
     }
 
     @Test
     public void deveriaAtualizarStatusCategoria() throws Exception {
 
+        int idCategoria = 7;
+        URI uri = new URI("/categorias/"+idCategoria);
+
+        JSONObject json = criarObjetoJson();
+        String request = json.toString();
+
+        mockMvc
+                .perform(MockMvcRequestBuilders
+                        .patch(uri)
+                        .content(request)
+                        .contentType(MediaType.APPLICATION_JSON)
+                )
+                .andExpect(MockMvcResultMatchers
+                        .status()
+                        .is(200));
+
+    }
+
+    private JSONObject criarObjetoJson() throws JSONException {
+        return new JSONObject()
+                .put("nome","Livros");
     }
 
 
