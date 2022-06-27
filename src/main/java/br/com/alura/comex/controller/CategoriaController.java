@@ -64,18 +64,6 @@ public class CategoriaController {
         return ResponseEntity.notFound().build();
     }
 
-    @DeleteMapping("/{id}")
-    @Transactional
-    @CacheEvict(value = "listaDePedidosPorCategoria", allEntries = true)
-    public ResponseEntity<?> deletar(@PathVariable Long id) {
-        Optional<Categoria> optional = categoriaRepository.findById(id);
-        if (optional.isPresent()) {
-            categoriaRepository.deleteById(id);
-            return ResponseEntity.ok().build();
-        }
-        return ResponseEntity.notFound().build();
-    }
-
     @GetMapping("/pedidos")
     @Cacheable(value = "listaDePedidosPorCategoria")
     public List<PedidosPorCategoriaProjection> listarPedidosPorCategoria() {
