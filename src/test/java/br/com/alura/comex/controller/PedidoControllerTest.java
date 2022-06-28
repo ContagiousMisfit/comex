@@ -1,5 +1,6 @@
 package br.com.alura.comex.controller;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
@@ -12,22 +13,22 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.net.URI;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 @AutoConfigureMockMvc
 @SpringBootTest
 @ActiveProfiles("test")
-public class CategoriaControllerTest {
+public class PedidoControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Test
-    public void deveriaCriarUmaCategoria() throws Exception {
+    public void deveriaAdicionarPedidos() throws Exception {
 
-        URI uri = new URI("/categorias");
+        URI uri = new URI("/pedidos");
 
         JSONObject json = criarObjetoJson();
         String request = json.toString();
@@ -42,41 +43,23 @@ public class CategoriaControllerTest {
     }
 
     @Test
-    public void deveriaAtualizarStatusCategoria() throws Exception {
+    public void deveriaListarTodosOsPedidos() throws Exception {
 
-        int idCategoria = 7;
-        URI uri = new URI("/categorias/"+idCategoria);
-
-        JSONObject json = criarObjetoJson();
-        String request = json.toString();
-
-        mockMvc
-                .perform(patch(uri)
-                        .content(request)
-                        .contentType(MediaType.APPLICATION_JSON)
-                )
-                .andExpect(status().isOk());
-
-    }
-
-    @Test
-    public void deveriaListarTodasAsCategorias() throws Exception {
-
-        URI uri = new URI("/categorias");
+        URI uri = new URI("/pedidos");
         mockMvc.perform(get(uri))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.length()").isNotEmpty())
-                .andExpect(jsonPath("$[0].nome").value("Livros"))
-                .andExpect(jsonPath("$[1].nome").value("Instrumentos Musicais"));
+                .andExpect(jsonPath("$.content[0].idCliente").value(15))
+                .andExpect(jsonPath("$.content[0].nomeCliente").value("Isabella"));
 
     }
 
     @Test
-    public void deveriaPesquisarCategoriasPorId() throws Exception {
+    public void deveriaListarOPedidoPorId() throws Exception {
 
-        int idCategoria = 50;
-        URI uri = new URI("/categorias/"+idCategoria);
+        int idPedido = 25;
+        URI uri = new URI("/pedidos/"+idPedido);
 
         JSONObject json = criarObjetoJson();
         String request = json.toString();
@@ -87,16 +70,14 @@ public class CategoriaControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                 )
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.nome").value("Livros"))
-                .andExpect(jsonPath("$.status").value("ATIVA"));
-
+                .andExpect(jsonPath("$.nomeCliente").value("Dara"));
     }
 
     @Test
     public void deveriaRetornar404PorIdNaoExistente() throws Exception {
 
-        int idCategoria = 99999;
-        URI uri = new URI("/categorias/"+idCategoria);
+        int idPedido = 99999;
+        URI uri = new URI("/pedidos/"+idPedido);
 
         JSONObject json = criarObjetoJson();
         String request = json.toString();
@@ -110,20 +91,26 @@ public class CategoriaControllerTest {
 
     }
 
-    @Test
-    public void deveriaListarPedidosPorCategoria() throws Exception {
-
-        URI uri = new URI("/categorias/pedidos");
-        mockMvc.perform(get(uri))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
-
-    }
-
     private JSONObject criarObjetoJson() throws JSONException {
-        return new JSONObject()
-                .put("nome","Livros");
-    }
 
+        JSONObject item1 = new JSONObject()
+                .put("idProduto", 3)
+                .put("quantidadeVendida", 2);
+
+        JSONObject item2 = new JSONObject()
+                .put("idProduto", 33)
+                .put("quantidadeVendida", 1);
+
+        JSONArray listaDeItens = new JSONArray();
+        listaDeItens.put(item1);
+        listaDeItens.put(item2);
+
+        JSONObject objeto = new JSONObject();
+        objeto.put("idCliente", 15);
+        objeto.put("listaDeItens", listaDeItens);
+
+        return objeto;
+
+    }
 
 }

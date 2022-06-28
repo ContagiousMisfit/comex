@@ -1,7 +1,6 @@
 package br.com.alura.comex.controller;
 
 import br.com.alura.comex.controller.dto.ClienteDto;
-import br.com.alura.comex.controller.form.atualizacao.AtualizarClienteForm;
 import br.com.alura.comex.controller.form.cadastro.ClienteForm;
 import br.com.alura.comex.model.Cliente;
 import br.com.alura.comex.repository.ClienteRepository;
@@ -52,21 +51,5 @@ public class ClienteController {
         return ResponseEntity.created(uri).body(new ClienteDto(cliente));
     }
 
-    @PutMapping("/{id}")
-    @Transactional
-    public ResponseEntity<ClienteDto> atualizar(@PathVariable Long id, @RequestBody @Valid AtualizarClienteForm form) {
-        return ResponseEntity.notFound().build();
-    }
-
-    @DeleteMapping("/{id}")
-    @Transactional
-    public ResponseEntity<?> deletar(@PathVariable Long id) {
-        Optional<Cliente> optional = clienteRepository.findById(id);
-        if (optional.isPresent()) {
-            clienteRepository.deleteById(id);
-            return ResponseEntity.ok().build();
-        }
-        return ResponseEntity.notFound().build();
-    }
 
 }

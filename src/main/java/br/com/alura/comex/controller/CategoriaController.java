@@ -2,7 +2,6 @@ package br.com.alura.comex.controller;
 
 import br.com.alura.comex.controller.dto.CategoriaDto;
 import br.com.alura.comex.controller.dto.projections.PedidosPorCategoriaProjection;
-import br.com.alura.comex.controller.form.atualizacao.AtualizarCategoriaForm;
 import br.com.alura.comex.controller.form.atualizacao.AtualizarStatusCategoriaForm;
 import br.com.alura.comex.controller.form.cadastro.CategoriaForm;
 import br.com.alura.comex.model.Categoria;
@@ -50,18 +49,6 @@ public class CategoriaController {
 
         URI uri = uriBuilder.path("/categorias/{id}").buildAndExpand(categoria.getId()).toUri();
         return ResponseEntity.created(uri).body(new CategoriaDto(categoria));
-    }
-
-    @PutMapping("/{id}")
-    @Transactional
-    @CacheEvict(value = "listaDePedidosPorCategoria", allEntries = true)
-    public ResponseEntity<CategoriaDto> atualizar(@PathVariable Long id, @RequestBody @Valid AtualizarCategoriaForm form) {
-        Optional<Categoria> optional = categoriaRepository.findById(id);
-        if (optional.isPresent()) {
-            Categoria categoria = form.atualizar(id, categoriaRepository);
-            return ResponseEntity.ok(new CategoriaDto(categoria));
-        }
-        return ResponseEntity.notFound().build();
     }
 
     @GetMapping("/pedidos")

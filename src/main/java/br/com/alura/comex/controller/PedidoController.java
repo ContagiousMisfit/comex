@@ -2,7 +2,6 @@ package br.com.alura.comex.controller;
 
 import br.com.alura.comex.controller.dto.DetalhesDoPedidoDto;
 import br.com.alura.comex.controller.dto.PedidoDto;
-import br.com.alura.comex.controller.form.atualizacao.AtualizarPedidoForm;
 import br.com.alura.comex.controller.form.cadastro.PedidoForm;
 import br.com.alura.comex.model.Pedido;
 import br.com.alura.comex.repository.ClienteRepository;
@@ -64,21 +63,5 @@ public class PedidoController {
         return ResponseEntity.created(uri).body(new DetalhesDoPedidoDto(pedido));
     }
 
-    @PutMapping("/{id}")
-    @Transactional
-    public ResponseEntity<DetalhesDoPedidoDto> atualizar(@PathVariable Long id, @RequestBody @Valid AtualizarPedidoForm form) {
-        return ResponseEntity.notFound().build();
-    }
-
-    @DeleteMapping("/{id}")
-    @Transactional
-    public ResponseEntity<?> deletar(@PathVariable Long id) {
-        Optional<Pedido> optional = pedidoRepository.findById(id);
-        if (optional.isPresent()) {
-            pedidoRepository.deleteById(id);
-            return ResponseEntity.ok().build();
-        }
-        return ResponseEntity.notFound().build();
-    }
 
 }
