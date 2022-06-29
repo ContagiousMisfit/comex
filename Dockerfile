@@ -1,6 +1,6 @@
 FROM openjdk:11-jre-slim
 
-WORKDIR/comex
+WORKDIR /comex
 
 COPY target/*.jar /comex/app.jar
 
