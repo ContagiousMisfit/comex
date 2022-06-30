@@ -32,9 +32,6 @@ public class PedidoRepositoryTest {
     @Autowired
     private ProdutoRepository produtoRepository;
 
-    @Autowired
-    private ItemDePedidoRepository itemDePedidoRepository;
-
     @Test
     public void deveriaRetornar2Registros() {
 
@@ -119,8 +116,6 @@ public class PedidoRepositoryTest {
         pedidoRepository.save(pedido2);
         produtoRepository.save(produto1);
         produtoRepository.save(produto2);
-        itemDePedidoRepository.save(item1);
-        itemDePedidoRepository.save(item2);
 
         List<PedidosPorCategoriaProjection> resultado = categoriaRepository.findPedidosPorCategoria();
 

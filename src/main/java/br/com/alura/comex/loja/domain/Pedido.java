@@ -37,35 +37,40 @@ public class Pedido {
     private TipoDescontoPedido tipoDesconto;
 
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
-    private List<ItemDePedido> listaDePedidos;
+    private List<ItemDePedido> listaDeItens;
 
-    public Pedido(LocalDateTime data, Cliente cliente, BigDecimal desconto, TipoDescontoPedido tipoDesconto, List<ItemDePedido> listaDePedidos) {
+    public Pedido(LocalDateTime data, Cliente cliente, BigDecimal desconto, TipoDescontoPedido tipoDesconto, List<ItemDePedido> listaDeItens) {
         this.data = data;
         this.cliente = cliente;
         this.desconto = desconto;
         this.tipoDesconto = tipoDesconto;
-        this.listaDePedidos = listaDePedidos;
+        this.listaDeItens = listaDeItens;
     }
 
     public List<ItemDePedido> getItens() {
-        return listaDePedidos;
+        return listaDeItens;
+    }
+
+    public void adicionarItem(ItemDePedido item) {
+        item.setPedido(this);
+        this.listaDeItens.add(item);
     }
 
     public long getQuantidadeItens() {
-        return this.listaDePedidos.stream()
+        return this.listaDeItens.stream()
                 .mapToLong(ItemDePedido::getQuantidade)
                 .sum();
     }
 
     public BigDecimal getValorTotalDescontos() {
-        return this.listaDePedidos.stream()
+        return this.listaDeItens.stream()
                 .map(ItemDePedido::getDesconto)
                 .reduce(BigDecimal.ZERO, BigDecimal::add)
                 .add(this.desconto);
     }
 
     public BigDecimal getValorTotalPedido() {
-        return this.listaDePedidos.stream()
+        return this.listaDeItens.stream()
                 .map(ItemDePedido::getValorTotal)
                 .reduce(BigDecimal.ZERO, BigDecimal::add)
                 .subtract(this.getValorTotalDescontos());
