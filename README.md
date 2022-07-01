@@ -5,7 +5,7 @@ a vários vendedores e, assim, consolidar-se como o shopping eletrônico mais po
 <br>
 
 ## 👩🏼‍💻 DDD e Clean Arch na Aplicação
-A separação de camadas escolhida vai poupar de problemas futuros com a manutenção do software.
+A separação de camadas escolhida vai nos poupar de problemas futuros com a manutenção do software.
 <br>
 <br>
 ![diagrama_camadas](https://user-images.githubusercontent.com/52979585/176940825-b37634de-49ee-44d5-a929-a441fe65a8ed.png) 
@@ -29,4 +29,5 @@ Um Endereço não possui uma identidade única -> duas pessoas podem inserir o m
 
 Um Usuário possui identidade única -> o email é exclusivo por usuário.
 
-![diagrama_entities](https://user-images.githubusercontent.com/52979585/176941973-a02fd639-e156-4377-9c1c-ce4fd5f3789b.png)
+![diagrama_entities](https://user-images.githubusercontent.com/52979585/176958110-3d755104-9d98-4536-9430-d9c2f1fc2401.png)
+
