@@ -12,7 +12,7 @@ A separação de camadas escolhida vai nos poupar de problemas futuros com a man
 
 
 ### ⚡ Quais os agregados da aplicação, qual sua raiz e que classes os compõem?
-Segundo Uncle Bob, Aggregate é um padrão no Domain-Driven Design e "um cluster de objetos de domínio que podem ser tratados como uma única unidade.
+> Segundo Martin Fowler, Aggregate é um padrão no Domain-Driven Design e "um cluster de objetos de domínio que podem ser tratados como uma única unidade.
 Um exemplo pode ser um **pedido** e seus **itens**, que serão objetos separados, mas é útil tratar o pedido (junto com seus itens) como um único agregado."
 
 Essa mesma lógica busquei aplicar no Comex. O **ItemDePedido** não possui seu próprio Repository, *não é persistido de forma isolada*. 
@@ -21,7 +21,7 @@ Ao manipular os dados, manipulamos unicamente o **Pedido** para *garantir a inte
 No diagrama, as Entidades (Aggregate roots) são representadas maiores e unidas aos seus Value Objects. 
 
 ### 🕵🏼‍♀️ Diferença entre VO e Entity
-*Entidades possuem uma **identidade única**, enquanto VOs são considerados iguais, se todos os seus atributos tiverem valores iguais.*
+>*Entidades possuem uma **identidade única**, enquanto VOs são considerados iguais, se todos os seus atributos tiverem valores iguais.*
 
 Um Cliente possui uma identidade única -> seu CPF, não existem dois clientes com o mesmo Cadastro de Pessoas Física.
 
@@ -33,7 +33,7 @@ Um Usuário possui identidade única -> o email é exclusivo por usuário.
 
 ### 🔒 Invariante
 
-"Toda manipulação de dados deve ser feita dentro da aggregate root, para garantir consistência e impedir que outras classes manipulem esses dados." 
+> "Toda manipulação de dados deve ser feita dentro da aggregate root, para garantir consistência e impedir que outras classes manipulem esses dados." 
 
 Busquei aplicar esse conceito, porém, para evitar nested `if`s, coloquei os use cases de aplicar desconto dentro de suas factories, para que o objeto seja criado aplicando a regra de negócio.
 
@@ -68,3 +68,10 @@ Busquei aplicar esse conceito, porém, para evitar nested `if`s, coloquei os use
         
     }
 ```
+## Bounded Contexts
+
+Para resolver conflitos de nomenclatura e classificação dos produtos, vamos separar a aplicação em *dois contextos*, sem um shared kernel.
+
+Na **loja**, a entidade `Produto` tem os atributos: comprimento em mm, altura em mm, largura em mm, peso em gramas que se referem às dimensões  do produto *fora da caixa.*
+
+Já no **estoque**,  para o armazém, a entidade tem os mesmos atributos, mas eles são válidos para *dentro da caixa.*
