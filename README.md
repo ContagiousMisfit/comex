@@ -31,3 +31,40 @@ Um Usuário possui identidade única -> o email é exclusivo por usuário.
 
 ![diagrama_entities](https://user-images.githubusercontent.com/52979585/176958110-3d755104-9d98-4536-9430-d9c2f1fc2401.png)
 
+### 🔒 Invariante
+
+"Toda manipulação de dados deve ser feita dentro da aggregate root, para garantir consistência e impedir que outras classes manipulem esses dados." 
+
+Busquei aplicar esse conceito, porém, para evitar nested `if`s, coloquei os use cases de aplicar desconto dentro de suas factories, para que o objeto seja criado aplicando a regra de negócio.
+
+➡️ **PedidoBuilder.java**
+```java
+    public PedidoBuilder aplicarDesconto() {
+    
+        if (cliente.getListaDePedidos().size() > 5) {
+            this.tipoDesconto = TipoDescontoPedido.FIDELIDADE;
+            this.desconto = new BigDecimal(0.5);
+            return this;
+        }
+
+        this.tipoDesconto = TipoDescontoPedido.NENHUM;
+        this.desconto = BigDecimal.ZERO;
+        return this;
+
+    }
+```
+➡️ **ItemDePedidoBuilder.java**
+```java
+    public ItemDePedidoBuilder aplicarDesconto() {
+    
+        if (quantidade > 10) {
+            this.tipoDesconto = TipoDescontoItemPedido.QUANTIDADE;
+            this.desconto = BigDecimal.TEN;
+            return this;
+        }
+            this.tipoDesconto = TipoDescontoItemPedido.NENHUM;
+            this.desconto = BigDecimal.ZERO;
+        return this;
+        
+    }
+```
