@@ -75,3 +75,5 @@ Para resolver conflitos de nomenclatura e classificação dos produtos, vamos se
 Na **loja**, a entidade `Produto` tem os atributos: comprimento em mm, altura em mm, largura em mm, peso em gramas que se referem às dimensões  do produto *fora da caixa.*
 
 Já no **estoque**,  para o armazém, a entidade tem os mesmos atributos, mas eles são válidos para *dentro da caixa.*
+![diagrama-contextos](https://user-images.githubusercontent.com/52979585/177211190-5b6a0284-2516-44f5-a00e-279b38268de1.png)
+
