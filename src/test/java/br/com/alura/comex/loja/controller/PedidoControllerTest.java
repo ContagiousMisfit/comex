@@ -59,7 +59,7 @@ public class PedidoControllerTest {
     public void deveriaListarOPedidoPorId() throws Exception {
 
         int idPedido = 25;
-        URI uri = new URI("/pedidos/"+idPedido);
+        URI uri = new URI("/pedidos/" + idPedido);
 
         JSONObject json = criarObjetoJson();
         String request = json.toString();
@@ -77,7 +77,7 @@ public class PedidoControllerTest {
     public void deveriaRetornar404PorIdNaoExistente() throws Exception {
 
         int idPedido = 99999;
-        URI uri = new URI("/pedidos/"+idPedido);
+        URI uri = new URI("/pedidos/" + idPedido);
 
         JSONObject json = criarObjetoJson();
         String request = json.toString();

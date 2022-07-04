@@ -37,7 +37,7 @@ public class SecurityConfigurationForTesting {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(authorizedRequests -> authorizedRequests
-                        .antMatchers( "/**").permitAll()
+                        .antMatchers("/**").permitAll()
                         .anyRequest().authenticated())
                 .csrf().disable();
         return http.build();

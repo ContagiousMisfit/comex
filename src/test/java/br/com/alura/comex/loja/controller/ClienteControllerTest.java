@@ -15,7 +15,6 @@ import java.net.URI;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 @AutoConfigureMockMvc
 @SpringBootTest
@@ -60,7 +59,7 @@ public class ClienteControllerTest {
     public void deveriaListarClientePorId() throws Exception {
 
         int idCliente = 20;
-        URI uri = new URI("/clientes/"+idCliente);
+        URI uri = new URI("/clientes/" + idCliente);
 
         JSONObject json = criarObjetoJson();
         String request = json.toString();
@@ -78,7 +77,7 @@ public class ClienteControllerTest {
     public void deveriaRetornar404PorIdNaoExistente() throws Exception {
 
         int idCliente = 99999;
-        URI uri = new URI("/clientes/"+idCliente);
+        URI uri = new URI("/clientes/" + idCliente);
 
         JSONObject json = criarObjetoJson();
         String request = json.toString();
@@ -94,9 +93,9 @@ public class ClienteControllerTest {
 
     private JSONObject criarObjetoJson() throws JSONException {
         return new JSONObject()
-                .put("nome","Camilla")
+                .put("nome", "Camilla")
                 .put("cpf", "12589465")
-                .put("telefone","119865481")
+                .put("telefone", "119865481")
                 .put("rua", "Times Square Avenue")
                 .put("numero", "10036")
                 .put("bairro", "Manhattan")

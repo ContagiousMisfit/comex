@@ -1,7 +1,7 @@
 package br.com.alura.comex.loja.infrastructure;
 
-import br.com.alura.comex.loja.domain.Usuario;
 import br.com.alura.comex.loja.api.repository.UsuarioRepository;
+import br.com.alura.comex.loja.domain.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

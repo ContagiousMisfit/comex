@@ -64,7 +64,7 @@ public class ProdutoControllerTest {
     public void deveriaListarOProdutoPorId() throws Exception {
 
         int idProduto = 33;
-        URI uri = new URI("/produtos/"+idProduto);
+        URI uri = new URI("/produtos/" + idProduto);
 
         JSONObject json = criarObjetoJson();
         String request = json.toString();
@@ -82,7 +82,7 @@ public class ProdutoControllerTest {
     public void deveriaAtualizarProduto() throws Exception {
 
         int idProduto = 3;
-        URI uri = new URI("/produtos/"+idProduto);
+        URI uri = new URI("/produtos/" + idProduto);
 
         JSONObject json = criarObjetoJson();
         json.put("quantidadeEmEstoque", 3);
@@ -102,9 +102,9 @@ public class ProdutoControllerTest {
 
     private JSONObject criarObjetoJson() throws JSONException {
         return new JSONObject()
-                .put("nome","Guzheng")
+                .put("nome", "Guzheng")
                 .put("descricao", "Instrumento musical antigo, uma espécie de cítara chinesa")
-                .put("precoUnitario",70000.00)
+                .put("precoUnitario", 70000.00)
                 .put("quantidadeEmEstoque", 5)
                 .put("idCategoria", 10);
     }

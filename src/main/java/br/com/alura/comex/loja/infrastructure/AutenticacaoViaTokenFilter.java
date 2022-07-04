@@ -1,7 +1,7 @@
 package br.com.alura.comex.loja.infrastructure;
 
-import br.com.alura.comex.loja.domain.Usuario;
 import br.com.alura.comex.loja.api.repository.UsuarioRepository;
+import br.com.alura.comex.loja.domain.Usuario;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;

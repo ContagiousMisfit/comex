@@ -2,7 +2,9 @@ package br.com.alura.comex.loja.api.model.form.cadastro;
 
 import br.com.alura.comex.loja.api.repository.CategoriaRepository;
 import br.com.alura.comex.loja.domain.Categoria;
+import br.com.alura.comex.loja.domain.Dimensoes;
 import br.com.alura.comex.loja.domain.Produto;
+import br.com.alura.comex.loja.domain.factory.DimensoesBuilder;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -36,9 +38,23 @@ public class ProdutoForm {
     @NotNull
     private Long idCategoria;
 
+    @NotNull
+    private Double altura;
+
+    @NotNull
+    private Double comprimento;
+
+    @NotNull
+    private Double peso;
+
+    @NotNull
+    private Double largura;
+
+
     public Produto converter(CategoriaRepository categoriaRepository) {
         Optional<Categoria> categoria = categoriaRepository.findById(idCategoria);
-        return new Produto(nome, descricao, precoUnitario, quantidadeEmEstoque, categoria.get());
+        Dimensoes dimensoes = new DimensoesBuilder().comAltura(altura).comComprimento(comprimento).comPeso(peso).comLargura(largura).build();
+        return new Produto(nome, descricao, precoUnitario, quantidadeEmEstoque, categoria.get(), dimensoes);
     }
 
 }

@@ -1,7 +1,7 @@
 package br.com.alura.comex.loja.api.model.form.cadastro;
 
-import br.com.alura.comex.loja.domain.StatusCategoria;
 import br.com.alura.comex.loja.domain.Categoria;
+import br.com.alura.comex.loja.domain.StatusCategoria;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

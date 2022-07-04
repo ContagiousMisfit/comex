@@ -14,7 +14,6 @@ import java.net.URI;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 @AutoConfigureMockMvc
 @SpringBootTest
@@ -45,7 +44,7 @@ public class CategoriaControllerTest {
     public void deveriaAtualizarStatusCategoria() throws Exception {
 
         int idCategoria = 7;
-        URI uri = new URI("/categorias/"+idCategoria);
+        URI uri = new URI("/categorias/" + idCategoria);
 
         JSONObject json = criarObjetoJson();
         String request = json.toString();
@@ -76,7 +75,7 @@ public class CategoriaControllerTest {
     public void deveriaPesquisarCategoriasPorId() throws Exception {
 
         int idCategoria = 50;
-        URI uri = new URI("/categorias/"+idCategoria);
+        URI uri = new URI("/categorias/" + idCategoria);
 
         JSONObject json = criarObjetoJson();
         String request = json.toString();
@@ -96,7 +95,7 @@ public class CategoriaControllerTest {
     public void deveriaRetornar404PorIdNaoExistente() throws Exception {
 
         int idCategoria = 99999;
-        URI uri = new URI("/categorias/"+idCategoria);
+        URI uri = new URI("/categorias/" + idCategoria);
 
         JSONObject json = criarObjetoJson();
         String request = json.toString();
@@ -122,7 +121,7 @@ public class CategoriaControllerTest {
 
     private JSONObject criarObjetoJson() throws JSONException {
         return new JSONObject()
-                .put("nome","Livros");
+                .put("nome", "Livros");
     }
 
 

@@ -32,12 +32,16 @@ public class Produto {
     @ManyToOne(optional = false, cascade = CascadeType.ALL)
     private Categoria categoria;
 
-    public Produto(String nome, String descricao, BigDecimal precoUnitario, long quantidadeEmEstoque, Categoria categoria) {
+    @Embedded
+    private Dimensoes dimensoes;
+
+    public Produto(String nome, String descricao, BigDecimal precoUnitario, long quantidadeEmEstoque, Categoria categoria, Dimensoes dimensoes) {
         this.nome = nome;
         this.descricao = descricao;
         this.precoUnitario = precoUnitario;
         this.quantidadeEmEstoque = quantidadeEmEstoque;
         this.categoria = categoria;
+        this.dimensoes = dimensoes;
     }
 
 }

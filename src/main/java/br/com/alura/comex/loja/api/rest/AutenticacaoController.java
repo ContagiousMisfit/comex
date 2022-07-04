@@ -1,8 +1,8 @@
 package br.com.alura.comex.loja.api.rest;
 
-import br.com.alura.comex.loja.infrastructure.TokenServiceImpl;
 import br.com.alura.comex.loja.api.security.model.TokenDto;
 import br.com.alura.comex.loja.infrastructure.LoginFormImpl;
+import br.com.alura.comex.loja.infrastructure.TokenServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -27,14 +27,14 @@ public class AutenticacaoController {
     private TokenServiceImpl tokenServiceImpl;
 
     @PostMapping
-    public ResponseEntity<TokenDto> autenticar(@RequestBody @Valid LoginFormImpl form ){
+    public ResponseEntity<TokenDto> autenticar(@RequestBody @Valid LoginFormImpl form) {
         UsernamePasswordAuthenticationToken dadosLogin = form.convert();
 
         try {
             Authentication authentication = authenticationManager.authenticate(dadosLogin);
             String token = tokenServiceImpl.gerarToken(authentication);
             return ResponseEntity.ok(new TokenDto(token, "Bearer"));
-        }catch (AuthenticationException e){
+        } catch (AuthenticationException e) {
             return ResponseEntity.badRequest().build();
         }
 

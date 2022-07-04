@@ -1,5 +1,6 @@
 package br.com.alura.comex.loja.api.model;
 
+import br.com.alura.comex.loja.domain.Dimensoes;
 import br.com.alura.comex.loja.domain.Produto;
 import lombok.Data;
 import org.springframework.data.domain.Page;
@@ -22,6 +23,8 @@ public class ProdutoDto {
 
     private CategoriaDto categoria;
 
+    private Dimensoes dimensoes;
+
     public ProdutoDto(Produto produto) {
         this.id = produto.getId();
         this.nome = produto.getNome();
@@ -29,6 +32,7 @@ public class ProdutoDto {
         this.descricao = produto.getDescricao();
         this.quantidadeEmEstoque = produto.getQuantidadeEmEstoque();
         this.precoUnitario = produto.getPrecoUnitario();
+        this.dimensoes = produto.getDimensoes();
     }
 
     public static List<ProdutoDto> converter(List<Produto> produtos) {

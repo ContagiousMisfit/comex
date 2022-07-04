@@ -1,11 +1,11 @@
 package br.com.alura.comex.loja.api.rest;
 
 import br.com.alura.comex.loja.api.model.CategoriaDto;
-import br.com.alura.comex.loja.api.model.projections.PedidosPorCategoriaProjection;
 import br.com.alura.comex.loja.api.model.form.atualizacao.AtualizarStatusCategoriaForm;
 import br.com.alura.comex.loja.api.model.form.cadastro.CategoriaForm;
-import br.com.alura.comex.loja.domain.Categoria;
+import br.com.alura.comex.loja.api.model.projections.PedidosPorCategoriaProjection;
 import br.com.alura.comex.loja.api.repository.CategoriaRepository;
+import br.com.alura.comex.loja.domain.Categoria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;

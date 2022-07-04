@@ -2,8 +2,8 @@ package br.com.alura.comex.loja.api.rest;
 
 import br.com.alura.comex.loja.api.model.ClienteDto;
 import br.com.alura.comex.loja.api.model.form.cadastro.ClienteForm;
-import br.com.alura.comex.loja.domain.Cliente;
 import br.com.alura.comex.loja.api.repository.ClienteRepository;
+import br.com.alura.comex.loja.domain.Cliente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

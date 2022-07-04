@@ -1,6 +1,7 @@
 package br.com.alura.comex.loja.domain.factory;
 
 import br.com.alura.comex.loja.domain.Categoria;
+import br.com.alura.comex.loja.domain.Dimensoes;
 import br.com.alura.comex.loja.domain.ItemDePedido;
 import br.com.alura.comex.loja.domain.Produto;
 
@@ -17,6 +18,8 @@ public class ProdutoBuilder {
     private List<ItemDePedido> listaDeItensDePedidos;
 
     private Categoria categoria;
+
+    private Dimensoes dimensoes;
 
     public ProdutoBuilder comNome(String nome) {
         this.nome = nome;
@@ -43,8 +46,13 @@ public class ProdutoBuilder {
         return this;
     }
 
+    public ProdutoBuilder comDimensoes(Dimensoes dimensoes) {
+        this.dimensoes = dimensoes;
+        return this;
+    }
+
     public Produto build() {
-        return new Produto(nome, descricao, precoUnitario, quantidadeEmEstoque, categoria);
+        return new Produto(nome, descricao, precoUnitario, quantidadeEmEstoque, categoria, dimensoes);
     }
 
 }

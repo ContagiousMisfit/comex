@@ -3,9 +3,9 @@ package br.com.alura.comex.loja.api.rest;
 import br.com.alura.comex.loja.api.model.ProdutoDto;
 import br.com.alura.comex.loja.api.model.form.atualizacao.AtualizarProdutoForm;
 import br.com.alura.comex.loja.api.model.form.cadastro.ProdutoForm;
-import br.com.alura.comex.loja.domain.Produto;
 import br.com.alura.comex.loja.api.repository.CategoriaRepository;
 import br.com.alura.comex.loja.api.repository.ProdutoRepository;
+import br.com.alura.comex.loja.domain.Produto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -48,7 +48,7 @@ public class ProdutoController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<ProdutoDto> cadastrar(@RequestBody @Valid ProdutoForm form, UriComponentsBuilder uriBuilder){
+    public ResponseEntity<ProdutoDto> cadastrar(@RequestBody @Valid ProdutoForm form, UriComponentsBuilder uriBuilder) {
 
         Produto produto = form.converter(categoriaRepository);
         produtoRepository.save(produto);

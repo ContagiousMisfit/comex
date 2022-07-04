@@ -1,7 +1,10 @@
 package br.com.alura.comex.loja.repository;
 
 import br.com.alura.comex.loja.api.model.projections.PedidosPorCategoriaProjection;
-import br.com.alura.comex.loja.api.repository.*;
+import br.com.alura.comex.loja.api.repository.CategoriaRepository;
+import br.com.alura.comex.loja.api.repository.ClienteRepository;
+import br.com.alura.comex.loja.api.repository.PedidoRepository;
+import br.com.alura.comex.loja.api.repository.ProdutoRepository;
 import br.com.alura.comex.loja.domain.*;
 import br.com.alura.comex.loja.domain.factory.*;
 import org.junit.jupiter.api.Test;
@@ -47,11 +50,26 @@ public class PedidoRepositoryTest {
                         .comStatus(StatusCategoria.ATIVA)
                         .build();
 
+        Dimensoes dimensoes1 = new DimensoesBuilder()
+                .comAltura(600.0)
+                .comComprimento(400.0)
+                .comLargura(400.0)
+                .comPeso(450.0)
+                .build();
+
+        Dimensoes dimensoes2 = new DimensoesBuilder()
+                .comAltura(160.0)
+                .comComprimento(120.0)
+                .comLargura(120.0)
+                .comPeso(32.0)
+                .build();
+
         Produto produto1 = new ProdutoBuilder()
                 .comCategoria(categoria1)
                 .comNome("Violino Eagle")
                 .comDescricao("O violino é um instrumento musical, classificado como Instrumento de cordas ou cordofone. Foi inventado por Gasparo de Salò.")
                 .comPrecoUnitario(new BigDecimal("3500.00"))
+                .comDimensoes(dimensoes1)
                 .build();
 
         Produto produto2 = new ProdutoBuilder()
@@ -59,6 +77,7 @@ public class PedidoRepositoryTest {
                 .comNome("O Pequeno Príncipe")
                 .comDescricao("Tu te tornas eternamente responsável por aquilo que cativas")
                 .comPrecoUnitario(new BigDecimal("40.00"))
+                .comDimensoes(dimensoes2)
                 .build();
 
         Cliente cliente = new ClienteBuilder()
