@@ -21,6 +21,7 @@ public class PedidoBuilder {
 
     private List<ItemDePedido> listaDePedidos;
 
+
     public PedidoBuilder comData(LocalDateTime data) {
         this.data = data;
         return this;
@@ -51,19 +52,19 @@ public class PedidoBuilder {
         return this;
     }
 
+
     public PedidoBuilder aplicarDesconto() {
-
-        this.tipoDesconto = TipoDescontoPedido.NENHUM;
-        this.desconto = BigDecimal.ZERO;
-
-        if (cliente.getListaDePedidos() == null) return this;
 
         if (cliente.getListaDePedidos().size() > 5) {
             this.tipoDesconto = TipoDescontoPedido.FIDELIDADE;
             this.desconto = new BigDecimal(0.5);
+            return this;
         }
 
+        this.tipoDesconto = TipoDescontoPedido.NENHUM;
+        this.desconto = BigDecimal.ZERO;
         return this;
+
     }
 
     public Pedido build() {

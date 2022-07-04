@@ -37,8 +37,8 @@ public class ItemDePedidoBuilder {
             this.desconto = BigDecimal.TEN;
             return this;
         }
-            this.tipoDesconto = TipoDescontoItemPedido.NENHUM;
-            this.desconto = BigDecimal.ZERO;
+        this.tipoDesconto = TipoDescontoItemPedido.NENHUM;
+        this.desconto = BigDecimal.ZERO;
         return this;
     }
 
