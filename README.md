@@ -1,17 +1,28 @@
 # Comex
 
-O projeto Comex é um sistema de e-commerce marketplace. Seu objetivo é permitir que a sua base de clientes tenha acesso
-a vários vendedores e, assim, consolidar-se como o shopping eletrônico mais popular da internet.
+<h2>Indice</h2>
+<a href="#sobre"> Sobre </a>
+<br>
+<a href="#clean-arch"> Conceito de Clean Arch </a>
+<br>
+<a href="#ddd"> Conceitos de DDD </a>
+<br>
+<a href="#aws"> Arquitetura Cloud na AWS </a>
+
+<h1></h1>
+<p id="sobre"> O projeto Comex é um sistema de e-commerce marketplace. Seu objetivo é permitir que a sua base de clientes tenha acesso
+a vários vendedores e, assim, consolidar-se como o shopping eletrônico mais popular da internet.</p>
 <br>
 
-## 👩🏼‍💻 DDD e Clean Arch na Aplicação
+<h1 id="clean-arch"> 👩🏼‍💻 DDD e Clean Arch na Aplicação </h1>
 A separação de camadas escolhida vai nos poupar de problemas futuros com a manutenção do software.
 <br>
 <br>
+
 ![diagrama_camadas](https://user-images.githubusercontent.com/52979585/176940825-b37634de-49ee-44d5-a929-a441fe65a8ed.png) 
 
-
-### ⚡ Quais os agregados da aplicação, qual sua raiz e que classes os compõem?
+<h1></h1>
+<h1 id="ddd"> ⚡ Quais os agregados da aplicação, qual sua raiz e que classes os compõem? </h1>
 > Segundo Martin Fowler, Aggregate é um padrão no Domain-Driven Design e "um cluster de objetos de domínio que podem ser tratados como uma única unidade.
 Um exemplo pode ser um **pedido** e seus **itens**, que serão objetos separados, mas é útil tratar o pedido (junto com seus itens) como um único agregado."
 
@@ -75,3 +86,14 @@ Para resolver conflitos de nomenclatura e classificação dos produtos, vamos se
 Na **loja**, a entidade `Produto` tem os atributos: comprimento em mm, altura em mm, largura em mm, peso em gramas que se referem às dimensões  do produto *fora da caixa.*
 
 Já no **estoque**,  para o armazém, a entidade tem os mesmos atributos, mas eles são válidos para *dentro da caixa.*
+![diagrama-contextos](https://user-images.githubusercontent.com/52979585/177211190-5b6a0284-2516-44f5-a00e-279b38268de1.png)
+
+<h1 id="aws">Arquitetura de Microsserviços na AWS</h1>
+
+![AWS-architecture](https://user-images.githubusercontent.com/52979585/178041190-af100332-2b60-4ed7-8180-153ccb9fcc5f.png)
+
+<h2> Componentes da arquitetura </h2>
+
+- **API Gateway:**
+Esse serviço vai atuar como porta de entrada única (nada de fora do VPC consegue acessar a aplicação sem passar por ele), além de servir como um mecanismo de segurança. 
+O API Gateway vai garantir a proteção por meio da autenticação de usuário, limitação de conexões e fornecer logs de acesso.
