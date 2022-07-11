@@ -103,10 +103,36 @@ Já no **estoque**,  para o armazém, a entidade tem os mesmos atributos, mas el
 
 <h2> Componentes da arquitetura </h2>
 
-- **API Gateway:**
-Esse serviço vai atuar como porta de entrada única (nada de fora do VPC consegue acessar a aplicação sem passar por ele), além de servir como um mecanismo de segurança. 
-O API Gateway vai garantir a proteção por meio da autenticação de usuário, limitação de conexões e fornecer logs de acesso.
+<ul>
+    <li> ⚡ <b> API Gateway: </b> 
+    Esse serviço vai atuar como porta de entrada única (nada de fora do VPC consegue acessar a aplicação sem passar por ele), além de servir como um mecanismo de segurança. 
+    O API Gateway vai garantir a proteção por meio da autenticação de usuário, limitação de conexões e fornecer logs de acesso.
+    </li>
+<br>
+<li> ⚡ <b> Fargate & ECS:</b>ECS é o orquestrador proprietário da plataforma Amazon, o Elastic Container Service. Ele é equivalente ao Kubernetes.
+Fargate é a opção serverless do ECS. Com Fargate, nós não nos preocupamos com o provisionamento de instâncias, a própria AWS gerencia para nós. Para orquestrar, precisamos de uma:
+    
+--**Task**, que é a unidade mínima de trabalho no ECS. Ela deve estar vinculada a uma task definition, e pode estar ou não associada a um service. No caso, temos uma **task** de **boleto**, uma **task** de **cartão**, uma **task** de **PIX**.
+    
+--**Task Definition**, que é a especificação de uma tarefa do ECS, onde nós informamos a configuração dos containers docker (é possível executar mais de um container em uma task do ECS, assim como em um pod, no Kubernetes)
+    
+--**Service**, que é o responsável por gerenciar o ciclo de vida de tarefas. Caso ocorra uma falha em uma tarefa, que venha a derrubar o processo, ele irá reiniciar a mesma tentando fazer a recuperação. Além disto, ele pode ser configurado para escalar a tarefa automaticamente, utilizar estratégias de deploy (rolling updates e blue/green), e ser vinculado a um loadbalancer.
+   
+</li>
+    <li> ⚡<b> Application Load Balancer (ALB)</b>
+O load balancer distribui o tráfego de entrada da aplicação por várias instâncias EC2 em diversas Zonas de disponibilidade. Isso aumenta a tolerância a falhas do COMEX, pois o ALB automaticamente detecta instâncias com problemas de integridade e roteia o tráfego somente para instâncias íntegras.
+</li>
+    
+</ul>
 
 <h1 id="aws-ms">☁️ Arquitetura de Microsserviços na AWS</h1>
 
 ![AWS-MS](https://user-images.githubusercontent.com/52979585/178319139-dce8c271-3889-422b-8ce6-6f420350cb38.png)
+
+<h3>Fluxo da aplicação:</h3>
+<ol>
+<li> O usuário realiza uma requisição (GET, POST, PUT, PATCH, DELETE); o API Gateway intercepta e filtra as conexões seguindo as regras de negócio do Comex. </li>
+
+<li> A partir daí, o ALB distribui o tráfego de entrada pelas zonas de disponibilidade. Ele identifica instâncias com problemas de integridade e roteia o tráfego somente para instâncias íntegras.</li>
+
+<li>Note que ambas instâncias EC2 apontam para o mesmo banco de dados: o Banco MySQL Primário. O segundo banco se trata de um backup em modo standby, para aumentar a disponibilidade da aplicação e a integridade dos dados (garantir que sejam salvos). Só entra em ação se o banco primário cair.</li>
