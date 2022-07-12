@@ -11,6 +11,8 @@
 <a href="#aws"> Arquitetura Cloud - AWS </a>
 <br>
 <a href="#aws-ms"> Arquitetura de microsserviços - AWS </a>
+<br>
+<a href="observability"> Observabilidade </a>
 
 <h1></h1>
 <p id="sobre"> O projeto Comex é um sistema de e-commerce marketplace. Seu objetivo é permitir que a sua base de clientes tenha acesso
@@ -136,3 +138,19 @@ O load balancer distribui o tráfego de entrada da aplicação por várias inst�
 <li> A partir daí, o ALB distribui o tráfego de entrada pelas zonas de disponibilidade. Ele identifica instâncias com problemas de integridade e roteia o tráfego somente para instâncias íntegras.</li>
 
 <li>Note que ambas instâncias EC2 apontam para o mesmo banco de dados: o Banco MySQL Primário. O segundo banco se trata de um backup em modo standby, para aumentar a disponibilidade da aplicação e a integridade dos dados (garantir que sejam salvos). Só entra em ação se o banco primário cair.</li>
+</ol>
+
+<h1 id="observability">🕵🏼 Monitoramento</h1>
+
+![AppD-logo](https://user-images.githubusercontent.com/52979585/178506648-af1accc6-3321-4cfd-a41a-70109a3df660.gif)
+
+<p><b>CloudWatch:</b> Com o Amazon CloudWatch, podemos coletar e rastrear métricas, criar alarmes que enviam notificações e fazem alterações nos recursos monitorados com base nas regras da lógica do negócio. 
+Porém, poderíamos utilizar outra ferramenta de Observabilidade.</p>
+<h3>Cisco AppDynamics</h3>
+<p>O AppDynamics descobre recursos automaticamente, cria uma baseline do desempenho da aplicação e ajuda a visualizar as interações de cada componente por meio de dados em tempo real para uma tomada de decisão. Essa imagem ilustra o levantamento que é feito pelos <b>software agents</b> e indica a saúde de cada <b>software component</b>.</p>
+
+![image](https://user-images.githubusercontent.com/52979585/178504248-58c1dc21-a00a-467f-bcb3-960072488e17.png)
+
+<p>Esse é um exemplo de Dashboard construída no Controller da AppD para mensurar o impacto da migração para arquitetura Cloud-First, se utilizássemos a estratégia de deploy <b>blue-green</b>.</p>
+
+![appDynamics-dashboard](https://user-images.githubusercontent.com/52979585/178503006-9d5225f7-a599-435b-92e1-a0af20bfcfc9.png)
