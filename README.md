@@ -12,7 +12,7 @@
 <br>
 <a href="#aws-ms"> Arquitetura de microsserviços - AWS </a>
 <br>
-<a href="observability"> Observabilidade </a>
+<a href="#observability"> Observabilidade </a>
 
 <h1></h1>
 <p id="sobre"> O projeto Comex é um sistema de e-commerce marketplace. Seu objetivo é permitir que a sua base de clientes tenha acesso
