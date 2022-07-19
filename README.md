@@ -13,6 +13,7 @@
 <a href="#aws-ms"> Arquitetura de microsserviços - AWS </a>
 <br>
 <a href="#observability"> Observabilidade </a>
+<br>
 <a href="#kafka"> Arquitetura "as is" - Kafka </a>
 
 <h1></h1>
