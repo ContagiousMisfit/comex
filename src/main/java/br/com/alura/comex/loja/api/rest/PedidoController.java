@@ -1,5 +1,6 @@
 package br.com.alura.comex.loja.api.rest;
 
+import br.com.alura.comex.loja.ItemDePedidoEvent;
 import br.com.alura.comex.loja.PedidoGeradoEvent;
 import br.com.alura.comex.loja.StreamConfig;
 import br.com.alura.comex.loja.api.model.DetalhesDoPedidoDto;
@@ -67,7 +68,8 @@ public class PedidoController {
         Pedido pedido = form.converter(clienteRepository, produtoRepository);
         pedidoRepository.save(pedido);
 
-        PedidoGeradoEvent event = new PedidoGeradoEvent(pedido.getId());
+        pedido.setValorTotal(pedido.getValorTotalPedido());
+        PedidoGeradoEvent event = new PedidoGeradoEvent(pedido.getValorTotal(), pedido.getCliente().getId(), pedido.getCliente().getCpf(), pedido.getCliente().getNome(), pedido.getId(), pedido.getCliente().getEndereco().toString(), pedido.getListaDeItens().stream().map(ItemDePedidoEvent::new).toList());
         Message<PedidoGeradoEvent> message = MessageBuilder.withPayload(event).build();
 
         pedidoGeradoSource.pedidoGerado().send(message);
