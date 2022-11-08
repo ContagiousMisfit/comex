@@ -17,8 +17,7 @@
 <a href="#kafka"> Arquitetura "as is" - Kafka </a>
 
 <h1></h1>
-<p id="sobre"> O projeto Comex é um sistema de e-commerce marketplace. Seu objetivo é permitir que a sua base de clientes tenha acesso
-a vários vendedores e, assim, consolidar-se como o shopping eletrônico mais popular da internet.</p>
+<p id="sobre"> O projeto Comex é um sistema de e-commerce marketplace. Foi desenvolvido ao longo do Bootcamp ALura na CI&T.</p>
 <p> O sistema desenvolvido é uma <b>API REST</b> funcional, com testes unitários para todos os endpoints e que conta com um sistema de autenticação utilizando JWT. </p>
 <h3>Tecnologias e plataformas</h3>
 
