@@ -1,0 +1,22 @@
+version: '3.1'
+
+services:
+  database:
+    image: mysql:latest
+    container_name: alura-comex-mysql
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - db-volume:/var/lib/mysql
+
+  comex:
+    image: alura/comex-api
+    container_name: alura-comex
+    environment:
+      DB_HOST: database
+    ports:
+      - "8080:8080"
+
+volumes:
+  db-volume:
